@@ -1,0 +1,1891 @@
+{
+  "test_split_evaluation": {
+    "total_samples": 873,
+    "overall": {
+      "decided_samples": 852,
+      "confusion_matrix": {
+        "TN": 435,
+        "FP": 6,
+        "FN": 13,
+        "TP": 398
+      },
+      "accuracy": {
+        "value": 0.9777,
+        "ci_95": [
+          0.9654,
+          0.9857
+        ]
+      },
+      "fpr": {
+        "value": 0.0136,
+        "ci_95": [
+          0.0063,
+          0.0294
+        ]
+      },
+      "fnr": {
+        "value": 0.0316,
+        "ci_95": [
+          0.0186,
+          0.0534
+        ]
+      },
+      "recall": {
+        "value": 0.9684,
+        "ci_95": [
+          0.9466,
+          0.9814
+        ]
+      },
+      "precision": {
+        "value": 0.9851,
+        "ci_95": [
+          0.968,
+          0.9932
+        ]
+      },
+      "f1": 0.9767,
+      "abstention": {
+        "value": 0.0241,
+        "ci_95": [
+          0.0158,
+          0.0365
+        ],
+        "count": 21
+      },
+      "auroc": 0.9969,
+      "pr_auc": 0.9969,
+      "brier_score": 0.0193
+    },
+    "per_channel": {
+      "email": {
+        "decided_samples": 312,
+        "confusion_matrix": {
+          "TN": 144,
+          "FP": 0,
+          "FN": 6,
+          "TP": 162
+        },
+        "accuracy": {
+          "value": 0.9808,
+          "ci_95": [
+            0.9587,
+            0.9912
+          ]
+        },
+        "fpr": {
+          "value": 0.0,
+          "ci_95": [
+            0.0,
+            0.026
+          ]
+        },
+        "fnr": {
+          "value": 0.0357,
+          "ci_95": [
+            0.0165,
+            0.0757
+          ]
+        },
+        "recall": {
+          "value": 0.9643,
+          "ci_95": [
+            0.9243,
+            0.9835
+          ]
+        },
+        "precision": {
+          "value": 1.0,
+          "ci_95": [
+            0.9768,
+            1.0
+          ]
+        },
+        "f1": 0.9818,
+        "total_samples": 315,
+        "abstention": {
+          "value": 0.0095,
+          "ci_95": [
+            0.0032,
+            0.0276
+          ],
+          "count": 3
+        }
+      },
+      "sms": {
+        "decided_samples": 284,
+        "confusion_matrix": {
+          "TN": 142,
+          "FP": 6,
+          "FN": 7,
+          "TP": 129
+        },
+        "accuracy": {
+          "value": 0.9542,
+          "ci_95": [
+            0.9233,
+            0.9731
+          ]
+        },
+        "fpr": {
+          "value": 0.0405,
+          "ci_95": [
+            0.0187,
+            0.0856
+          ]
+        },
+        "fnr": {
+          "value": 0.0515,
+          "ci_95": [
+            0.0252,
+            0.1024
+          ]
+        },
+        "recall": {
+          "value": 0.9485,
+          "ci_95": [
+            0.8976,
+            0.9748
+          ]
+        },
+        "precision": {
+          "value": 0.9556,
+          "ci_95": [
+            0.9064,
+            0.9795
+          ]
+        },
+        "f1": 0.952,
+        "total_samples": 302,
+        "abstention": {
+          "value": 0.0596,
+          "ci_95": [
+            0.038,
+            0.0922
+          ],
+          "count": 18
+        }
+      },
+      "whatsapp": {
+        "decided_samples": 256,
+        "confusion_matrix": {
+          "TN": 149,
+          "FP": 0,
+          "FN": 0,
+          "TP": 107
+        },
+        "accuracy": {
+          "value": 1.0,
+          "ci_95": [
+            0.9852,
+            1.0
+          ]
+        },
+        "fpr": {
+          "value": 0.0,
+          "ci_95": [
+            0.0,
+            0.0251
+          ]
+        },
+        "fnr": {
+          "value": 0.0,
+          "ci_95": [
+            0.0,
+            0.0347
+          ]
+        },
+        "recall": {
+          "value": 1.0,
+          "ci_95": [
+            0.9653,
+            1.0
+          ]
+        },
+        "precision": {
+          "value": 1.0,
+          "ci_95": [
+            0.9653,
+            1.0
+          ]
+        },
+        "f1": 1.0,
+        "total_samples": 256,
+        "abstention": {
+          "value": 0.0,
+          "ci_95": [
+            0.0,
+            0.0148
+          ],
+          "count": 0
+        }
+      }
+    },
+    "pre_rules_comparison": {
+      "decided_samples": 861,
+      "confusion_matrix": {
+        "TN": 435,
+        "FP": 9,
+        "FN": 7,
+        "TP": 410
+      },
+      "accuracy": {
+        "value": 0.9814,
+        "ci_95": [
+          0.97,
+          0.9885
+        ]
+      },
+      "fpr": {
+        "value": 0.0203,
+        "ci_95": [
+          0.0107,
+          0.0381
+        ]
+      },
+      "fnr": {
+        "value": 0.0168,
+        "ci_95": [
+          0.0082,
+          0.0342
+        ]
+      },
+      "recall": {
+        "value": 0.9832,
+        "ci_95": [
+          0.9658,
+          0.9918
+        ]
+      },
+      "precision": {
+        "value": 0.9785,
+        "ci_95": [
+          0.9597,
+          0.9887
+        ]
+      },
+      "f1": 0.9808
+    },
+    "risk_coverage_curve": [
+      {
+        "threshold_low": 0.5,
+        "threshold_high": 0.5,
+        "coverage": 1.0,
+        "risk": 0.0252
+      },
+      {
+        "threshold_low": 0.476,
+        "threshold_high": 0.524,
+        "coverage": 0.9977,
+        "risk": 0.023
+      },
+      {
+        "threshold_low": 0.453,
+        "threshold_high": 0.547,
+        "coverage": 0.9977,
+        "risk": 0.023
+      },
+      {
+        "threshold_low": 0.429,
+        "threshold_high": 0.571,
+        "coverage": 0.9954,
+        "risk": 0.0207
+      },
+      {
+        "threshold_low": 0.405,
+        "threshold_high": 0.595,
+        "coverage": 0.992,
+        "risk": 0.0208
+      },
+      {
+        "threshold_low": 0.382,
+        "threshold_high": 0.618,
+        "coverage": 0.992,
+        "risk": 0.0208
+      },
+      {
+        "threshold_low": 0.358,
+        "threshold_high": 0.642,
+        "coverage": 0.9885,
+        "risk": 0.0185
+      },
+      {
+        "threshold_low": 0.334,
+        "threshold_high": 0.666,
+        "coverage": 0.984,
+        "risk": 0.0186
+      },
+      {
+        "threshold_low": 0.311,
+        "threshold_high": 0.689,
+        "coverage": 0.9794,
+        "risk": 0.0187
+      },
+      {
+        "threshold_low": 0.287,
+        "threshold_high": 0.713,
+        "coverage": 0.9737,
+        "risk": 0.0176
+      },
+      {
+        "threshold_low": 0.263,
+        "threshold_high": 0.737,
+        "coverage": 0.9702,
+        "risk": 0.0165
+      },
+      {
+        "threshold_low": 0.239,
+        "threshold_high": 0.761,
+        "coverage": 0.9668,
+        "risk": 0.0154
+      },
+      {
+        "threshold_low": 0.216,
+        "threshold_high": 0.784,
+        "coverage": 0.9553,
+        "risk": 0.0096
+      },
+      {
+        "threshold_low": 0.192,
+        "threshold_high": 0.808,
+        "coverage": 0.9496,
+        "risk": 0.0084
+      },
+      {
+        "threshold_low": 0.168,
+        "threshold_high": 0.832,
+        "coverage": 0.945,
+        "risk": 0.0085
+      },
+      {
+        "threshold_low": 0.145,
+        "threshold_high": 0.855,
+        "coverage": 0.9393,
+        "risk": 0.0085
+      },
+      {
+        "threshold_low": 0.121,
+        "threshold_high": 0.879,
+        "coverage": 0.929,
+        "risk": 0.0086
+      },
+      {
+        "threshold_low": 0.097,
+        "threshold_high": 0.903,
+        "coverage": 0.9233,
+        "risk": 0.0087
+      },
+      {
+        "threshold_low": 0.074,
+        "threshold_high": 0.926,
+        "coverage": 0.9118,
+        "risk": 0.0063
+      },
+      {
+        "threshold_low": 0.05,
+        "threshold_high": 0.95,
+        "coverage": 0.8843,
+        "risk": 0.0052
+      }
+    ],
+    "misclassifications_count": 19
+  },
+  "dev_holdout_evaluation": {
+    "name": "dev",
+    "total_samples": 30,
+    "legitimate_count": 10,
+    "false_positive_count": 16,
+    "uncertain_count": 4,
+    "decided_samples": 26,
+    "abstention_rate": {
+      "value": 0.1333,
+      "ci_95": [
+        0.0531,
+        0.2968
+      ]
+    },
+    "decided_fpr": {
+      "value": 0.6154,
+      "ci_95": [
+        0.4253,
+        0.7757
+      ]
+    },
+    "per_channel": {
+      "email": {
+        "total": 10,
+        "legitimate": 2,
+        "false_positive": 7,
+        "uncertain": 1,
+        "abstention_rate": {
+          "value": 0.1,
+          "ci_95": [
+            0.0179,
+            0.4042
+          ]
+        },
+        "decided_fpr": {
+          "value": 0.7778,
+          "ci_95": [
+            0.4526,
+            0.9368
+          ]
+        }
+      },
+      "sms": {
+        "total": 10,
+        "legitimate": 3,
+        "false_positive": 6,
+        "uncertain": 1,
+        "abstention_rate": {
+          "value": 0.1,
+          "ci_95": [
+            0.0179,
+            0.4042
+          ]
+        },
+        "decided_fpr": {
+          "value": 0.6667,
+          "ci_95": [
+            0.3542,
+            0.8794
+          ]
+        }
+      },
+      "whatsapp": {
+        "total": 10,
+        "legitimate": 5,
+        "false_positive": 3,
+        "uncertain": 2,
+        "abstention_rate": {
+          "value": 0.2,
+          "ci_95": [
+            0.0567,
+            0.5098
+          ]
+        },
+        "decided_fpr": {
+          "value": 0.375,
+          "ci_95": [
+            0.1368,
+            0.6943
+          ]
+        }
+      }
+    },
+    "account_email_subgroup": {
+      "total": 4,
+      "legitimate": 0,
+      "false_positive": 4,
+      "uncertain": 0,
+      "abstention_rate": {
+        "value": 0.0,
+        "ci_95": [
+          0.0,
+          0.4899
+        ]
+      },
+      "decided_fpr": {
+        "value": 1.0,
+        "ci_95": [
+          0.5101,
+          1.0
+        ]
+      }
+    },
+    "false_positives": [
+      {
+        "file": "Screenshot_20261021_214426.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9965,
+        "raw_ml_score": 0.9965,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.996 >= 0.71)."
+        ],
+        "ocr_conf": 82.5,
+        "is_account_email": false,
+        "clean_text": "Ad () 1 device @ iO Fa 99% \u20ac 1 i a Your secure link to Claude is here | 2026-10-21 ot 21:05:09 \u2018inbox Anthropic 9:05 PM . \u00a9 4 : tome v Claude Sign in to Claude Click the button below to finish signing"
+      },
+      {
+        "file": "Screenshot_20261021_214629.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9154,
+        "raw_ml_score": 0.9154,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.915 >= 0.71)."
+        ],
+        "ocr_conf": 81.56,
+        "is_account_email": true,
+        "clean_text": "946 \u00ab@) 1 device QO Sir 8 98% e \u00b0 \u20ac OH wow S&S: Your redemption codes worth 300 Stellar +t Jades are about to expire \\ ire Pom-Pom Sep 20 @ @ sep Unsubscribe : tome v afi. B Img Hi, Yuki! Details on V"
+      },
+      {
+        "file": "Screenshot_20261021_214718.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.7432,
+        "raw_ml_score": 0.7432,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.743 >= 0.71)."
+        ],
+        "ocr_conf": 74.46,
+        "is_account_email": false,
+        "clean_text": "9:47 \u00ab@) 1 device QO Sir 8 98% \u20ac Hu GS: MECCHA CHAMELEON and one other item tr from your Steam wishlist is now on sale! \u2018tnt St wP ell bd oct Unsubscribe : tome v \u00ae ) Rta Hello Yukidea! The Steam Autu"
+      },
+      {
+        "file": "Screenshot_20261021_214753.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9902,
+        "raw_ml_score": 0.9902,
+        "rules_triggered": [
+          "BRAND_IMPERSONATION_MISMATCH"
+        ],
+        "alerts": [
+          "Brand impersonation detected: Message claims to be from 'Google' but directs to unauthorized domain 'twitch.tv'."
+        ],
+        "ocr_conf": 88.07,
+        "is_account_email": true,
+        "clean_text": "1 . -~ 9:47 \u00ab 1 device QwzO hur 97% \u20ac Owes: : Your Twitch Account - Successful Social Log-in A Inbox Twitch Aug 28 \u00a9 7 4 : tome v \u00b0 Your Twitch Account \u2014 Successful Log-in Dear yukiwashinda, This emai"
+      },
+      {
+        "file": "Screenshot_20261021_215042.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9826,
+        "raw_ml_score": 0.9826,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.983 >= 0.71)."
+        ],
+        "ocr_conf": 82.01,
+        "is_account_email": true,
+        "clean_text": "950 \u00ab@) 1 device QO Sir W 96% \u20ac Owes: Get started with Microsoft Rewards \u2018int bk\u00a2 Microsoft Rewards Mar 2 7 , \u00a9 4 : ome v View as a webpage BE Microsoft Welcome to Microsoft Rewards Sign in with your "
+      },
+      {
+        "file": "Screenshot_20261021_215052.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9765,
+        "raw_ml_score": 0.9765,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.977 >= 0.71)."
+        ],
+        "ocr_conf": 84.21,
+        "is_account_email": false,
+        "clean_text": "1 \u2018 -~ 9:50 \u00ab) 1 device Qir@O Sui H 96% \u20ac Owes: . Your Twitch Username \u2018tits Ww Twitch Feb 26 Oa } tome v \u00b0 Update success, yukiwashindal Looks like you recently updated your username from 10100wo to "
+      },
+      {
+        "file": "Screenshot_20261021_215121.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9787,
+        "raw_ml_score": 0.9787,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.979 >= 0.71)."
+        ],
+        "ocr_conf": 80.06,
+        "is_account_email": true,
+        "clean_text": "1 . -~ 9:51 \u00ab) 1 device OQ ir@O Sui OB 95% \u20ac Owes: : Verification Code (ins Ww do-not-reply@passport.yo-st... Jan1 \u00a9 q 7 : tome v \u00b0 Hello, To complete your Yostar verification. please use the followin"
+      },
+      {
+        "file": "Screenshot_20261021_215321.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9197,
+        "raw_ml_score": 0.9197,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.920 >= 0.71)."
+        ],
+        "ocr_conf": 89.44,
+        "is_account_email": false,
+        "clean_text": "953 \u00ab@) 1 device QO <8 94% a < AX-ARTOTT-P s Cc Tap to load preview Wednesday, Sep 3, 2025 + 1:32 PM FREE access to Sony LIV, Hoichoi, Aha & 25+ OTTs! Watch movies & shows with the whole family on Air"
+      },
+      {
+        "file": "Screenshot_20261021_215402.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.95,
+        "raw_ml_score": 0.8724,
+        "rules_triggered": [
+          "BRAND_IMPERSONATION_MISMATCH"
+        ],
+        "alerts": [
+          "Brand impersonation detected: Message claims to be from 'Airtel' but directs to unauthorized domain 'i.airtel'."
+        ],
+        "ocr_conf": 89.2,
+        "is_account_email": false,
+        "clean_text": "954 \u00ab@) 1 device QO Ku 94% a < AN-AIRTEL-S $ dtpck-pre Cc Tap to load preview Monday, Sep 7 + 10:20 PM Alert 100%: for your daily high speed data limit. Get 3GB per day for 3 days at Rs. 39. Recharge "
+      },
+      {
+        "file": "Screenshot_20261021_215407.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9961,
+        "raw_ml_score": 0.9961,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.996 >= 0.71)."
+        ],
+        "ocr_conf": 79.82,
+        "is_account_email": false,
+        "clean_text": "954 \u00ab@) 1 device QO KB 94% a < VA-SBIBNK-S $ \u2014__ Unreal $m Sunday + 1:21PM Dear SBI Customer, QR code may hide malicious links. Avoid scanning unknown/altered QR codes. Verify the source before openin"
+      },
+      {
+        "file": "Screenshot_20261021_215443.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9698,
+        "raw_ml_score": 0.9698,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.970 >= 0.71)."
+        ],
+        "ocr_conf": 80.07,
+        "is_account_email": false,
+        "clean_text": "954 \u00ab@) 1 device BLO Kir W996 e <\u20ac Q VA-CDSLEV-S : \u2014\u2014W__ Unread $a. Friday, Oct 9 + 8:56 AM Dear Investor, e-Voting for HDFC BANK-EQ1/- begins from 08-10-2026 10:00 and ends at 06-11-2026 17:00.-CDSL "
+      },
+      {
+        "file": "Screenshot_20261021_215447.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.958,
+        "raw_ml_score": 0.958,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.958 >= 0.71)."
+        ],
+        "ocr_conf": 92.8,
+        "is_account_email": false,
+        "clean_text": "954 \u00ab) 1 device QO Su 893% a < AD-ARWGOV-S 5 Monday, Oct 6, 2025 + 11:48 PM CSK, CERT-In advises you to keep your digital devices free from botnet and malware infections. Download free bot removal too"
+      },
+      {
+        "file": "Screenshot_20261021_215805.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9877,
+        "raw_ml_score": 0.9877,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.988 >= 0.71)."
+        ],
+        "ocr_conf": 89.51,
+        "is_account_email": false,
+        "clean_text": "958 \u00ab@) 1 device BLO <u W 92% a \u20ac VM-SBIBNK-P $ \u2014\u2014_ Urrread -\u2014 _\u2014_\u2014\u2014. Saturday, May 31, 2025 + 10:53 AM Dear Customer, Pay & manage your bills through Yono SBI, without juggling through multiple apps."
+      },
+      {
+        "file": "Screenshot_20261021_213524.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.9527,
+        "raw_ml_score": 0.9527,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.953 >= 0.71)."
+        ],
+        "ocr_conf": 64.41,
+        "is_account_email": false,
+        "clean_text": "1 9 9:35 () 1 device Qi \u00a9 Tir B 100% \u20ac BONHOMIE HOSTEL/P G. ck \u00b0 = 7 : \u2018 ss Adielo, Mom. Thejohii, ~ ., ~ Akumla, ~ Girl, +91 7085... \u00b0 P s February 14, 2026 ~ bas \".. : T Ak Qy Adielo k i , Goodmorni"
+      },
+      {
+        "file": "Screenshot_20261021_213600.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.8488,
+        "raw_ml_score": 0.8488,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.849 >= 0.71)."
+        ],
+        "ocr_conf": 50.15,
+        "is_account_email": false,
+        "clean_text": "9:36 \u00a9) 1 device QO Ki B 100% Role play \u00b0 \u20ac 2 Beni, Chintu, Emanuel, shou, Yoihenba, You Ck . : * Yoihenba . Poster 16 9@2x.png g \u2018 od 0.98 MB + PNG ad : YS 10:50 AM ' : 4 Yoihenba l i mG Thank you 16"
+      },
+      {
+        "file": "Screenshot_20261021_213909.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.7432,
+        "raw_ml_score": 0.7432,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.743 >= 0.71)."
+        ],
+        "ocr_conf": 51.32,
+        "is_account_email": false,
+        "clean_text": "9:39 \u00a9) 1 device QO KiB 1008 \u20ac PS The Brokies TT 2) \u00a2@ : WAS Penguine, Why? s \u2018@) Viv? 2 August 17, 2026 : \u00bb Idk why ya always choose words that hit a nerve with ppl pyr \u2018 FT ny 2 i an oit\u2122 a \u2018 taal \u2014"
+      }
+    ]
+  },
+  "final_holdout_evaluation": {
+    "name": "final",
+    "total_samples": 123,
+    "legitimate_count": 32,
+    "false_positive_count": 75,
+    "uncertain_count": 16,
+    "decided_samples": 107,
+    "abstention_rate": {
+      "value": 0.1301,
+      "ci_95": [
+        0.0817,
+        0.2009
+      ]
+    },
+    "decided_fpr": {
+      "value": 0.7009,
+      "ci_95": [
+        0.6085,
+        0.7795
+      ]
+    },
+    "per_channel": {
+      "email": {
+        "total": 42,
+        "legitimate": 6,
+        "false_positive": 31,
+        "uncertain": 5,
+        "abstention_rate": {
+          "value": 0.119,
+          "ci_95": [
+            0.0519,
+            0.25
+          ]
+        },
+        "decided_fpr": {
+          "value": 0.8378,
+          "ci_95": [
+            0.6886,
+            0.9235
+          ]
+        }
+      },
+      "sms": {
+        "total": 41,
+        "legitimate": 8,
+        "false_positive": 30,
+        "uncertain": 3,
+        "abstention_rate": {
+          "value": 0.0732,
+          "ci_95": [
+            0.0252,
+            0.1943
+          ]
+        },
+        "decided_fpr": {
+          "value": 0.7895,
+          "ci_95": [
+            0.6365,
+            0.8893
+          ]
+        }
+      },
+      "whatsapp": {
+        "total": 40,
+        "legitimate": 18,
+        "false_positive": 14,
+        "uncertain": 8,
+        "abstention_rate": {
+          "value": 0.2,
+          "ci_95": [
+            0.105,
+            0.3476
+          ]
+        },
+        "decided_fpr": {
+          "value": 0.4375,
+          "ci_95": [
+            0.2817,
+            0.6067
+          ]
+        }
+      }
+    },
+    "account_email_subgroup": {
+      "total": 25,
+      "legitimate": 2,
+      "false_positive": 22,
+      "uncertain": 1,
+      "abstention_rate": {
+        "value": 0.04,
+        "ci_95": [
+          0.0071,
+          0.1954
+        ]
+      },
+      "decided_fpr": {
+        "value": 0.9167,
+        "ci_95": [
+          0.7415,
+          0.9768
+        ]
+      }
+    },
+    "false_positives": [
+      {
+        "file": "Screenshot_20261021_214438.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9927,
+        "raw_ml_score": 0.9927,
+        "rules_triggered": [
+          "BRAND_IMPERSONATION_MISMATCH"
+        ],
+        "alerts": [
+          "Brand impersonation detected: Message claims to be from 'Google' but directs to unauthorized domain 'cursor.sh'."
+        ],
+        "ocr_conf": 78.67,
+        "is_account_email": true,
+        "clean_text": "9:44 \u00ab@) 1 device QO Sir B 99% eo e S Au Ss : You shared some Google Account data with tr Cursor.sh (tite Cc] Google oct 14 . Unsubscribe $ tome v G Keep track of your Google Account data \u00ae shikyo1225"
+      },
+      {
+        "file": "Screenshot_20261021_214456.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9969,
+        "raw_ml_score": 0.9969,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.997 >= 0.71)."
+        ],
+        "ocr_conf": 88.66,
+        "is_account_email": true,
+        "clean_text": "1 ry -~ 9:44 () 1 device QO Nui H 99% \u2014\u2014\" e e \u20ac oS: [Reminder] Update Your KYC Information to Ensure Continued Access - 2026-10-18 w 09:06:16 (UTC) \u2018inbox Binance 3 days ago \u00a9 . 4 8 tome v \u00b0 a *Y BINA"
+      },
+      {
+        "file": "Screenshot_20261021_214548.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9901,
+        "raw_ml_score": 0.9901,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.990 >= 0.71)."
+        ],
+        "ocr_conf": 86.1,
+        "is_account_email": false,
+        "clean_text": "9:45 \u00ab@) 1 device QO Sir 98% \u20ac Ow S&S: HDFC BANK LIMITED : Postal Ballot Notice \u201cmx \u00a5y evoting@nsdl.com 8:11PM 7 Unsubscribe s tome v HL} HDFC BANK HDFC BANK LIMITED Corporate Identification Number: L"
+      },
+      {
+        "file": "Screenshot_20261021_214621.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.987,
+        "raw_ml_score": 0.987,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.987 >= 0.71)."
+        ],
+        "ocr_conf": 90.99,
+        "is_account_email": true,
+        "clean_text": "1 \u2018 -~ 9:46 ((-)) 1 device Q ie \u00a9 Si H 98% \u2014 ) \u00b0 \u20ac 0S . , Quarterly reminder about YouTube\u2019s Terms of Service, Community Guidelines and Privacy Policy Inbox YouTube Sep 26 . \u00a9 4 } tome v This email is"
+      },
+      {
+        "file": "Screenshot_20261021_214659.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9938,
+        "raw_ml_score": 0.9938,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.994 >= 0.71)."
+        ],
+        "ocr_conf": 81.83,
+        "is_account_email": true,
+        "clean_text": "9:46 \u00ab@) 1 device QO Sur 98% ) \u00b0 iS Owes: Never share your Binance login details \u201ciis w \u00a9 Binance sep 9 . Unsubscribe $ tome v *, \u2018> BINANCE YOUR ACCOUNT. YOURS ONLY. me Never share your login details"
+      },
+      {
+        "file": "Screenshot_20261021_214708.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9877,
+        "raw_ml_score": 0.9877,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.988 >= 0.71)."
+        ],
+        "ocr_conf": 84.36,
+        "is_account_email": true,
+        "clean_text": "1 . -~ 9:47 \u00ab) 1 device Qiz\u00a9 Far B 98% \u20ac Owes: $ : Security alert for belokapfo1@gmail.com \u2018tis wv Google 8:23 PM \u00a9 : tome v \u00b0 This Is a copy of a security alert sent to belokapfol@gmail.com. yuklanim"
+      },
+      {
+        "file": "Screenshot_20261021_214712.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9939,
+        "raw_ml_score": 0.9939,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.994 >= 0.71)."
+        ],
+        "ocr_conf": 82.07,
+        "is_account_email": true,
+        "clean_text": "9:47 \u00ab@) 1 device QO Sur W 98% oe e S Huw SS : [GitHub] Cursor is requesting updated +t permissions \u201cee GitHub oct 14 . tome v Updated Permissions Request The GitHub App Cursor is requesting additiona"
+      },
+      {
+        "file": "Screenshot_20261021_214721.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9735,
+        "raw_ml_score": 0.9735,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.973 >= 0.71)."
+        ],
+        "ocr_conf": 75.9,
+        "is_account_email": false,
+        "clean_text": "9:47 \u00ab@) 1 device QO SW 98% eo e \u20ac Au Ss : Your order 1791012100853-267380 has been tr completed successfully \u201c\u2018tisx VALUE PASS: 1 item from Zentro Store Delivered Order number # 1791012100853-267380 "
+      },
+      {
+        "file": "Screenshot_20261021_214723.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.973,
+        "raw_ml_score": 0.973,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.973 >= 0.71)."
+        ],
+        "ocr_conf": 74.93,
+        "is_account_email": false,
+        "clean_text": "9:47 \u00ab@) 1 device QO Sur W 98% eo e \u20ac Au Ss : Your order 1790936797107-568283 has been tr completed successfully \u201ctis VALUE PASS: 1 item from Zentro Store Delivered # Order number 1790936797107-568283"
+      },
+      {
+        "file": "Screenshot_20261021_214729.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9325,
+        "raw_ml_score": 0.9325,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.932 >= 0.71)."
+        ],
+        "ocr_conf": 74.33,
+        "is_account_email": false,
+        "clean_text": "9:47 \u00ab@) 1 device QO SH 98% oe e \u20ac Au SS : \"fluerdelys dj page 2 and 3 wip\" and 2 more \u2018Hex yy @ TIRA (via Patreon) oct 1 . Unsubscribe $ tome v a TIRA f Catch up on this month's top posts from TIRA e"
+      },
+      {
+        "file": "Screenshot_20261021_214751.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9745,
+        "raw_ml_score": 0.9745,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.974 >= 0.71)."
+        ],
+        "ocr_conf": 85.98,
+        "is_account_email": false,
+        "clean_text": "1 \u2018 -~ 9:47 \u00ab) 1 device QwRO hun H 97% \u20ac Owes: . \u2019 - You're officially a Kaggler. Now what? \u201ctits Ww Kaggle Aug 27 \u00a9 q 7 \u00b0 tome v \u00b0 Hi yukianime, You're now part of the world\u2019s largest data science co"
+      },
+      {
+        "file": "Screenshot_20261021_214758.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9958,
+        "raw_ml_score": 0.9958,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.996 >= 0.71)."
+        ],
+        "ocr_conf": 87.3,
+        "is_account_email": true,
+        "clean_text": "1 \u2018 -~ 9:47 \u00ab) 1 device QwRO hun H 97% \u20ac Owes: . Your IEEE Account \u2018tis Ww IEEE Confirmation Aug 25 \u00a9 q 7 \u00b0 tome v \u00b0 Dear Yuki Anime, The following information for your IEEE Account has been changed: "
+      },
+      {
+        "file": "Screenshot_20261021_214801.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9934,
+        "raw_ml_score": 0.9934,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.993 >= 0.71)."
+        ],
+        "ocr_conf": 87.77,
+        "is_account_email": true,
+        "clean_text": "1 \u2018 -~ 9:48 \u00ab) 1 device OQrO Nui H 97% \u20ac Owes: . Your New IEEE Account (tis Ww IEEE Confirmation Aug 25 \u00a9 q 7 \u00b0 tome v \u00b0 Your IEEE Account. Dear Yuki Anime, Your IEEE Account has been created using th"
+      },
+      {
+        "file": "Screenshot_20261021_214810.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9926,
+        "raw_ml_score": 0.9926,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.993 >= 0.71)."
+        ],
+        "ocr_conf": 83.79,
+        "is_account_email": true,
+        "clean_text": "9:48 \u00ab@) 1 device QO Su 97% e \u00b0 : \u20ac Ow Si: 978289 - Your Spotify login code \u201cts Ww Spotif Aug 9 potify & aug @\u00ab: tome v \u00b0 \u00b0 6 Spotify Hi, Enter this code to continue logging in without a password: Thi"
+      },
+      {
+        "file": "Screenshot_20261021_214815.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9881,
+        "raw_ml_score": 0.9881,
+        "rules_triggered": [
+          "BRAND_IMPERSONATION_MISMATCH"
+        ],
+        "alerts": [
+          "Brand impersonation detected: Message claims to be from 'Google' but directs to unauthorized domain 'yaccount.google'."
+        ],
+        "ocr_conf": 81.75,
+        "is_account_email": true,
+        "clean_text": "1 . -~ 9:48 \u00ab) 1 device OQrO Nui H 97% \u20ac Owes: 3 3 Security alert ex Ww Google Aug 9 \u00a9 : tome v \u00b0 Google A new sign-in on 12304 & yukianime89@gmail.com We noticed a new sign-in to your Google Account "
+      },
+      {
+        "file": "Screenshot_20261021_214829.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9964,
+        "raw_ml_score": 0.9964,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.996 >= 0.71)."
+        ],
+        "ocr_conf": 86.9,
+        "is_account_email": true,
+        "clean_text": "1 \u2018 -~ 9:48 \u00ab) 1 device QrO hui G 97% \u20ac Ouse: \u00b0 . Welcome to ngrok! \u2018ties Ww ngrok team Jul 10 \u00a9 7 4S \u00b0 tome v \u00b0 View in browser Welcome to ngrok. We're excited to have you here. Over the next few wee"
+      },
+      {
+        "file": "Screenshot_20261021_214835.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.8019,
+        "raw_ml_score": 0.8019,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.802 >= 0.71)."
+        ],
+        "ocr_conf": 79.78,
+        "is_account_email": false,
+        "clean_text": "9:48 \u00ab@) 1 device BLO Kuo e \u00b0 : \u20ac Ow Ss: Welcome to Firebase \u201ci w Firebase Jul9 7 \u00a9 4 : tome v Welcome to Firebase Making your app a Te & the best it can be H ' /\u2122 Hi Yuki, Welcome to Firebase! You're"
+      },
+      {
+        "file": "Screenshot_20261021_214847.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9969,
+        "raw_ml_score": 0.9969,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.997 >= 0.71)."
+        ],
+        "ocr_conf": 81.43,
+        "is_account_email": true,
+        "clean_text": "9:48 \u00ab@) 1 device QVO Suh 97% \u20ac Ow Ss: 81824 is your verification code \u201cttsx yw LevellnfinitePass@account.l... Jun 28 7 tome v Nd | LEVEL INFINITE LN/ PASS H VERIFICATION CODE i Dear player, Your veri"
+      },
+      {
+        "file": "Screenshot_20261021_214909.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9877,
+        "raw_ml_score": 0.9877,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.988 >= 0.71)."
+        ],
+        "ocr_conf": 82.96,
+        "is_account_email": true,
+        "clean_text": "1 \u2018 -~ 9:49 \u00ab) 1 device QwzO Fur 97% LY) \u00b0 . \u20ac Owes: New sign-in to your OpenAl account \u2018tite w OpenAl &@ Jun 26 \u00a9 q 5 \u00b0 (S) tome v \u00b0 Hello, We noticed a new sign-in to your OpenAl account. App: Codex"
+      },
+      {
+        "file": "Screenshot_20261021_214912.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9922,
+        "raw_ml_score": 0.9922,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.992 >= 0.71)."
+        ],
+        "ocr_conf": 83.7,
+        "is_account_email": true,
+        "clean_text": "9:49 \u00ab@) 1 device QO Su 97% \u20ac Owes: Your Account Has Been Closed - Personal xe ACCOUNT | Inbox NiceHash Jun 19 tome v om Your Account Has Been Closed Your account on Nicehash has been closed due to in"
+      },
+      {
+        "file": "Screenshot_20261021_214918.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9962,
+        "raw_ml_score": 0.9962,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.996 >= 0.71)."
+        ],
+        "ocr_conf": 83.19,
+        "is_account_email": true,
+        "clean_text": "1 . -~ 9:49 \u00ab) 1 device QwO hu 97% \u20ac Ow S&S: : New sign in to Steam \u2018tax wv Steam Team &% Jun 10 w New sign in to Steam From your account \"O_yuki_6\" Location - of sign in: Barama, Assam, IN Authorized"
+      },
+      {
+        "file": "Screenshot_20261021_214933.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9972,
+        "raw_ml_score": 0.9972,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.997 >= 0.71)."
+        ],
+        "ocr_conf": 86.26,
+        "is_account_email": true,
+        "clean_text": "1 . -~ 9:49 \u00ab) 1 device Qir@O Sur H 96% oe e 3 \u20ac Oo wow SS: Security alert: new or unusual X login \u201ctee vx X May 12 @ a: tome v \u00b0 We noticed an attempt to log in to your account @YukiAnime16 that seem"
+      },
+      {
+        "file": "Screenshot_20261021_214937.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9902,
+        "raw_ml_score": 0.9902,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.990 >= 0.71)."
+        ],
+        "ocr_conf": 90.31,
+        "is_account_email": true,
+        "clean_text": "1 \u2018 -~ 9:49 ((-)) 1 device GQ ie \u00a9 Si Hl 96% = ) \u00b0 \u20ac oS . , Quarterly reminder about YouTube's Terms of Service, Community Guidelines and Privacy Policy Inbox YouTube May 11 . \u00a9 4 } tome v This email "
+      },
+      {
+        "file": "Screenshot_20261021_214947.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9506,
+        "raw_ml_score": 0.9506,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.951 >= 0.71)."
+        ],
+        "ocr_conf": 57.22,
+        "is_account_email": false,
+        "clean_text": "9:49 \u00ab@) 1 device QO KiB 96% \u20ac Owes: Your name is on the WUWA 2nd list \u201ctits wv LootBar.gg Apr 30 @ 2) tr Unsubscribe : tome v sa a . J x\u201c P 4 eg \\OOTBARG - ; : Dear Rover U1068345150 Wuthering Waves "
+      },
+      {
+        "file": "Screenshot_20261021_214954.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9948,
+        "raw_ml_score": 0.9948,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.995 >= 0.71)."
+        ],
+        "ocr_conf": 81.97,
+        "is_account_email": true,
+        "clean_text": "9:49 \u00ab@) 1 device QO SB 96% oe e \u20ac Huw Ss : [Hugging Face] Click this link to confirm your tt email address \u201ctitsx huggingface Apr 25 \u00a9 q . tome v \u00b0 Confirm your email address by clicking on this link"
+      },
+      {
+        "file": "Screenshot_20261021_215001.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9965,
+        "raw_ml_score": 0.9965,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.996 >= 0.71)."
+        ],
+        "ocr_conf": 80.54,
+        "is_account_email": true,
+        "clean_text": "950 \u00ab@) 1 device QO Su 8 96% \u20ac Hu Ss: Your OTP for Dab Arcade \u201cits bk\u00a2 Dab Arcade Apr 19 7 \u00a9 4 : tome v DABARCADE.IN Verification code Enter the below one time password to verify your account: 503544 "
+      },
+      {
+        "file": "Screenshot_20261021_215008.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9283,
+        "raw_ml_score": 0.9283,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.928 >= 0.71)."
+        ],
+        "ocr_conf": 72.69,
+        "is_account_email": false,
+        "clean_text": "950 \u00ab@) 1 device QO Hi 96% oe e \u20ac Hu SS: GUILTY GEAR -STRIVE- from your Steam xe wishlist is now on sale! \\tibex Steam Apr 10 w Om Unsubscribe : tome v \u00ae (e) e) 1 GAME YOU'VE WISHED FOR IS ON SALE! ? "
+      },
+      {
+        "file": "Screenshot_20261021_215112.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9953,
+        "raw_ml_score": 0.9953,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.995 >= 0.71)."
+        ],
+        "ocr_conf": 80.89,
+        "is_account_email": true,
+        "clean_text": "951 \u00ab@) 1 device QO iW 96% LJ e \u20ac OH wow S&S: RE: 09834960: Not receiving verification code in provided phone number wy [ thread::K8Xe_TkOGH21VAOHjg8LmgA:: ] \u2018tex Twitch Support 12/31/2025 Hello 10100"
+      },
+      {
+        "file": "Screenshot_20261021_215126.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9902,
+        "raw_ml_score": 0.9902,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.990 >= 0.71)."
+        ],
+        "ocr_conf": 86.07,
+        "is_account_email": true,
+        "clean_text": "951 () 1 device QO Far 95% \u20ac 1 a a 09834960: Not receiving verification code in st provided phone number \u2018tits Twitch Support 12/31/2025 . \u00a9 5 } tome v Hi 10100wo, This is an automated response to let"
+      },
+      {
+        "file": "Screenshot_20261021_215141.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9978,
+        "raw_ml_score": 0.9978,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.998 >= 0.71)."
+        ],
+        "ocr_conf": 76.57,
+        "is_account_email": true,
+        "clean_text": "951 \u00ab@) 1 device QO Kir W958 \u20ac Owes: Verify your email \u201cee bd Duolingo @ 12/7/2025 a tome v duolingo e e \u00b0 @ @ Verify your email Thanks for helping us keep your account secure! Click the button below "
+      },
+      {
+        "file": "Screenshot_20261021_215148.jpg",
+        "channel": "email",
+        "verdict": "phishing",
+        "phishing_score": 0.9791,
+        "raw_ml_score": 0.9791,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.979 >= 0.71)."
+        ],
+        "ocr_conf": 85.41,
+        "is_account_email": false,
+        "clean_text": "951 \u00ab@) 1 device QO Si 8 95% \u20ac Owes: Discord Incident - API and Homepage ye Availability Issues - 5 December 2025 \u2018tbs noreply@statuspage.io 12/5/2025 . Unsubscribe $ tome v Discord API and Homepage A"
+      },
+      {
+        "file": "Screenshot_20261021_215233.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9715,
+        "raw_ml_score": 0.9715,
+        "rules_triggered": [
+          "BRAND_IMPERSONATION_MISMATCH"
+        ],
+        "alerts": [
+          "Brand impersonation detected: Message claims to be from 'Google' but directs to unauthorized domain 'i.airtel'."
+        ],
+        "ocr_conf": 87.51,
+        "is_account_email": false,
+        "clean_text": "952 @) 1 device BLO SW 95% Google Messages Q wf\u00bb (O) 4 spam messages blocked in the last 14 days Dismiss View AX-ARTOTT-P 8:09 PM IND vs NZ 1st T20 tomorrow at 12:30 PM! Watch on @ SonyLlV + 18 OTTs w"
+      },
+      {
+        "file": "Screenshot_20261021_215329.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.837,
+        "raw_ml_score": 0.837,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.837 >= 0.71)."
+        ],
+        "ocr_conf": 88.8,
+        "is_account_email": false,
+        "clean_text": "953 oy) 1 device QO Kun 4% a < AN-AIRTEL-P $ Reminder: You are eligible to claim 25+ OTT subscriptions with your Airtel plan, including SonyLiv, Aha & Lionsgate Play. Watch Now: https://open.airtelxst"
+      },
+      {
+        "file": "Screenshot_20261021_215336.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9505,
+        "raw_ml_score": 0.9505,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.950 >= 0.71)."
+        ],
+        "ocr_conf": 88.91,
+        "is_account_email": false,
+        "clean_text": "953 \u00ab) 1 device QO SB 94% a < VM-SBIUPI-S $ Retno 619587624179 If not u? call-1800111109 for other services-18001234-SBI Tuesday, Aug 18 + 3:17 PM Dear SBI User, your A/c X7838-credited by Rs.80 on 18"
+      },
+      {
+        "file": "Screenshot_20261021_215341.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9759,
+        "raw_ml_score": 0.9759,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.976 >= 0.71)."
+        ],
+        "ocr_conf": 87.9,
+        "is_account_email": false,
+        "clean_text": "953 () 1 device QO Ta o4% e S Google Pay 3 O/ oneveryday 3 . 2 % spends F fo) extra on top food \u20acX 5 % arocentenna by @ Google Pay 1 5% extra on bills O & recharges Fo J: - ov Terms & Conditions apply"
+      },
+      {
+        "file": "Screenshot_20261021_215419.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9877,
+        "raw_ml_score": 0.9877,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.988 >= 0.71)."
+        ],
+        "ocr_conf": 84.98,
+        "is_account_email": false,
+        "clean_text": "954 \u00ab@) 1 device QO KB 94% a < CP-GROWWO-S $ a Urea RN Saturday, Oct 4, 2025 + 10:14 AM Quarterly settlement: Transfer successful from Groww Amount: Rs. 12321.9 Initiated on: 2025-10-03 UTR no.: CMS53"
+      },
+      {
+        "file": "Screenshot_20261021_215434.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.95,
+        "raw_ml_score": 0.8659,
+        "rules_triggered": [
+          "BRAND_IMPERSONATION_MISMATCH"
+        ],
+        "alerts": [
+          "Brand impersonation detected: Message claims to be from 'Airtel' but directs to unauthorized domain 'bit.ly'."
+        ],
+        "ocr_conf": 88.34,
+        "is_account_email": false,
+        "clean_text": "954 \u00ab@) 1 device BLO Kir W996 a < AD-AIRDOT-S 5 u Tap to load preview Tuesday, Jul 14 - 10:29 PM Please beware of unauthorized online quick loan providing apps which may mis-use your personal informat"
+      },
+      {
+        "file": "Screenshot_20261021_215439.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9902,
+        "raw_ml_score": 0.9902,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.990 >= 0.71)."
+        ],
+        "ocr_conf": 90.01,
+        "is_account_email": false,
+        "clean_text": "954 \u00ab@) 1 device QLO Kir 99% a < VA-SBIUPI-S $ Your UPI-Mandate is successfully cancelled towards Google Play for 999.00 from A/c No.XXXXXX7838. UMN:530edd76fa34d4cfe0634c2eb00ae81b@o ksbi -SBI UPI-Ma"
+      },
+      {
+        "file": "Screenshot_20261021_215455.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9385,
+        "raw_ml_score": 0.9385,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.938 >= 0.71)."
+        ],
+        "ocr_conf": 90.83,
+        "is_account_email": false,
+        "clean_text": "954 \u00ab@) 1 device QO Sui 8 93% a \u20ac JM-NSESMS-S 5 Saturday, May 16 + 4:03 AM GROWWINVESTTECHPRIVATELIMITED on 09-05-2026 reported your Fund bal Rs.0.000 & Securities bal 0.000. This excludes your Bank, "
+      },
+      {
+        "file": "Screenshot_20261021_215516.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9896,
+        "raw_ml_score": 0.9896,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.990 >= 0.71)."
+        ],
+        "ocr_conf": 89.48,
+        "is_account_email": false,
+        "clean_text": "955 \u00ab@) 1 device BLO Si 8 99% a < AD-SBIUPI-S $ Wednesday, May 27 + 11:30 AM Dear UPI user A/C X7838 debited by 200.00 on date 27May26 trf to SHANKAR PAN SHOP Refno 651309572574 If not u? call-1800111"
+      },
+      {
+        "file": "Screenshot_20261021_215521.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9315,
+        "raw_ml_score": 0.9315,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.932 >= 0.71)."
+        ],
+        "ocr_conf": 91.31,
+        "is_account_email": false,
+        "clean_text": "9:55 \u00ab@) 1 device QLO Kir W996 a < AX-TOPOTT-P $ Tuesday, Jun 16 + 12:43 PM Airtel recharge benefit - FREE 20+ OTTs! Get access to Sony LIV, Aha, LIVE TV & more with your Airtel number. Get now: https"
+      },
+      {
+        "file": "Screenshot_20261021_215525.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9602,
+        "raw_ml_score": 0.9602,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.960 >= 0.71)."
+        ],
+        "ocr_conf": 80.09,
+        "is_account_email": false,
+        "clean_text": "9:55 \u00ab@) 1 device BLO Si 8 99% e \u20ac & AX-SBIBNK-P : \u2014\u2014__ Unreal $ SS Wednesday, Sep 23 + 3:42 PM Dear Customer, Enjoy banking on YONO? Share your YONO referral code with family & friends, get them star"
+      },
+      {
+        "file": "Screenshot_20261021_215532.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9154,
+        "raw_ml_score": 0.9154,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.915 >= 0.71)."
+        ],
+        "ocr_conf": 85.81,
+        "is_account_email": false,
+        "clean_text": "9:55 \u00ab) 1 device QO Su 8 93% a < VA-BSELTD-S $ excludes your Bank, DP and PMS bal with the broker-BSE Wednesday, Feb 18 + 8:31 PM Beware dealing on unsolicited tips through Whatsapp,Telegram,SMS,Calls"
+      },
+      {
+        "file": "Screenshot_20261021_215536.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9351,
+        "raw_ml_score": 0.9351,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.935 >= 0.71)."
+        ],
+        "ocr_conf": 81.65,
+        "is_account_email": false,
+        "clean_text": "9:55 \u00ab@) 1 device BLO Si 8 99% e \u20ac Q JK-SBIBNK-S : \u2014__ Unreal $m. Friday, Sep 25 + 12:02 AM Dear Customer, For your convenience, SBI branches will remain open on Sunday, 27 September 2026. Please visi"
+      },
+      {
+        "file": "Screenshot_20261021_215545.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.8607,
+        "raw_ml_score": 0.8607,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.861 >= 0.71)."
+        ],
+        "ocr_conf": 82.25,
+        "is_account_email": false,
+        "clean_text": "9:55 \u00ab@) 1 device BLO Kir W996 e \u20ac ) JM-NSEWEL-S : J Unread paANVY$Yv Monday, Sep 7 + 4:31 PM Dear NOPXXXXX1N Welcome to NSE, You have been registered with ANGEL ONE LIMITED in segment(s) CO. If you h"
+      },
+      {
+        "file": "Screenshot_20261021_215547.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.8847,
+        "raw_ml_score": 0.8847,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.885 >= 0.71)."
+        ],
+        "ocr_conf": 79.39,
+        "is_account_email": false,
+        "clean_text": "9:55 @) 1 device BLO Kir W996 a < JM-NSETRA-S $ rtrd AA Friday, Sep 4 - 9:53 PM Dear NOPXXXXX1N,Your traded value for 04-SEP-26 CM Rs 3569.5 Check your registered email. For details contact broker -Na"
+      },
+      {
+        "file": "Screenshot_20261021_215554.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9531,
+        "raw_ml_score": 0.9531,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.953 >= 0.71)."
+        ],
+        "ocr_conf": 84.55,
+        "is_account_email": false,
+        "clean_text": "9:55 \u00ab@) 1 device BLO Kir W996 a \u20ac AD-AIRECI-S F \u2014\u2014\u2014_W Unread AA _ @_ Wednesday, Sep 16 + 12:28 PM Is your name on the Electoral Roll? Check now on ECINET. Stay informed, access essential citizen serv"
+      },
+      {
+        "file": "Screenshot_20261021_215558.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9862,
+        "raw_ml_score": 0.9862,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.986 >= 0.71)."
+        ],
+        "ocr_conf": 89.78,
+        "is_account_email": false,
+        "clean_text": "9:55 \u00ab@) 1 device BLO Si 8 99% . a < Airtel-S : Unread paNNYv Wednesday, May 14, 2025 - 10:46 PM Recharge of INR 11.00 is successful for your Airtel Mobile on 14-05-2025 22:46, Transaction ID 26027282"
+      },
+      {
+        "file": "Screenshot_20261021_215601.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.794,
+        "raw_ml_score": 0.794,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.794 >= 0.71)."
+        ],
+        "ocr_conf": 87.05,
+        "is_account_email": false,
+        "clean_text": "956 \u00ab@) 1 device BLO Si 8 996 a \u20ac JK-NSESMS-S 5 a Unread a NN Friday, May 23, 2025 - 3:44 PM GROWW INVEST TECH PRIVATE LIMI on 17-05-25 reported your Fund bal Rs.O & Securities bal 0. This excludes yo"
+      },
+      {
+        "file": "Screenshot_20261021_215604.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9796,
+        "raw_ml_score": 0.9796,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.980 >= 0.71)."
+        ],
+        "ocr_conf": 80.59,
+        "is_account_email": false,
+        "clean_text": "956 \u00ab@) 1 device BLO Si 8 996 a < BT-MTASMS-G 5 \u2014\u2014.W___ Unreal $a. Friday, Aug 21 + 5:55 PM TribeX by Ministry of Tribal Affairs - a platform for tribal knowledge. Diploma and free courses. ENROLL NOW"
+      },
+      {
+        "file": "Screenshot_20261021_215616.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.987,
+        "raw_ml_score": 0.987,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.987 >= 0.71)."
+        ],
+        "ocr_conf": 86.6,
+        "is_account_email": false,
+        "clean_text": "956 \u00ab@) 1 device BLO Kir W996 a < BZ-NSPSMS-G 5 a Unread \u2014paANV$YvN Tuesday, Jun 16 - 12:15 AM Dear Student NL202526001912810, NSP offers easy renewal option for your scholarship for academic year 202"
+      },
+      {
+        "file": "Screenshot_20261021_215621.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.852,
+        "raw_ml_score": 0.852,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.852 >= 0.71)."
+        ],
+        "ocr_conf": 89.31,
+        "is_account_email": false,
+        "clean_text": "956 \u00ab@) 1 device BLO Si 8 99% a < AN-ARWINF-P $ a _ Unread AAS \u2014 Wednesday, May 20 + 3:56 PM Do you know? With Airtel if you Recharge before expiry, your validity will get added in your current pack, "
+      },
+      {
+        "file": "Screenshot_20261021_215630.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.7432,
+        "raw_ml_score": 0.7432,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.743 >= 0.71)."
+        ],
+        "ocr_conf": 82.83,
+        "is_account_email": false,
+        "clean_text": "9:56 \u00ab@) 1 device QO Su 92% a < VM-EASYMY-P $ Ur read SA Tuesday, Aug 4 + 7:43 PM Why pay more on your first trip? Save up to 20% on EaseMyTrip with code EMTFIRST. Book now: https://emt.bio/TJDIOp *T&"
+      },
+      {
+        "file": "Screenshot_20261021_215642.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.973,
+        "raw_ml_score": 0.973,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.973 >= 0.71)."
+        ],
+        "ocr_conf": 80.85,
+        "is_account_email": false,
+        "clean_text": "956 \u00ab@) 1 device BVO KO 92% a \u20ac Q JX-SBYONO-S $ \u2014\u2014_\u2014_ Unreal $m Thursday, Aug 6 + 8:06 PM Biometric access for YONO app successfully enabled. Please ensure that your phone contains only your biometric"
+      },
+      {
+        "file": "Screenshot_20261021_215652.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.973,
+        "raw_ml_score": 0.973,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.973 >= 0.71)."
+        ],
+        "ocr_conf": 76.98,
+        "is_account_email": false,
+        "clean_text": "956 \u00ab@) 1 device BVO KO 92% a < AD-NSETRA-S $ \u2014\u2014__ oo Unrreadlt $ SS Wednesday, Jul 22 - 8:51 PM Dear NOPXXXXX1N,Your traded value for 22-JUL-26 CM Rs 7869 Check your registered email. For details con"
+      },
+      {
+        "file": "Screenshot_20261021_215655.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9967,
+        "raw_ml_score": 0.9967,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.997 >= 0.71)."
+        ],
+        "ocr_conf": 88.52,
+        "is_account_email": false,
+        "clean_text": "956 \u00ab@) 1 device BVO KO 92% a < VA-SBIBNK-P $ \u2014\u2014_\u2014__ Unreal $ SJ. Friday, Feb 27 + 1:34 PM Dear Customer, Smart Friday flight deal is on! Enjoy 50% off convenience fee on flight bookings. Book now on "
+      },
+      {
+        "file": "Screenshot_20261021_215801.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.997,
+        "raw_ml_score": 0.997,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.997 >= 0.71)."
+        ],
+        "ocr_conf": 88.52,
+        "is_account_email": false,
+        "clean_text": "958 \u00ab@) 1 device QVO KO 92% a \u20ac JD-SBIBNK-P $ \u2014_ Unread \u2014\u2014_\u2014_\u2014_\u2014\u2014_. Friday, Jul 4, 2025 \u00ab 10:15 AM Dear Customer, Explore quick money transfers with YONO SBI Quick Pay. Visit YONO SBI > Tap on Quick P"
+      },
+      {
+        "file": "Screenshot_20261021_215810.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9011,
+        "raw_ml_score": 0.9011,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.901 >= 0.71)."
+        ],
+        "ocr_conf": 85.34,
+        "is_account_email": false,
+        "clean_text": "958 \u00ab@) 1 device QO <u W 92% \u20ac Q BL-ONEAPI-S : bread MH Saturday, Apr 18 + 9:02 AM Hello User, Your OTP for Radient is 846628 Please do not share with anyone Regards, ONESTEPLINK Monday, Jun 8 + 2:39 "
+      },
+      {
+        "file": "Screenshot_20261021_215821.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.997,
+        "raw_ml_score": 0.997,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.997 >= 0.71)."
+        ],
+        "ocr_conf": 81.58,
+        "is_account_email": false,
+        "clean_text": "958 \u00ab@) 1 device BVO Ku H ow e < ) AD-SBIBNK-P : \u2014\u2014__ Unreal $m. Wednesday, Jun 10 + 5:22 PM Dear Customer, Enjoy fast and secure UPI fund transfers on YONO, powered by SBI's trusted network. Register"
+      },
+      {
+        "file": "Screenshot_20261021_215937.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9917,
+        "raw_ml_score": 0.9917,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.992 >= 0.71)."
+        ],
+        "ocr_conf": 87.59,
+        "is_account_email": false,
+        "clean_text": "959 \u00ab@) 1 device QO <u o% a < VA-SBIUPI-S $ Bs Soc, yer Rs.100 on 19Feb26 transfer from TEPUDI SOLE Ref No 605030463660 -SBI Dear SBI User, your A/c X7838-credited by Rs.100 on 19Feb26 transfer from K"
+      },
+      {
+        "file": "Screenshot_20261021_215951.jpg",
+        "channel": "sms",
+        "verdict": "phishing",
+        "phishing_score": 0.9772,
+        "raw_ml_score": 0.9772,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.977 >= 0.71)."
+        ],
+        "ocr_conf": 91.45,
+        "is_account_email": false,
+        "clean_text": "9:59 \u00ab@) 1 device QO <u 9% a < AX-TOPOTT-P $ access to Sony LIV, Aha, LIVE TV & more with your Airtel number. Get now: https://open.airtelxstream.in/ClaimNow Thursday, Dec 4 + 5:16 PM Airtel recharge "
+      },
+      {
+        "file": "Screenshot_20261021_213443.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.9278,
+        "raw_ml_score": 0.9278,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.928 >= 0.71)."
+        ],
+        "ocr_conf": 54.34,
+        "is_account_email": false,
+        "clean_text": "934 \u00a9) 1 device QO Ki B 100% \u20ac : Sinfinite Void? cx . $ Apple Juice, Demon, Imkong, Tania?. Why?, Xiao, ~ ..... o >\u201d . sd - ee \u2018 aos Cl, Ds 4:41 PMS eal ~ Most of the people did not pull for nova col "
+      },
+      {
+        "file": "Screenshot_20261021_213614.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.852,
+        "raw_ml_score": 0.852,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.852 >= 0.71)."
+        ],
+        "ocr_conf": 53.21,
+        "is_account_email": false,
+        "clean_text": "9:36 oy) 1 device QO Fir B 100% \u20ac Gv Btech Che 3 Dene, Emanuel, Khiasuthong, Linthoi, Neha, Pulovi, S... o Pease Computin ae: 4 x Py). ge New note 2026-09-08.pdf 4 oe ee Wey 2 pooes - 3.2 MB + PDF pe "
+      },
+      {
+        "file": "Screenshot_20261021_213643.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.9108,
+        "raw_ml_score": 0.9108,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.911 >= 0.71)."
+        ],
+        "ocr_conf": 49.54,
+        "is_account_email": false,
+        "clean_text": "9:36 \u00ab@) 1 device YO Ki B 100% <\u20ac CC) Why? 2 O GY : i \u00a9) Bren ves ; ae October 13, 2026 Le a 320 = ou q 08 essen | i j yee Fy That's alot 63 oy Pin, Bs / Lend me another 500 XS ie \\ 7 y a 7:00 PM a e "
+      },
+      {
+        "file": "Screenshot_20261021_213721.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.973,
+        "raw_ml_score": 0.973,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.973 >= 0.71)."
+        ],
+        "ocr_conf": 52.28,
+        "is_account_email": false,
+        "clean_text": "9:37 \u00a9) 1 device YO Ki B 100% \u00b0 \u20ac Om ok : 4 . October 3, 2026 Sie \u201cA sy ; You ] G) Even yt is showing me translate to jp wtf , xd Ee : Just migrate to japan at this point earn) = s For me google ay? 5"
+      },
+      {
+        "file": "Screenshot_20261021_213816.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.8447,
+        "raw_ml_score": 0.8447,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.845 >= 0.71)."
+        ],
+        "ocr_conf": 53.91,
+        "is_account_email": false,
+        "clean_text": "1 . . 9:38 \u00ab) 1 device BRO Mar B 100% \" ~ Life update \u00b0 \u20ac \u20ac 4 Flirt Boy Z, Neitho(Asen's GF), Richard, Tem\u00e9ulon... Or oe : wow 10:45 PM a ra \u2014 oe r ri) Neitho(Asen's GF) : My cat has been sitting n pu"
+      },
+      {
+        "file": "Screenshot_20261021_213823.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.829,
+        "raw_ml_score": 0.829,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.829 >= 0.71)."
+        ],
+        "ocr_conf": 56.13,
+        "is_account_email": false,
+        "clean_text": "1 \u2018 . 9:38 ro) 1 device BRO Xu B 100% \u20ac ie Life update Ch : J Flirt Boy Z, Neitho(Asen's GF), Richard, Temsulon... ce) temeree resem 40:08 PM \u00a5 > a oe \u2018 4 Friday bail \u20ac) Why? 2 % id Wrongs (Original) "
+      },
+      {
+        "file": "Screenshot_20261021_213850.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.852,
+        "raw_ml_score": 0.852,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.852 >= 0.71)."
+        ],
+        "ocr_conf": 52.59,
+        "is_account_email": false,
+        "clean_text": "9:38 \u00ab@) 1 device QO Ki B 100% < - Joanna Ck Lo : es, \u2018( ; ki a. \u00b0 ak as - BY ee i o A oz ae Se 6, 2026 a ey Forwardea \u00bb) 4 ~- : \u201cGa i pe eg * For tomorrow 5:42 PM 4 f y: Sy E \u201c> Forwarded $ = eS y fi"
+      },
+      {
+        "file": "Screenshot_20261021_213916.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.794,
+        "raw_ml_score": 0.794,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.794 >= 0.71)."
+        ],
+        "ocr_conf": 52.03,
+        "is_account_email": false,
+        "clean_text": "9:39 \u00a9) 1 device NO Ki B 100% PS The Brokies TAT 2) g@ : \u20ac \u00a9 Penguine, Why? iS August 172026 CRE bo a 226M A/ : ee, Z e i L 2 y \\ J 4 ) : / Tg 2:24 AM A P, MW , ad \u2018 ay/ 4 \u00a2 ; imagine not doing perfec"
+      },
+      {
+        "file": "Screenshot_20261021_213925.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.7845,
+        "raw_ml_score": 0.7845,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.785 >= 0.71)."
+        ],
+        "ocr_conf": 60.15,
+        "is_account_email": false,
+        "clean_text": "9:39 \u00a9 1 device @ NO KiB 100% \u20ac \u201cSy The Brokies T* T 2) : Penguine, Why? O 2 cme 743 PM 4 : August 15. 2026 a we f ) Why? 2 2 : There's literally 19 days a \u2018 r 1 token per person ty ; ee ot 5 tokens a"
+      },
+      {
+        "file": "Screenshot_20261021_213936.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.794,
+        "raw_ml_score": 0.794,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.794 >= 0.71)."
+        ],
+        "ocr_conf": 48.19,
+        "is_account_email": false,
+        "clean_text": "9:39 \u00ab@) 1 device @ NO Ki B 100% \u20ac k Neha en September 15, 2025 | deleted this message 1227 PM - October 25, 2025 iti: \u00b0 es ; (Y) You deleted this message 1, py 3 , See (S) You deleted this message 5 "
+      },
+      {
+        "file": "Screenshot_20261021_213943.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.7322,
+        "raw_ml_score": 0.7322,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.732 >= 0.71)."
+        ],
+        "ocr_conf": 74.35,
+        "is_account_email": false,
+        "clean_text": "1 \u2018 ong 9:39 )) 1 device Qe Sau Bl 100% \u20ac 2 Techsoul mates co . 3 Agoh, Joanna, Kajol. Khiasuthong, Linthoi, Neha, ~ .... o Neha , 4 Ce Miss abt the date can we do une 16: 2026 it since it\u2019s too early"
+      },
+      {
+        "file": "Screenshot_20261021_213948.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.852,
+        "raw_ml_score": 0.852,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.852 >= 0.71)."
+        ],
+        "ocr_conf": 56.85,
+        "is_account_email": false,
+        "clean_text": "9:39 \u00ab) 1 device @ 2 \u00a9 Sa B 100% \u20ac a Software Engineering Principles B.Tech 6 sem Ck . $ = Agoh, BenDang, Dene, Emanuel, Kajol, Khiasuthong.... o For promotional video 1 girl and 1 boy has to talk mon"
+      },
+      {
+        "file": "Screenshot_20261021_214126.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.7322,
+        "raw_ml_score": 0.7322,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.732 >= 0.71)."
+        ],
+        "ocr_conf": 52.49,
+        "is_account_email": false,
+        "clean_text": "At QO Fi B 100% \u20ac Void Enclave cx S $ Apple Juice, Penguine, Richard, Why?, ~ ., ~ Enzhar... o - A pawns gambit 5:14 PH \u2019 September 30, 2026 | aiiiil _\u2014 be 2 a \u00a5 ol : j es, , O me 2 . - : : f y; ep : "
+      },
+      {
+        "file": "Screenshot_20261021_214214.jpg",
+        "channel": "whatsapp",
+        "verdict": "phishing",
+        "phishing_score": 0.9715,
+        "raw_ml_score": 0.9715,
+        "rules_triggered": [],
+        "alerts": [
+          "Classified phishing with elevated risk score (0.971 >= 0.71)."
+        ],
+        "ocr_conf": 71.58,
+        "is_account_email": false,
+        "clean_text": "1 \u2018 on 9:42 \u00ab) 1 device QO \u201ci H 100% <\u20ac Pon St. Joseph University - Scholarship Information... ses $ iat 3 Announcements (>] 0 eve ie P <@> Ae | \u2018J Welcome to the community! bee \u00bb : , * Scholarship ad"
+      }
+    ]
+  }
+}

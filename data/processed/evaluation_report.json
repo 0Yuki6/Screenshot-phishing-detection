@@ -1,0 +1,131 @@
+{
+  "dataset": "D:\\Phishing\\data\\processed\\features_real.csv",
+  "n_samples": 6000,
+  "n_features": 245,
+  "train_size": 4800,
+  "test_size": 1200,
+  "cv_5fold_label_stratified": {
+    "accuracy_mean": 0.9620000000000001,
+    "accuracy_std": 0.0027182510717166765,
+    "f1_macro_mean": 0.9619974724635609,
+    "f1_macro_std": 0.002717089065989357
+  },
+  "held_out_test": {
+    "accuracy": 0.965,
+    "precision_macro": 0.9653309019747376,
+    "recall_macro": 0.9650000000000001,
+    "f1_macro": 0.9649937766714083,
+    "confusion_matrix": {
+      "tn": 587,
+      "fp": 13,
+      "fn": 29,
+      "tp": 571
+    },
+    "false_positive_rate": 0.021666666666666667,
+    "false_negative_rate": 0.04833333333333333,
+    "phishing_precision": 0.9777397260273972,
+    "phishing_recall": 0.9516666666666667
+  },
+  "top_features_permutation": [
+    {
+      "name": "total_word_count",
+      "importance_mean": 0.0313333333333333,
+      "importance_std": 0.00535153145266744
+    },
+    {
+      "name": "action_word_count",
+      "importance_mean": 0.02558333333333328,
+      "importance_std": 0.004595438559654067
+    },
+    {
+      "name": "tfidf_2002",
+      "importance_mean": 0.023249999999999972,
+      "importance_std": 0.0023993633414813136
+    },
+    {
+      "name": "tfidf_ww",
+      "importance_mean": 0.012999999999999956,
+      "importance_std": 0.0023629078131263102
+    },
+    {
+      "name": "reward_bait_count",
+      "importance_mean": 0.008333333333333293,
+      "importance_std": 0.002527625148017187
+    },
+    {
+      "name": "tfidf_service",
+      "importance_mean": 0.006166666666666631,
+      "importance_std": 0.0011902380714237922
+    },
+    {
+      "name": "tfidf_account",
+      "importance_mean": 0.005583333333333318,
+      "importance_std": 0.0017892425461319911
+    },
+    {
+      "name": "tfidf_reply",
+      "importance_mean": 0.004666666666666641,
+      "importance_std": 0.0023921166824012186
+    },
+    {
+      "name": "financial_context_count",
+      "importance_mean": 0.0044999999999999814,
+      "importance_std": 0.0020138409955991208
+    },
+    {
+      "name": "tfidf_sent",
+      "importance_mean": 0.003749999999999987,
+      "importance_std": 0.001592081097878583
+    },
+    {
+      "name": "tfidf_message ao",
+      "importance_mean": 0.0037499999999999756,
+      "importance_std": 0.0009316949906249338
+    },
+    {
+      "name": "tfidf_chat",
+      "importance_mean": 0.0036666666666666514,
+      "importance_std": 0.0020816659994661257
+    },
+    {
+      "name": "tfidf_text",
+      "importance_mean": 0.0034999999999999697,
+      "importance_std": 0.0010408329997330904
+    },
+    {
+      "name": "tfidf_week",
+      "importance_mean": 0.0033333333333332993,
+      "importance_std": 0.0005270462766947421
+    },
+    {
+      "name": "tfidf_mw",
+      "importance_mean": 0.0029999999999999584,
+      "importance_std": 0.000763762615825991
+    },
+    {
+      "name": "tfidf_today",
+      "importance_mean": 0.0029166666666666343,
+      "importance_std": 0.0014553540997144327
+    },
+    {
+      "name": "tfidf_support",
+      "importance_mean": 0.002666666666666617,
+      "importance_std": 0.000623609564462338
+    },
+    {
+      "name": "tfidf_text message",
+      "importance_mean": 0.002583333333333293,
+      "importance_std": 0.0011456439237389614
+    },
+    {
+      "name": "tfidf_free",
+      "importance_mean": 0.002583333333333282,
+      "importance_std": 0.0005833333333333468
+    },
+    {
+      "name": "account_security_count",
+      "importance_mean": 0.0022499999999999742,
+      "importance_std": 0.0012936812246883214
+    }
+  ]
+}

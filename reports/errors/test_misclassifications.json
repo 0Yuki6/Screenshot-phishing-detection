@@ -1,0 +1,539 @@
+[
+  {
+    "test_idx": 171,
+    "channel": "email",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.9969,
+    "score_after_rules": 0.05,
+    "rules_triggered": [
+      "EXACT_WHITELIST_BYPASS"
+    ],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        123.0
+      ],
+      [
+        "url_length",
+        8.0
+      ],
+      [
+        "domain_length",
+        8.0
+      ],
+      [
+        "url_entropy",
+        2.5
+      ],
+      [
+        "domain_entropy",
+        2.5
+      ]
+    ],
+    "clean_text": "= Mail Search mail Cy) . Your Citi Bank Account Has Been Temporarily Suspended g \u2018. Compose Citi Bank <customers.mails@payment.com> \u2018Tue, Nov 01, 2016, 07:08 AM tome & Inbox stared Dear Customer , This is to inform you that your Citi Bank online account has been temporarily restricted for profile verification because you have not logon your account for \u2018sometime now. Logon below to verify your account. citi.com Thank You. Best Regards, Citi Bank U.S.A 388 Greenwich Street New 5) Snoozed York, NY 10013 U.S.A. Citibank Terms and Conditions apply and are subject to change without prior notice. They are available upon request and on our website. & sent Citibank.com Privacy Terms, conditions, caveats and small print Copyright \u00a9 2016, Citicorp # Drafts",
+    "alerts": [
+      "Verified sender: All embedded links point exclusively to verified official domains (citibank.com, citi.com)."
+    ]
+  },
+  {
+    "test_idx": 190,
+    "channel": "email",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.9975,
+    "score_after_rules": 0.05,
+    "rules_triggered": [
+      "EXACT_WHITELIST_BYPASS"
+    ],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        231.0
+      ],
+      [
+        "url_length",
+        34.0
+      ],
+      [
+        "domain_length",
+        23.0
+      ],
+      [
+        "special_character_count",
+        4.0
+      ],
+      [
+        "url_token_count",
+        4.0
+      ]
+    ],
+    "clean_text": "Confirming Your Online Gateway Support American Express <wada@atw.ne.jp> Sat, Jun 23, 2018, 06:06 PM Starred Your Online Gateway Support Hello, CARD MEMBER. Account Activity: Your Online Gateway Support th Sent We find it necessary to inform you that according to our service support system, Your American Express online payment gateway details are yet to be updated with our system @ Trash for a better online experience. The security of your account is very important to us. Kindly Proceed to review details. Your assured security is our priority. Thank you for \u00a9 spam your Card Membership. American Express Customer Care Contact Customer Service | \u2014 View Privacy Statement | Update E-mail Address\u00ae: Used by Amex under license from American Express. This is a servicing communication from American Express. You can contact us to verify the authenticity of this e-mail by visiting www.americanexpress.com/contactus. This e-mail address is not monitored and messages received cannot be responded to. Note that this e-mail was sent for your account protection. You may receive this e-mail at a different address you have on file with American Express \u00a9 2018 American Express.  . CANENALENOTO0012 Your Online Gateway Support Hello, CARD MEMBER Account Activity: Your Online Gateway Support We find it necessary to inform you that according to our service support system, Your American Express online payment gateway details are yet to be updated with our system for a ...",
+    "alerts": [
+      "Verified sender: All embedded links point exclusively to verified official domains (americanexpress.com)."
+    ]
+  },
+  {
+    "test_idx": 192,
+    "channel": "email",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.9956,
+    "score_after_rules": 0.05,
+    "rules_triggered": [
+      "EXACT_WHITELIST_BYPASS"
+    ],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        106.0
+      ],
+      [
+        "url_length",
+        10.0
+      ],
+      [
+        "domain_length",
+        10.0
+      ],
+      [
+        "url_entropy",
+        2.9219280948873623
+      ],
+      [
+        "domain_entropy",
+        2.9219280948873623
+      ]
+    ],
+    "clean_text": "Want to complete your PayPal payment at Red Rock Threads service@paypal.com <memillind@kernsheriff.com> Tue, Feb 12, 2019, 07:59 AM Starred Want to complete your PayPal payment th Sent at Red Rock Threads? To finish up, \u00a9 Trash give your final approval. \u00a9 span Original payment details: Red Rock Threads $71.85 USD Return to Merchant/Cancel Payment Help & Contact | Security | Apps Choose how you receive your payment notifications at PayPal.com. Please don't reply to this email. To get in touch with us, click Help & Contact. Copyright \u00a9 1999-2019 PayPal, Inc.  . PayPal is located at 2211 N. First St., San Jose, CA 95131.1. PayPal PPC001695:1.24:24818643a57e8",
+    "alerts": [
+      "Verified sender: All embedded links point exclusively to verified official domains (paypal.com)."
+    ]
+  },
+  {
+    "test_idx": 197,
+    "channel": "email",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.9979,
+    "score_after_rules": 0.05,
+    "rules_triggered": [
+      "EXACT_WHITELIST_BYPASS"
+    ],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        188.0
+      ],
+      [
+        "url_length",
+        14.0
+      ],
+      [
+        "domain_length",
+        14.0
+      ],
+      [
+        "url_entropy",
+        3.521640636343318
+      ],
+      [
+        "domain_entropy",
+        3.521640636343318
+      ]
+    ],
+    "clean_text": "Cloutlook \u2014\u00ae Search Y Online Banking Security Alert Wellsfargo Bank <connect@orcacom.co.nz> \u2018Sun, Jun 25, 2017, 05:59 PM th Inbox To: You Drafts th Sent items wellsfargo.com Online Banking Security Alert!!! Dear Customer, Wells Fargo has been receiving complaints for un-authorised use of Wells Fargo Online accounts. As a result to Deleted te this, we are making an extra security check on all our customers account. Kindly verify your online informations for the safety of your accounts. Sign On and verify your fed Items ~ informations. If you have questions about your account, please contact Wells Fargo Customer Service. Sign On to secure your account. wellsfargo.com | Fraud Information Center Junk Ema wellsfargo.comOnline Banking Security Alert! Dear Customer, Wells Fargo has been receiving complaints for un-authorised use of Wells Fargo Online accounts. As a result to this, we are making an extra security check on all our customers account. Kindly verify your online informations for the safety of your accounts. Sign On and verify your informations. Ifyou have questions about your account, please contact Wells Fargo Customer Service. Sign On to secure your account. wellsfargo.com | Fraud Information Center",
+    "alerts": [
+      "Verified sender: All embedded links point exclusively to verified official domains (wellsfargo.com)."
+    ]
+  },
+  {
+    "test_idx": 224,
+    "channel": "email",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.9945,
+    "score_after_rules": 0.05,
+    "rules_triggered": [
+      "EXACT_WHITELIST_BYPASS"
+    ],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        125.0
+      ],
+      [
+        "url_length",
+        9.0
+      ],
+      [
+        "domain_length",
+        9.0
+      ],
+      [
+        "url_entropy",
+        2.6416041678685938
+      ],
+      [
+        "domain_entropy",
+        2.6416041678685938
+      ]
+    ],
+    "clean_text": "yahoo/mail \u00ae Search mail () =?UTF-8?B?4pyllFRyYWNriFlvdXigU2hpcG1lbnQgLSBGZWRFeA==?= shipment <shipment@fedex.com> Fri, Sep 28, 2018, 07:50 PM by nox | To: you@\u00aeyahoo.com Stared Enter your tracking number to track and pay Dear Customer, Your package has been retumed to the FedEx office. The reason for the return is - payment of shipping costs. the th Sent landed cost of your shipment is not paid yet so you will be charged to pay handling cost 04.5 USD You have a period of 72 hours to recover your package, otherwise it will be @ Trash returned to the sender. Enter your tracking number to track and payTracking Numbers : 780032194102 djdj Click here to view the status of your order 8s fedex.com/apps/fedextrack/?action=track \u2014 Thank You for understanding best regards pam",
+    "alerts": [
+      "Verified sender: All embedded links point exclusively to verified official domains (yahoo.com, fedex.com)."
+    ]
+  },
+  {
+    "test_idx": 295,
+    "channel": "email",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.9978,
+    "score_after_rules": 0.05,
+    "rules_triggered": [
+      "EXACT_WHITELIST_BYPASS"
+    ],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        69.0
+      ],
+      [
+        "url_length",
+        9.0
+      ],
+      [
+        "domain_length",
+        9.0
+      ],
+      [
+        "url_entropy",
+        2.6416041678685938
+      ],
+      [
+        "domain_entropy",
+        2.6416041678685938
+      ]
+    ],
+    "clean_text": "yahoo/mail \u00ae Search mail () =?UTF-87B?RW1haWwgZGizY 29ubmVjdGVkISBSZS1jb25maXJtIHRvIGZpeCBub3ch?= =?UTF-87B?QWNjb3VudCBSZS1BY3RpdmF0aW9u?= <noreply@serversettings.com> Mon, Sep 23, 2019, 03:56 PM by nox | To: you@\u00aeyahoo.com Stared * New Policy Notice Hi jose@monkey.org , We noticed that your jose@monkey.org have been disconnected from sending and Sent receiving mails. We urge you to re-confirm if your account is still active to Trash officially unlock it to our default settings. Re-Confirm account B.Regards,\u00a92019 Database Monitor \u00a9 spam",
+    "alerts": [
+      "Verified sender: All embedded links point exclusively to verified official domains (yahoo.com)."
+    ]
+  },
+  {
+    "test_idx": 414,
+    "channel": "sms",
+    "true_label": "legitimate",
+    "predicted_verdict": "phishing",
+    "score_before_rules": 0.9154,
+    "score_after_rules": 0.9154,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        35.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "'ve sent my wife your text. After we buy them she'll tell you what to do. So just relax. We should go get them this wkend. 2:26 AM + Enter message >] oO (e) \u00a2",
+    "alerts": [
+      "Classified phishing with elevated risk score (0.915 >= 0.71)."
+    ]
+  },
+  {
+    "test_idx": 415,
+    "channel": "sms",
+    "true_label": "legitimate",
+    "predicted_verdict": "phishing",
+    "score_before_rules": 0.9877,
+    "score_after_rules": 0.9877,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        16.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "send a text. We'll skype later. 3:42 PM \u00a9 Text message oO u \u20ac [e) a)",
+    "alerts": [
+      "Classified phishing with elevated risk score (0.988 >= 0.71)."
+    ]
+  },
+  {
+    "test_idx": 427,
+    "channel": "sms",
+    "true_label": "legitimate",
+    "predicted_verdict": "phishing",
+    "score_before_rules": 0.9108,
+    "score_after_rules": 0.9108,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        16.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "your brother transfered only &lt#&gt; + &lt#&gt; . Pa. 2:18 AM + Enter message [> |",
+    "alerts": [
+      "Classified phishing with elevated risk score (0.911 >= 0.71)."
+    ]
+  },
+  {
+    "test_idx": 451,
+    "channel": "sms",
+    "true_label": "legitimate",
+    "predicted_verdict": "phishing",
+    "score_before_rules": 0.9828,
+    "score_after_rules": 0.9828,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        9.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "4 lor... 8:11 PM \u00a9 Text message oO u",
+    "alerts": [
+      "Classified phishing with elevated risk score (0.983 >= 0.71)."
+    ]
+  },
+  {
+    "test_idx": 458,
+    "channel": "sms",
+    "true_label": "legitimate",
+    "predicted_verdict": "phishing",
+    "score_before_rules": 0.794,
+    "score_after_rules": 0.794,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        37.0
+      ],
+      [
+        "url_length",
+        7.0
+      ],
+      [
+        "domain_length",
+        7.0
+      ],
+      [
+        "url_entropy",
+        2.521640636343318
+      ],
+      [
+        "domain_entropy",
+        2.521640636343318
+      ]
+    ],
+    "clean_text": "| might come to kerala for 2 days.so you can be prepared to take a leave once i finalise .dont plan any travel during my visit.need to finish urgent works. 6:04 AM + Enter message [> |",
+    "alerts": [
+      "Classified phishing with elevated risk score (0.794 >= 0.71)."
+    ]
+  },
+  {
+    "test_idx": 459,
+    "channel": "sms",
+    "true_label": "legitimate",
+    "predicted_verdict": "phishing",
+    "score_before_rules": 0.9417,
+    "score_after_rules": 0.9417,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        43.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "(OS Sun cant come to earth but send luv as rays. cloud cant come to river but send luv as rain. | cant come to meet U, but can send my care as msg to U. Gud evng a 9:22 AM : \u00a9",
+    "alerts": [
+      "Classified phishing with elevated risk score (0.942 >= 0.71)."
+    ]
+  },
+  {
+    "test_idx": 753,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.2262,
+    "score_after_rules": 0.2262,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        18.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "i have won wining number 946 wot do i do next 9:33 AM \u00a9 Text message oO &",
+    "alerts": [
+      "Classified legitimate with low risk score (0.226 <= 0.40)."
+    ]
+  },
+  {
+    "test_idx": 754,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.3039,
+    "score_after_rules": 0.3039,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        34.0
+      ],
+      [
+        "reward_bait_count",
+        1.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "< t+) +1 (409) 298-1395 ma & : Wed, Sep 16 Thank you, winner notified by sms. Good Luck! No future marketing reply STOP to 84122 customer services 08450542832 \u00a9 Text message oO &",
+    "alerts": [
+      "Classified legitimate with low risk score (0.304 <= 0.40)."
+    ]
+  },
+  {
+    "test_idx": 769,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.2163,
+    "score_after_rules": 0.2163,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        8.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "84484 11:20 AM \u00a9 Text message oO io",
+    "alerts": [
+      "Classified legitimate with low risk score (0.216 <= 0.40)."
+    ]
+  },
+  {
+    "test_idx": 791,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.2688,
+    "score_after_rules": 0.2688,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        41.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "\u20ac 0 +1 (484) 387-3609 x & : Tue, Sep 15 Get a brand new mobile phone by being an agent of The Mob! Plus loads more goodies! For more info just text MAT to 87021. \u00a9 Text message oO &",
+    "alerts": [
+      "Classified legitimate with low risk score (0.269 <= 0.40)."
+    ]
+  },
+  {
+    "test_idx": 817,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.2577,
+    "score_after_rules": 0.2577,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        31.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "Matthew please call 09063440451 from a landline, your complimentary 4*Lux Tenerife holiday or \u00a31000 CASH await collection. ppm150 SAE T&Cs Box334 SK38XH. 7:39 AM + Enter message >] oO (e) \u00a2",
+    "alerts": [
+      "Classified legitimate with low risk score (0.258 <= 0.40)."
+    ]
+  },
+  {
+    "test_idx": 831,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.0303,
+    "score_after_rules": 0.0303,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        21.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "_Now - 12Mths Half Price Orange line rental: 400mins...Call MobileUpd8 on 08000839402 or call2optout=J5Q 5:44 PM + Enter message [> |",
+    "alerts": [
+      "Classified legitimate with low risk score (0.030 <= 0.40)."
+    ]
+  },
+  {
+    "test_idx": 847,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.0183,
+    "score_after_rules": 0.0183,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        38.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "<\u20ac t+) PZ-CLAIMNOW mw: Wed, Sep 16 ROMCAPspam Everyone around should be responding well to your presence since you are so warm and outgoing. You are bringing in a real breath of sunshine. \u00a9 Text message oO &",
+    "alerts": [
+      "Classified legitimate with low risk score (0.018 <= 0.40)."
+    ]
+  }
+]

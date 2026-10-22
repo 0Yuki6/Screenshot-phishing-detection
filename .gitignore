@@ -1,0 +1,51 @@
+# Byte-compiled / optimized / ambient
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Testing & notebooks
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Environment & credentials (DO NOT COMMIT SECRETS)
+.env
+.env.local
+
+# Node / Frontend build artifacts
+client use/node_modules/
+client use/dist/
+node_modules/
+
+# Local cache & scratch
+scratch/
+backup_old_code/
+
+# Large datasets & raw images (>800MB - keep git repo lightweight)
+# Users can regenerate or download via reproduction scripts
+data/raw/
+data/real_holdout/
+data/real_holdout_originals/
+data/augmented_dark/
+data/phone_screenshots/
+data/generated/
+data/processed/*.csv
+data/processed/dual_ocr_cache.csv
+data/processed/ocr_cache.csv
+data/processed/features_real.csv
+data/processed/dataset_with_groups.csv
+
+# Keep lightweight models & configs
+!data/models/thresholds.json

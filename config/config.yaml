@@ -1,0 +1,64 @@
+# Phishing Screenshot Detector Configuration
+system:
+  seed: 42
+  tesseract_cmd: "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
+  offline_mode: true
+  store_uploads: false
+
+paths:
+  raw_dir: "data/raw"
+  holdout_dev_dir: "data/real_holdout/dev"
+  holdout_final_dir: "data/real_holdout/final"
+  holdout_originals_dir: "data/real_holdout_originals"
+  generated_dir: "data/generated"
+  processed_dir: "data/processed"
+  models_dir: "data/models"
+  reports_dir: "reports"
+  errors_dir: "reports/errors"
+
+data:
+  exclude_linkless_spam_from_phishing: false
+  min_group_similarity: 0.85
+  email_templates:
+    - "gmail"
+    - "outlook"
+    - "yahoo"
+    - "applemail"
+  sms_templates:
+    - "standard"
+  whatsapp_templates:
+    - "standard"
+
+preprocessing:
+  min_dimension: 600
+  max_dimension: 1920
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: [8, 8]
+  nl_means_h: 10
+  adaptive_block_size: 15
+  adaptive_c: 4
+
+ocr:
+  min_text_length: 15
+  min_confidence: 35.0  # Tuned on validation split
+
+features:
+  min_df: 5
+  sublinear_tf: true
+  max_ngram_word: 2
+  max_ngram_char: 5
+  drop_zero_variance: true
+
+model:
+  candidate: "random_forest"  # "random_forest", "logistic_regression", "lightgbm"
+  rf_n_estimators: 200
+  rf_max_depth: 25
+  rf_min_samples_split: 5
+  class_weight_ratio: 3.0  # FP on legitimate costs 3x higher than FN
+  calibration_method: "isotonic"  # "isotonic" or "sigmoid"
+
+thresholds:
+  t_low: 0.30       # Calibrated on validation
+  t_high: 0.70      # Calibrated on validation so legitimate FPR <= 1.0%
+  target_max_fpr: 0.01
+  max_target_abstention: 0.10

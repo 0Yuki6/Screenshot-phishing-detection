@@ -1,0 +1,255 @@
+
+========================================================================
+   MODEL COMPARISON: Random Forest vs SVM vs Logistic Regression
+   Phishing Detection Pipeline
+========================================================================
+
+----------------------- Training: Random Forest ------------------------
+
+---------------------- Training: SVM (RBF Kernel) ----------------------
+
+-------------------- Training: Logistic Regression ---------------------
+
+========================= MODEL: Random Forest =========================
+
+  Timing Measurements:
+    Final model fitting time      : 1.08s
+    5-fold cross-validation time  : 9.55s
+    Test set prediction time      : 0.2389s
+
+  -------------------------------------------------------
+  TRAINING PERFORMANCE (mean +/- std across 5 folds)
+  -------------------------------------------------------
+    Accuracy (macro) : 1.0000 +/- 0.0000
+    Precision (macro): 1.0000 +/- 0.0000
+    Recall (macro)   : 1.0000 +/- 0.0000
+    F1-Score (macro) : 1.0000 +/- 0.0000
+
+  -------------------------------------------------------
+  CROSS-VALIDATION PERFORMANCE (mean +/- std across 5 folds)
+  -------------------------------------------------------
+    Accuracy (macro) : 0.9596 +/- 0.0039
+    Precision (macro): 0.9599 +/- 0.0037
+    Recall (macro)   : 0.9596 +/- 0.0039
+    F1-Score (macro) : 0.9596 +/- 0.0039
+
+  -------------------------------------------------------
+  PER-FOLD CROSS-VALIDATION BREAKDOWN
+  -------------------------------------------------------
+    Fold 1: Train Acc=1.0000 F1=1.0000  |  Val Acc=0.9594 F1=0.9594  (gap=+0.0406)
+    Fold 2: Train Acc=1.0000 F1=1.0000  |  Val Acc=0.9552 F1=0.9552  (gap=+0.0448)
+    Fold 3: Train Acc=1.0000 F1=1.0000  |  Val Acc=0.9594 F1=0.9594  (gap=+0.0406)
+    Fold 4: Train Acc=1.0000 F1=1.0000  |  Val Acc=0.9573 F1=0.9573  (gap=+0.0427)
+    Fold 5: Train Acc=1.0000 F1=1.0000  |  Val Acc=0.9667 F1=0.9667  (gap=+0.0333)
+
+  -------------------------------------------------------
+  HELD-OUT TEST PERFORMANCE (20% split)
+  -------------------------------------------------------
+    Accuracy         : 0.9658
+    Precision (macro): 0.9661
+    Recall (macro)   : 0.9658
+    F1-Score (macro) : 0.9658
+
+  -------------------------------------------------------
+  CLASSIFICATION REPORT (Held-out Test Set)
+  -------------------------------------------------------
+                  precision    recall  f1-score   support
+    
+      Legitimate       0.95      0.98      0.97       600
+        Phishing       0.98      0.95      0.97       600
+    
+        accuracy                           0.97      1200
+       macro avg       0.97      0.97      0.97      1200
+    weighted avg       0.97      0.97      0.97      1200
+    
+
+  -------------------------------------------------------
+  CONFUSION MATRIX (Held-out Test Set)
+  -------------------------------------------------------
+                      Predicted
+                  Legit    Phish
+    Actual Legit    587       13
+    Actual Phish     28      572
+
+    TP=572  TN=587  FP=13  FN=28
+    False Positive Rate (FPR) : 0.0217
+    Phishing Precision        : 0.9778
+    Phishing Recall (TPR)     : 0.9533
+
+======================= MODEL: SVM (RBF Kernel) ========================
+
+  Timing Measurements:
+    Final model fitting time      : 10.27s
+    5-fold cross-validation time  : 23.60s
+    Test set prediction time      : 1.2161s
+
+  -------------------------------------------------------
+  TRAINING PERFORMANCE (mean +/- std across 5 folds)
+  -------------------------------------------------------
+    Accuracy (macro) : 0.9727 +/- 0.0018
+    Precision (macro): 0.9737 +/- 0.0018
+    Recall (macro)   : 0.9727 +/- 0.0018
+    F1-Score (macro) : 0.9726 +/- 0.0018
+
+  -------------------------------------------------------
+  CROSS-VALIDATION PERFORMANCE (mean +/- std across 5 folds)
+  -------------------------------------------------------
+    Accuracy (macro) : 0.9442 +/- 0.0049
+    Precision (macro): 0.9459 +/- 0.0040
+    Recall (macro)   : 0.9442 +/- 0.0049
+    F1-Score (macro) : 0.9441 +/- 0.0049
+
+  -------------------------------------------------------
+  PER-FOLD CROSS-VALIDATION BREAKDOWN
+  -------------------------------------------------------
+    Fold 1: Train Acc=0.9695 F1=0.9695  |  Val Acc=0.9458 F1=0.9458  (gap=+0.0237)
+    Fold 2: Train Acc=0.9745 F1=0.9745  |  Val Acc=0.9417 F1=0.9416  (gap=+0.0328)
+    Fold 3: Train Acc=0.9732 F1=0.9732  |  Val Acc=0.9458 F1=0.9458  (gap=+0.0274)
+    Fold 4: Train Acc=0.9742 F1=0.9742  |  Val Acc=0.9365 F1=0.9363  (gap=+0.0379)
+    Fold 5: Train Acc=0.9719 F1=0.9719  |  Val Acc=0.9510 F1=0.9510  (gap=+0.0208)
+
+  -------------------------------------------------------
+  HELD-OUT TEST PERFORMANCE (20% split)
+  -------------------------------------------------------
+    Accuracy         : 0.9400
+    Precision (macro): 0.9433
+    Recall (macro)   : 0.9400
+    F1-Score (macro) : 0.9399
+
+  -------------------------------------------------------
+  CLASSIFICATION REPORT (Held-out Test Set)
+  -------------------------------------------------------
+                  precision    recall  f1-score   support
+    
+      Legitimate       0.90      0.98      0.94       600
+        Phishing       0.98      0.90      0.94       600
+    
+        accuracy                           0.94      1200
+       macro avg       0.94      0.94      0.94      1200
+    weighted avg       0.94      0.94      0.94      1200
+    
+
+  -------------------------------------------------------
+  CONFUSION MATRIX (Held-out Test Set)
+  -------------------------------------------------------
+                      Predicted
+                  Legit    Phish
+    Actual Legit    590       10
+    Actual Phish     62      538
+
+    TP=538  TN=590  FP=10  FN=62
+    False Positive Rate (FPR) : 0.0167
+    Phishing Precision        : 0.9818
+    Phishing Recall (TPR)     : 0.8967
+
+====================== MODEL: Logistic Regression ======================
+
+  Timing Measurements:
+    Final model fitting time      : 0.17s
+    5-fold cross-validation time  : 4.56s
+    Test set prediction time      : 0.0028s
+
+  -------------------------------------------------------
+  TRAINING PERFORMANCE (mean +/- std across 5 folds)
+  -------------------------------------------------------
+    Accuracy (macro) : 0.9664 +/- 0.0021
+    Precision (macro): 0.9665 +/- 0.0021
+    Recall (macro)   : 0.9664 +/- 0.0021
+    F1-Score (macro) : 0.9664 +/- 0.0021
+
+  -------------------------------------------------------
+  CROSS-VALIDATION PERFORMANCE (mean +/- std across 5 folds)
+  -------------------------------------------------------
+    Accuracy (macro) : 0.9435 +/- 0.0033
+    Precision (macro): 0.9438 +/- 0.0033
+    Recall (macro)   : 0.9435 +/- 0.0033
+    F1-Score (macro) : 0.9435 +/- 0.0033
+
+  -------------------------------------------------------
+  PER-FOLD CROSS-VALIDATION BREAKDOWN
+  -------------------------------------------------------
+    Fold 1: Train Acc=0.9628 F1=0.9628  |  Val Acc=0.9406 F1=0.9406  (gap=+0.0221)
+    Fold 2: Train Acc=0.9690 F1=0.9690  |  Val Acc=0.9490 F1=0.9489  (gap=+0.0201)
+    Fold 3: Train Acc=0.9661 F1=0.9661  |  Val Acc=0.9417 F1=0.9417  (gap=+0.0245)
+    Fold 4: Train Acc=0.9664 F1=0.9664  |  Val Acc=0.9406 F1=0.9406  (gap=+0.0258)
+    Fold 5: Train Acc=0.9677 F1=0.9677  |  Val Acc=0.9458 F1=0.9458  (gap=+0.0219)
+
+  -------------------------------------------------------
+  HELD-OUT TEST PERFORMANCE (20% split)
+  -------------------------------------------------------
+    Accuracy         : 0.9417
+    Precision (macro): 0.9433
+    Recall (macro)   : 0.9417
+    F1-Score (macro) : 0.9416
+
+  -------------------------------------------------------
+  CLASSIFICATION REPORT (Held-out Test Set)
+  -------------------------------------------------------
+                  precision    recall  f1-score   support
+    
+      Legitimate       0.92      0.97      0.94       600
+        Phishing       0.97      0.91      0.94       600
+    
+        accuracy                           0.94      1200
+       macro avg       0.94      0.94      0.94      1200
+    weighted avg       0.94      0.94      0.94      1200
+    
+
+  -------------------------------------------------------
+  CONFUSION MATRIX (Held-out Test Set)
+  -------------------------------------------------------
+                      Predicted
+                  Legit    Phish
+    Actual Legit    583       17
+    Actual Phish     53      547
+
+    TP=547  TN=583  FP=17  FN=53
+    False Positive Rate (FPR) : 0.0283
+    Phishing Precision        : 0.9699
+    Phishing Recall (TPR)     : 0.9117
+
+==================== SIDE-BY-SIDE MODEL COMPARISON =====================
+
+  Metric                             |        Random Forest |     SVM (RBF Kernel) |  Logistic Regression
+  -------------------------------------------------------------------------------------------------------
+  Final Model Fitting Time (s)       |                 1.08 |                10.27 |                 0.17
+  5-Fold CV Time (s)                 |                 9.55 |                23.60 |                 4.56
+  Test Set Prediction Time (s)       |               0.2389 |               1.2161 |               0.0028
+  Test Accuracy                      |               0.9658 |               0.9400 |               0.9417
+  Test Precision (macro avg)         |               0.9661 |               0.9433 |               0.9433
+  Test Recall (macro avg)            |               0.9658 |               0.9400 |               0.9417
+  Test F1-Score (macro avg)          |               0.9658 |               0.9399 |               0.9416
+  CV Accuracy (macro avg)            |    0.9596 +/- 0.0039 |    0.9442 +/- 0.0049 |    0.9435 +/- 0.0033
+  CV Precision (macro avg)           |    0.9599 +/- 0.0037 |    0.9459 +/- 0.0040 |    0.9438 +/- 0.0033
+  CV Recall (macro avg)              |    0.9596 +/- 0.0039 |    0.9442 +/- 0.0049 |    0.9435 +/- 0.0033
+  CV F1-Score (macro avg)            |    0.9596 +/- 0.0039 |    0.9441 +/- 0.0049 |    0.9435 +/- 0.0033
+  Phishing Recall (Test)             |               0.9533 |               0.8967 |               0.9117
+  False Positive Rate (Test)         |               0.0217 |               0.0167 |               0.0283
+
+  -------------------------------------------------------------------------------------------------------
+
+  BEST MODEL PER METRIC:
+     Test F1-Score (macro avg)      -> Random Forest (0.9658)
+     Test Precision (macro avg)     -> Random Forest (0.9661)
+     Test Recall (macro avg)        -> Random Forest (0.9658)
+     Phishing Recall (Test)         -> Random Forest (0.9533)
+     Lowest False Positive Rate     -> SVM (RBF Kernel) (0.0167)
+
+========================= FINAL RECOMMENDATION =========================
+  Recommended Model: Random Forest
+
+  Evaluation Rationale (based on experiment results):
+    - Macro F1-Score: Random Forest achieved 0.9658 on the held-out test set,
+      demonstrating the strongest balance across legitimate and phishing classes.
+    - Phishing Recall: Achieved 0.9533 recall on phishing samples
+      (572 detected out of 600), minimizing missed threats.
+    - False Positive Rate: Achieved an FPR of 0.0217 (13 false alarms out of 600), minimizing disruption to benign communications.
+    - Cross-Validation Consistency: 5-fold CV F1 score was 0.9596 +/- 0.0039,
+      indicating stable generalization with low fold-to-fold variance.
+    - Training Efficiency: Final model fitting completed in 1.08s,
+      making it computationally suitable for periodic retraining.
+
+  Note: This recommendation is strictly based on the empirical performance
+  metrics observed in this experiment on the current dataset and feature set.
+========================================================================
+

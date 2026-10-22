@@ -1,0 +1,106 @@
+{
+  "thresholds": {
+    "t_legit": 0.4,
+    "t_phish": 0.71,
+    "validation_tuning_metrics": {
+      "fpr": 0.008791208791208791,
+      "recall": 0.9753694581280788,
+      "abstention_rate": 0.01148105625717566,
+      "accuracy_decided": 0.983739837398374,
+      "n_decided": 861,
+      "n_abstained": 10
+    }
+  },
+  "validation_evaluation": {
+    "total_samples": 871,
+    "decided_samples": 852,
+    "uncertain_samples": 19,
+    "abstention_rate": 0.0218,
+    "decided_accuracy": 0.98,
+    "decided_fpr": 0.0044,
+    "decided_recall": 0.9624,
+    "confusion_matrix_decided": {
+      "TN": 451,
+      "FP": 2,
+      "FN": 15,
+      "TP": 384
+    },
+    "per_channel": {
+      "email": {
+        "total": 307,
+        "abstained": 2,
+        "abstention_rate": 0.0065,
+        "decided_accuracy": 0.9803,
+        "decided_fpr": 0.0,
+        "decided_recall": 0.9586
+      },
+      "sms": {
+        "total": 290,
+        "abstained": 16,
+        "abstention_rate": 0.0552,
+        "decided_accuracy": 0.9672,
+        "decided_fpr": 0.0139,
+        "decided_recall": 0.9462
+      },
+      "whatsapp": {
+        "total": 274,
+        "abstained": 1,
+        "abstention_rate": 0.0036,
+        "decided_accuracy": 0.9927,
+        "decided_fpr": 0.0,
+        "decided_recall": 0.9839
+      }
+    },
+    "rules_triggered_counts": {
+      "UNREADABLE_OCR": 9,
+      "EXACT_WHITELIST_BYPASS": 14,
+      "BRAND_IMPERSONATION_MISMATCH": 19
+    }
+  },
+  "test_evaluation": {
+    "total_samples": 873,
+    "decided_samples": 855,
+    "uncertain_samples": 18,
+    "abstention_rate": 0.0206,
+    "decided_accuracy": 0.9778,
+    "decided_fpr": 0.0136,
+    "decided_recall": 0.9686,
+    "confusion_matrix_decided": {
+      "TN": 435,
+      "FP": 6,
+      "FN": 13,
+      "TP": 401
+    },
+    "per_channel": {
+      "email": {
+        "total": 315,
+        "abstained": 3,
+        "abstention_rate": 0.0095,
+        "decided_accuracy": 0.9808,
+        "decided_fpr": 0.0,
+        "decided_recall": 0.9643
+      },
+      "sms": {
+        "total": 302,
+        "abstained": 15,
+        "abstention_rate": 0.0497,
+        "decided_accuracy": 0.9547,
+        "decided_fpr": 0.0405,
+        "decided_recall": 0.9496
+      },
+      "whatsapp": {
+        "total": 256,
+        "abstained": 0,
+        "abstention_rate": 0.0,
+        "decided_accuracy": 1.0,
+        "decided_fpr": 0.0,
+        "decided_recall": 1.0
+      }
+    },
+    "rules_triggered_counts": {
+      "UNREADABLE_OCR": 9,
+      "BRAND_IMPERSONATION_MISMATCH": 9,
+      "EXACT_WHITELIST_BYPASS": 15
+    }
+  }
+}
