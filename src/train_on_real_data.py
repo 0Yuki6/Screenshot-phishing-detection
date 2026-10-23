@@ -1,199 +1,159 @@
 """
-Training script for real dataset images.
+Ingestion and processing script for real training screenshots.
 
-Traverses the data/raw/ directory, extracts text from images using the
-preprocessing and OCR modules, builds the feature matrix, trains the model,
-and saves the artifacts.
-
-Usage:
-    python -m src.train_on_real_data
+Scans data/real_train/<channel>/<label>/, validates against dev and final holdout
+image hashes to prevent any data leakage, runs dual-variant OCR, and appends
+processed samples to data/processed/real_train_samples.csv with source="real".
 """
 
 import os
 import sys
+import hashlib
+import glob
 import logging
-import json
-from glob import glob
+from typing import Set, Dict, List, Any
 
-from dotenv import load_dotenv
-load_dotenv()
-
-import numpy as np
+import cv2
 import pandas as pd
-import joblib
-from sklearn.model_selection import train_test_split
 
 # Ensure project root is on PYTHONPATH
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.preprocessing import preprocess_image
-from src.ocr import extract_text
-from src.generate_synthetic_data import build_feature_matrix
-from src.model import train_model, evaluate_model, save_model, get_permutation_importance
+from src.ocr import run_dual_variant_ocr
+from src.masking import strip_template_chrome
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
-RAW_DATA_DIR = "data/raw"
+REAL_TRAIN_DIR = "data/real_train"
+PROCESSED_REAL_TRAIN_CSV = "data/processed/real_train_samples.csv"
+HOLDOUT_DIRS = [
+    "data/real_holdout/dev",
+    "data/real_holdout/final",
+    "data/real_holdout_originals",
+]
 
 
-def load_ocr_cache() -> pd.DataFrame:
-    cache_path = "data/processed/ocr_cache.csv"
-    if os.path.exists(cache_path):
-        try:
-            return pd.read_csv(cache_path)
-        except Exception as e:
-            logger.warning(f"Failed to load cache: {e}")
-    return pd.DataFrame(columns=["message_id", "ocr_text", "channel", "label"])
+def compute_file_hash(filepath: str) -> str:
+    """Compute SHA-256 hash of a file's raw bytes."""
+    h = hashlib.sha256()
+    with open(filepath, "rb") as f:
+        while chunk := f.read(65536):
+            h.update(chunk)
+    return h.hexdigest()
 
 
-def save_ocr_cache(df: pd.DataFrame):
-    os.makedirs("data/processed", exist_ok=True)
-    df.to_csv("data/processed/ocr_cache.csv", index=False)
-
-
-def _process_single_image(args):
-    filepath, filename, channel, label = args
-    logger.info("Processing %s", filepath)
-    try:
-        with open(filepath, "rb") as f:
-            image_bytes = f.read()
-            
-        binarized_image = preprocess_image(image_bytes)
-        text = extract_text(binarized_image)
-        
-        if not text.strip():
-            logger.warning("Empty OCR text for %s. Skipping.", filepath)
-            return None
-            
-        return {
-            "message_id": filename,
-            "ocr_text": text,
-            "channel": channel,
-            "label": label,
-        }
-    except Exception as e:
-        logger.error("Failed to process %s: %s", filepath, e)
-        return None
-
-
-def extract_data_from_images() -> pd.DataFrame:
-    """
-    Traverse the raw data directory and process each image (with caching and multiprocessing).
-    
-    Returns:
-        DataFrame with columns: message_id, ocr_text, channel, label
-    """
+def get_holdout_hashes(holdout_dirs: List[str] = HOLDOUT_DIRS) -> Set[str]:
+    """Collect SHA-256 hashes of all holdout images to guarantee zero leakage."""
+    holdout_hashes: Set[str] = set()
     supported_exts = {".png", ".jpg", ".jpeg", ".webp"}
-    
-    cache_df = load_ocr_cache()
-    cached_ids = set(cache_df["message_id"].values)
-    
-    tasks = []
-    if os.path.exists(RAW_DATA_DIR):
-        channels = [d for d in os.listdir(RAW_DATA_DIR) if os.path.isdir(os.path.join(RAW_DATA_DIR, d))]
-        for channel in channels:
-            for label in ["legitimate", "phishing"]:
-                label_dir = os.path.join(RAW_DATA_DIR, channel, label)
-                if not os.path.exists(label_dir):
-                    continue
-                    
-                for filename in os.listdir(label_dir):
-                    ext = os.path.splitext(filename)[1].lower()
-                    if ext not in supported_exts:
-                        continue
-                        
-                    if filename in cached_ids:
-                        continue
-                        
-                    filepath = os.path.join(label_dir, filename)
-                    tasks.append((filepath, filename, channel, label))
 
-    new_records = []
-    if tasks:
-        import concurrent.futures
-        logger.info(f"Running OCR on {len(tasks)} new images using multiprocessing...")
-        with concurrent.futures.ProcessPoolExecutor() as executor:
-            for result in executor.map(_process_single_image, tasks):
-                if result:
-                    new_records.append(result)
-                    
+    for h_dir in holdout_dirs:
+        if not os.path.exists(h_dir):
+            continue
+        for root, _, files in os.walk(h_dir):
+            for file in files:
+                ext = os.path.splitext(file)[1].lower()
+                if ext in supported_exts:
+                    fp = os.path.join(root, file)
+                    holdout_hashes.add(compute_file_hash(fp))
+
+    logger.info("Indexed %d unique holdout hashes across holdout sets.", len(holdout_hashes))
+    return holdout_hashes
+
+
+def ingest_real_training_data(
+    real_train_dir: str = REAL_TRAIN_DIR,
+    output_csv: str = PROCESSED_REAL_TRAIN_CSV,
+) -> pd.DataFrame:
+    """
+    Process images from data/real_train/<channel>/<label>/, verify zero overlap
+    with holdout data, run dual OCR, and output processed DataFrame.
+    """
+    channels = ["email", "sms", "whatsapp"]
+    labels = ["legitimate", "phishing"]
+    supported_exts = {".png", ".jpg", ".jpeg", ".webp"}
+
+    # Create folder structure if it doesn't exist yet
+    for ch in channels:
+        for lbl in labels:
+            os.makedirs(os.path.join(real_train_dir, ch, lbl), exist_ok=True)
+
+    holdout_hashes = get_holdout_hashes()
+
+    existing_df = pd.DataFrame()
+    if os.path.exists(output_csv):
+        try:
+            existing_df = pd.read_csv(output_csv)
+            logger.info("Loaded %d previously processed real training samples from %s", len(existing_df), output_csv)
+        except Exception as e:
+            logger.warning("Could not load existing %s: %s", output_csv, e)
+
+    processed_ids = set(existing_df["message_id"].values) if not existing_df.empty else set()
+
+    new_records: List[Dict[str, Any]] = []
+    skipped_leakage_count = 0
+
+    for ch in channels:
+        for lbl in labels:
+            folder = os.path.join(real_train_dir, ch, lbl)
+            files = sorted(os.listdir(folder))
+            for fn in files:
+                ext = os.path.splitext(fn)[1].lower()
+                if ext not in supported_exts:
+                    continue
+
+                fp = os.path.join(folder, fn)
+                img_hash = compute_file_hash(fp)
+
+                # Leakage check: NEVER allow holdout images into training
+                if img_hash in holdout_hashes:
+                    logger.warning("SKIPPING %s: Duplicate/Hash match with holdout evaluation set!", fp)
+                    skipped_leakage_count += 1
+                    continue
+
+                msg_id = f"real_{ch}_{lbl}_{fn}"
+                if msg_id in processed_ids:
+                    continue
+
+                img = cv2.imread(fp)
+                if img is None:
+                    logger.warning("Failed to read image %s. Skipping.", fp)
+                    continue
+
+                ocr_res = run_dual_variant_ocr(img)
+                raw_text = ocr_res["text"]
+                conf = float(ocr_res["confidence"])
+                winner = ocr_res["winning_variant"]
+                clean_t = strip_template_chrome(raw_text, channel=ch)
+
+                new_records.append({
+                    "message_id": msg_id,
+                    "channel": ch,
+                    "label": lbl,
+                    "ocr_text": raw_text,
+                    "clean_text": clean_t,
+                    "confidence": conf,
+                    "winning_variant": winner,
+                    "source": "real",
+                    "file_hash": img_hash,
+                })
+                logger.info("Ingested [%s/%s] %s (Conf: %.1f%%)", ch, lbl, fn, conf)
+
+    if skipped_leakage_count > 0:
+        logger.warning("Blocked %d images matching holdout dataset hashes.", skipped_leakage_count)
+
     if new_records:
         new_df = pd.DataFrame(new_records)
-        # Exclude empty or all-NA entries before concat if they exist, though new_df is clean
-        cache_df = pd.concat([cache_df, new_df], ignore_index=True)
-        save_ocr_cache(cache_df)
+        combined_df = pd.concat([existing_df, new_df], ignore_index=True) if not existing_df.empty else new_df
+        os.makedirs(os.path.dirname(output_csv), exist_ok=True)
+        combined_df.to_csv(output_csv, index=False)
+        logger.info("Saved %d total real training samples to %s", len(combined_df), output_csv)
+        return combined_df
 
-    logger.info("Extracted data from %d real images", len(cache_df))
-    return cache_df
-
-
-def main():
-    """Main training pipeline."""
-    os.makedirs("data/processed", exist_ok=True)
-    os.makedirs("data/models", exist_ok=True)
-
-    # Step 1: Extract data
-    logger.info("=== Step 1: Extracting text from real images ===")
-    df = extract_data_from_images()
-    
-    if df.empty:
-        logger.error("No valid data found in %s. Exiting.", RAW_DATA_DIR)
-        return
-        
-    df.to_csv("data/processed/real_samples.csv", index=False)
-    logger.info("Saved extracted text to data/processed/real_samples.csv")
-
-    # Step 2: Build feature matrix
-    logger.info("=== Step 2: Extracting features ===")
-    X, y, feature_names, tfidf = build_feature_matrix(df)
-
-    feature_df = pd.DataFrame(X, columns=feature_names)
-    feature_df["label"] = y
-    feature_df["channel_name"] = df["channel"].values
-    feature_df.to_csv("data/processed/features_real.csv", index=False)
-    logger.info("Saved feature matrix to data/processed/features_real.csv")
-
-    # Step 3: Train/test split and train model
-    logger.info("=== Step 3: Training model ===")
-    # Handle very small datasets during testing gracefully
-    test_size = 0.2 if len(df) >= 10 else 0.5
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=42, stratify=y if len(np.unique(y)) > 1 and len(df) >= 10 else None
-    )
-    model = train_model(X_train, y_train)
-
-    # Step 4: Evaluate
-    logger.info("=== Step 4: Evaluating model ===")
-    try:
-        results = evaluate_model(model, X_test, y_test, label_names=["legitimate", "phishing"])
-        print("\n" + results["classification_report"])
-        print(f"Confusion Matrix:\n{results['confusion_matrix']}\n")
-    except Exception as e:
-        logger.warning("Evaluation failed (likely too few samples): %s", e)
-
-    # Step 5: Save model and TF-IDF vectorizer
-    logger.info("=== Step 5: Saving artifacts ===")
-    save_model(model, "data/models/model.pkl")
-    joblib.dump(tfidf, "data/models/tfidf_vectorizer.pkl")
-    logger.info("Saved TF-IDF vectorizer to data/models/tfidf_vectorizer.pkl")
-
-    with open("data/models/feature_names.json", "w") as f:
-        json.dump(feature_names, f)
-    logger.info("Saved feature names to data/models/feature_names.json")
-
-    # Step 6: Permutation importance
-    logger.info("=== Step 6: Feature importance ===")
-    try:
-        importance = get_permutation_importance(model, X_test, y_test, feature_names)
-        print("\nTop 15 Features by Permutation Importance:")
-        for name, mean, std in importance[:15]:
-            print(f"  {name:40s} {mean:+.4f} ± {std:.4f}")
-    except Exception as e:
-        logger.warning("Feature importance failed: %s", e)
-
-    logger.info("\n✓ Pipeline complete. Artifacts saved to data/models/")
+    logger.info("No new real training images to ingest in %s.", real_train_dir)
+    return existing_df
 
 
 if __name__ == "__main__":
-    main()
+    ingest_real_training_data()

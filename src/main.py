@@ -31,6 +31,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.preprocessing import preprocess_image
 from src.ocr import extract_text
 from src.channel_detector import detect_channel
+from src.masking import strip_template_chrome, mask_text
 from src.feature_extraction import extract_features, FEATURE_NAMES
 
 # ── Logging ──────────────────────────────────────────────────────────
@@ -57,20 +58,24 @@ app.add_middleware(
 )
 
 # ── Model loading ────────────────────────────────────────────────────
-MODEL_PATH = "data/models/model.pkl"
+MODEL_PATH = "data/models/calibrated_model.pkl" if os.path.exists("data/models/calibrated_model.pkl") else "data/models/model.pkl"
 TFIDF_PATH = "data/models/tfidf_vectorizer.pkl"
 FEATURE_NAMES_PATH = "data/models/feature_names.json"
+THRESHOLDS_PATH = "data/models/thresholds.json"
 FEEDBACK_PATH = "data/feedback.jsonl"
 
 _model = None
 _tfidf = None
 _feature_names = None
+_explainer = None
+_t_legit = 0.35
+_t_phish = 0.65
 
 
 @app.on_event("startup")
 def load_artifacts():
-    """Load model and TF-IDF vectorizer at startup."""
-    global _model, _tfidf, _feature_names
+    """Load model, TF-IDF vectorizer, thresholds, and SHAP explainer at startup."""
+    global _model, _tfidf, _feature_names, _explainer, _t_legit, _t_phish
 
     if os.path.exists(MODEL_PATH):
         _model = joblib.load(MODEL_PATH)
@@ -84,26 +89,68 @@ def load_artifacts():
     else:
         logger.warning("⚠ No TF-IDF vectorizer found at %s.", TFIDF_PATH)
 
+    if os.path.exists(THRESHOLDS_PATH):
+        try:
+            with open(THRESHOLDS_PATH, "r") as f:
+                th_data = json.load(f)
+                _t_legit = float(th_data.get("t_legit", 0.35))
+                _t_phish = float(th_data.get("t_phish", 0.65))
+            logger.info("✓ Thresholds loaded: t_legit=%.3f, t_phish=%.3f", _t_legit, _t_phish)
+        except Exception as e:
+            logger.warning("Failed to load thresholds from %s: %s", THRESHOLDS_PATH, e)
+
+    expected_names = list(FEATURE_NAMES)
+    if _tfidf is not None:
+        expected_names += [f"tfidf_{n}" for n in _tfidf.get_feature_names_out()]
+    _feature_names = expected_names
+
     if os.path.exists(FEATURE_NAMES_PATH):
-        with open(FEATURE_NAMES_PATH, "r") as f:
-            _feature_names = json.load(f)
-        logger.info("✓ Feature names loaded (%d features)", len(_feature_names))
+        try:
+            with open(FEATURE_NAMES_PATH, "r") as f:
+                stored_names = json.load(f)
+            if stored_names != expected_names:
+                logger.error(
+                    "Feature names mismatch: stored has %d features, expected %d. Updating feature names.",
+                    len(stored_names), len(expected_names),
+                )
+            else:
+                logger.info("✓ Feature names validated against feature_names.json (%d features)", len(_feature_names))
+        except Exception as e:
+            logger.warning("Error reading feature_names.json: %s", e)
+
+    # Initialize SHAP explainer
+    if _model is not None:
+        try:
+            import shap
+            from sklearn.calibration import CalibratedClassifierCV
+            base = _model
+            if isinstance(base, CalibratedClassifierCV):
+                if hasattr(base, 'calibrated_classifiers_') and len(base.calibrated_classifiers_) > 0:
+                    cc = base.calibrated_classifiers_[0]
+                    base = getattr(cc, 'estimator', getattr(cc, 'base_estimator', base))
+            _explainer = shap.TreeExplainer(base)
+            logger.info("✓ SHAP TreeExplainer initialized")
+        except Exception as e:
+            logger.warning("SHAP explainer unavailable: %s", e)
+            _explainer = None
 
 
 def _build_feature_vector(ocr_text: str, channel: str) -> np.ndarray:
     """
     Build the full feature vector (scalar features + TF-IDF) for a single sample.
+    Ensures identical preprocessing (chrome stripping + entity masking) as training.
     """
-    # Scalar features
-    features = extract_features(ocr_text, channel, skip_whois=True)
+    clean_text = strip_template_chrome(ocr_text, channel=channel)
+    features = extract_features(clean_text, channel, skip_whois=True)
     scalar_vector = np.array(
         [features[name] for name in FEATURE_NAMES],
         dtype=np.float64,
     ).reshape(1, -1)
 
-    # TF-IDF features
+    # TF-IDF features (must match training: masked entities)
     if _tfidf is not None:
-        tfidf_vector = _tfidf.transform([ocr_text])
+        masked_text = mask_text(clean_text)
+        tfidf_vector = _tfidf.transform([masked_text])
         combined = hstack([csr_matrix(scalar_vector), tfidf_vector]).toarray()
     else:
         combined = scalar_vector
@@ -212,6 +259,83 @@ def _get_flagged_features(
 
 
 
+# ── SHAP Explanation Helpers ─────────────────────────────────────────
+_FEATURE_LABELS = {
+    "urgency_count": "Uses urgent or pressure language",
+    "threat_count": "Contains threatening or consequence language",
+    "credential_request": "Asks for login or payment credentials",
+    "personal_info_request": "Requests personal identity information",
+    "financial_context_count": "Mentions banking or financial context",
+    "reward_bait_count": "Contains prize, reward, or bait language",
+    "sensitive_request": "Directly requests sensitive credentials",
+    "generic_greeting_flag": "Uses an impersonal or generic greeting",
+    "threat_plus_urgency": "Combines threat and urgency language",
+    "brand_domain_mismatch": "Domain doesn't match the claimed brand",
+    "has_high_risk_tld": "Link uses a high-risk domain extension",
+    "blacklist_status": "Domain is flagged by threat databases",
+    "typosquatting_score": "Domain resembles a known brand (typosquatting)",
+    "is_shortened_url": "Uses a URL shortener to hide destination",
+    "raw_ip_address": "Link goes to a raw IP address",
+    "has_punycode": "URL uses obfuscated characters (Punycode)",
+    "redirect_domain_change": "URL redirects to a different domain",
+    "suspicious_url_keyword_count": "URL contains deceptive keywords",
+    "number_of_subdomains": "Excessive subdomains in URL",
+    "special_character_count": "Many special characters in URL",
+    "whitelist_match": "Domain matches a verified official domain",
+    "uses_https": "Link uses HTTPS encryption",
+    "total_word_count": "Overall message length",
+    "action_word_count": "Contains call-to-action words",
+    "account_security_count": "Mentions account security topics",
+    "url_length": "URL is unusually long",
+    "url_entropy": "URL has high character randomness",
+    "domain_entropy": "Domain name appears random",
+    "has_dns_record": "Domain has valid DNS records",
+    "domain_length": "Domain name length",
+    "brand_in_domain": "Brand name appears in the domain",
+    "channel": "Message channel type",
+}
+
+
+def _translate_feature(name: str) -> str:
+    """Translate a raw feature name into a plain-English sentence."""
+    if name in _FEATURE_LABELS:
+        return _FEATURE_LABELS[name]
+    if name.startswith("tfidf_"):
+        token = name[6:]
+        return f"Text contains the pattern '{token}'"
+    return name.replace("_", " ").capitalize()
+
+
+def _get_shap_explanations(feature_vector: np.ndarray, top_n: int = 3):
+    """Return (suspicion_reasons, safe_reasons) based on SHAP values."""
+    suspicion = []
+    safe = []
+    if _explainer is None or not _feature_names:
+        return suspicion, safe
+
+    try:
+        shap_values = _explainer.shap_values(feature_vector)
+        if isinstance(shap_values, list):
+            sv = shap_values[1][0] if len(shap_values) > 1 else shap_values[0][0]
+        elif getattr(shap_values, "ndim", 0) == 3:
+            sv = shap_values[0, :, 1]
+        else:
+            sv = shap_values[0]
+
+        pairs = list(zip(_feature_names, sv))
+        positive = sorted([(n, v) for n, v in pairs if v > 0.001], key=lambda x: -x[1])
+        for name, _ in positive[:top_n]:
+            suspicion.append(_translate_feature(name))
+
+        negative = sorted([(n, v) for n, v in pairs if v < -0.001], key=lambda x: x[1])
+        for name, _ in negative[:top_n]:
+            safe.append(_translate_feature(name))
+    except Exception as e:
+        logger.warning("SHAP explanation failed: %s", e)
+
+    return suspicion, safe
+
+
 # ── Endpoints ────────────────────────────────────────────────────────
 
 @app.get("/health")
@@ -296,70 +420,82 @@ async def predict(
 
     feature_vector = _build_feature_vector(ocr_text, channel)
 
-    prediction = _model.predict(feature_vector)[0]
+    # Class 1 predict_proba
     proba = _model.predict_proba(feature_vector)[0]
+    classes = list(_model.classes_)
+    phish_idx = classes.index(1) if 1 in classes else 1
+    p_phish = float(proba[phish_idx])
+    phishing_score = p_phish
+    confidence = max(p_phish, 1.0 - p_phish)
 
-    label = "phishing" if prediction == 1 else "legitimate"
-    confidence = float(proba[prediction])
+    # Threshold-based verdict
+    if p_phish >= _t_phish:
+        verdict = "phishing"
+    elif p_phish <= _t_legit:
+        verdict = "legitimate"
+    else:
+        verdict = "uncertain"
 
-    # ── Hardened Scoring & Decision Override ─────────────────────────
-    # Identify high-risk flags from the feature vector using val_map
     val_map = {name: feature_vector[0, idx] for idx, name in enumerate(_feature_names) if idx < feature_vector.shape[1]}
-    
+
+    # Hard overrides allowed ONLY for:
+    # 1. Known malicious URL/domain (blacklist hit) -> force phishing
+    # 2. Confirmed brand impersonation (brand detected, domain present and does not match brand's official domain) -> force phishing
+    # 3. High-risk TLD + credential-harvesting keywords together -> force phishing
+    # 4. Whitelist match may DOWNGRADE phishing -> uncertain, but NEVER directly to legitimate if the model flagged it
+    is_blacklist = val_map.get("blacklist_status", 0) > 0
     is_mismatch = val_map.get("brand_domain_mismatch", 0) > 0
-    is_high_risk_link = (val_map.get("has_high_risk_tld", 0) > 0) or (val_map.get("blacklist_status", 0) > 0)
-
-    if (is_mismatch or is_high_risk_link) and label == "legitimate":
-        # Force verdict to phishing, override confidence to a high value
-        label = "phishing"
-        confidence = 0.95
-        logger.info("Hardened Scoring: Overriding NLP prediction to phishing due to high-risk heuristic.")
-
-    # Whitelist safeguard: If the URL is on a verified legitimate domain (e.g. YouTube, Google)
-    # and has zero threat / credential / phishing signals, prevent false positives from query tracking parameters
-    is_whitelisted = val_map.get("whitelist_match", 0) > 0
-    has_zero_threat_signals = (
-        val_map.get("blacklist_status", 0) == 0
-        and val_map.get("brand_domain_mismatch", 0) == 0
-        and val_map.get("typosquatting_score", 0) == 0
-        and val_map.get("has_high_risk_tld", 0) == 0
-        and val_map.get("raw_ip_address", 0) == 0
-        and val_map.get("credential_request", 0) == 0
-        and val_map.get("personal_info_request", 0) == 0
-        and val_map.get("sensitive_request", 0) == 0
-        and val_map.get("threat_plus_urgency", 0) == 0
-        and val_map.get("threat_count", 0) == 0
-        and val_map.get("urgency_count", 0) == 0
-        and val_map.get("reward_bait_count", 0) == 0
-        and val_map.get("redirect_domain_change", 0) == 0
+    is_high_risk_combo = (val_map.get("has_high_risk_tld", 0) > 0) and (
+        val_map.get("credential_request", 0) > 0 or val_map.get("sensitive_request", 0) > 0
     )
 
-    if is_whitelisted and has_zero_threat_signals and label == "phishing":
-        label = "legitimate"
-        confidence = 0.95
-        logger.info("Whitelist Safeguard: Overriding false positive to legitimate for verified whitelisted domain with zero threats.")
+    override_reason = None
+    if is_blacklist:
+        verdict = "phishing"
+        phishing_score = max(phishing_score, 0.95)
+        confidence = max(confidence, 0.95)
+        override_reason = "Known malicious URL/domain detected by threat database"
+    elif is_mismatch:
+        verdict = "phishing"
+        phishing_score = max(phishing_score, 0.95)
+        confidence = max(confidence, 0.95)
+        override_reason = "Domain does not match the claimed brand (brand impersonation)"
+    elif is_high_risk_combo:
+        verdict = "phishing"
+        phishing_score = max(phishing_score, 0.95)
+        confidence = max(confidence, 0.95)
+        override_reason = "High-risk domain extension combined with credential harvesting keywords"
+    elif val_map.get("whitelist_match", 0) > 0:
+        if verdict == "phishing":
+            verdict = "uncertain"
+            phishing_score = (_t_phish + _t_legit) / 2.0
+            confidence = 0.50
+            override_reason = "Verified whitelist match downgraded phishing to uncertain"
 
-    flagged = _get_flagged_features(feature_vector, confidence, ocr_text, channel, label=label)
+    suspicion_reasons, safe_reasons = _get_shap_explanations(feature_vector, top_n=3)
+    if override_reason and override_reason not in suspicion_reasons:
+        suspicion_reasons.insert(0, override_reason)
 
-    # ── Append Override Explanations to Key Indicators ───────────────
-    if (is_mismatch or is_high_risk_link) and "High-risk URL heuristics triggered an automatic phishing verdict" not in flagged:
-         # Put the heuristic alert at the top
-         flagged.insert(0, "High-risk URL heuristics triggered an automatic phishing verdict")
+    flagged = _get_flagged_features(feature_vector, confidence, ocr_text, channel, label=verdict)
 
     prediction_id = str(uuid4())
 
     logger.info(
-        "Prediction: %s (%.2f confidence) | Channel: %s | ID: %s",
-        label, confidence, channel, prediction_id,
+        "Prediction: %s (score: %.4f, confidence: %.4f) | Channel: %s | ID: %s",
+        verdict, phishing_score, confidence, channel, prediction_id,
     )
 
     return {
         "prediction_id": prediction_id,
         "channel": channel,
-        "label": label,
+        "verdict": verdict,
+        "label": verdict,
+        "phishing_score": round(phishing_score, 4),
         "confidence": round(confidence, 4),
-        "flagged_features": flagged,
-        "channel_scores": channel_result["scores"],
+        "suspicion_reasons": suspicion_reasons,
+        "safe_reasons": safe_reasons,
+        "flagged_features": suspicion_reasons if suspicion_reasons else flagged,
+        "channel_scores": channel_result.get("scores", {}),
     }
 
 

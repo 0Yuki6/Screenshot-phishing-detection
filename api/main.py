@@ -78,6 +78,8 @@ class AnalysisResponse(BaseModel):
     winning_variant: str = Field(..., description="Winning image preprocessing variant")
     rules_triggered: List[str] = Field(default_factory=list, description="Names of triggered deterministic rules")
     raw_ml_score: float = Field(..., description="Unscaled probability from random forest")
+    suspicion_reasons: List[str] = Field(default_factory=list, description="Top SHAP features raising suspicion")
+    safe_reasons: List[str] = Field(default_factory=list, description="Top SHAP features pointing to legitimate")
     # Compatibility fields for legacy frontend
     label: str = Field(..., description="Legacy alias for verdict")
     confidence: float = Field(..., description="Legacy decision confidence")
@@ -176,9 +178,11 @@ async def process_image_upload(file: UploadFile) -> AnalysisResponse:
         winning_variant=result["winning_variant"],
         rules_triggered=result["rules_triggered"],
         raw_ml_score=result["raw_ml_score"],
+        suspicion_reasons=result.get("suspicion_reasons", []),
+        safe_reasons=result.get("safe_reasons", []),
         label=result["verdict"],
         confidence=legacy_confidence,
-        flagged_features=result["alerts"] + result["rules_triggered"],
+        flagged_features=result.get("suspicion_reasons", []) + result["alerts"],
     )
 
 

@@ -52,6 +52,12 @@ def extract_text_and_confidence(img: np.ndarray, psm: int = 6) -> Tuple[str, flo
     return text.strip(), round(mean_conf, 2), len(words)
 
 
+def extract_text(img: np.ndarray, psm: int = 6) -> str:
+    """Convenience function returning extracted text."""
+    text, _, _ = extract_text_and_confidence(img, psm=psm)
+    return text
+
+
 def run_dual_variant_ocr(
     bgr_img: np.ndarray,
     min_side: int = 600,

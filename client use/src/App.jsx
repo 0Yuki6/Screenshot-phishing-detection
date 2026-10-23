@@ -4,15 +4,14 @@ import {
   ShieldAlert, 
   ShieldCheck, 
   UploadCloud, 
-  FileText, 
   Image as ImageIcon, 
   Loader2, 
   AlertTriangle, 
-  ChevronRight, 
   Smartphone, 
   Mail, 
   MessageCircle, 
-  HelpCircle 
+  HelpCircle,
+  ShieldQuestion
 } from 'lucide-react';
 import KeyIndicators from './KeyIndicators.jsx';
 
@@ -109,16 +108,8 @@ function App() {
     }
   };
 
-  const mapIndicator = (rawString) => {
-    if (rawString.includes("Domain does not match")) return "Cross-Brand Link Detected: Text mentions primary platform brands, but points to an external domain.";
-    if (rawString.includes("deceptive security/login")) return "Complex Link Structure: Web link contains tracking or redirection parameters.";
-    if (rawString.includes("Suspicious vocabulary")) return "Action Phrases Found: Contains common request keywords (e.g., 'read', 'meeting', 'help').";
-    if (rawString.includes("High-risk URL")) return "Unusual Web Address: Link structure differs from standard secure portals.";
-    return rawString;
-  };
-
-  const getRiskDetails = (phishingScore) => {
-    if (phishingScore >= 0.7) {
+  const getRiskDetails = (verdict, phishingScore) => {
+    if (verdict === 'phishing') {
       return {
         icon: <AlertTriangle className="w-10 h-10" />,
         title: "Phishing Detected",
@@ -126,10 +117,11 @@ function App() {
         bgClass: "bg-red-500/20 text-red-500 ring-red-500/30",
         topBorder: "bg-red-500"
       };
-    } else if (phishingScore >= 0.35) {
+    } else if (verdict === 'uncertain') {
       return {
-        icon: <AlertTriangle className="w-10 h-10" />,
-        title: "Moderate Risk / Exercise Caution",
+        icon: <ShieldQuestion className="w-10 h-10" />,
+        title: "Could Not Decide",
+        subtitle: "Verify through the official app or website",
         colorClass: "text-yellow-400",
         bgClass: "bg-yellow-500/20 text-yellow-500 ring-yellow-500/30",
         topBorder: "bg-yellow-500"
@@ -262,8 +254,9 @@ function App() {
         <div className="lg:col-span-7">
           {result ? (
             (() => {
-              const phishingScore = result.label === 'phishing' ? result.confidence : 1 - result.confidence;
-              const riskDetails = getRiskDetails(phishingScore);
+              const phishingScore = result.phishing_score ?? 0;
+              const verdict = result.verdict || 'uncertain';
+              const riskDetails = getRiskDetails(verdict, phishingScore);
               return (
                 <div className="glass-panel p-1 relative overflow-hidden h-full flex flex-col">
                   {/* Colored top border based on verdict */}
@@ -281,11 +274,13 @@ function App() {
                       <h2 className={`text-2xl font-bold tracking-tight ${riskDetails.colorClass} px-2`}>
                         {riskDetails.title}
                       </h2>
+                      {riskDetails.subtitle && (
+                        <p className="text-sm text-slate-300 mt-2 italic">
+                          {riskDetails.subtitle}
+                        </p>
+                      )}
                       <p className="text-slate-400 mt-2 font-medium">
-                        {(phishingScore * 100).toFixed(1)}% Phishing Risk
-                      </p>
-                      <p className="text-xs text-slate-500 mt-1">
-                        Model confidence: {(result.confidence * 100).toFixed(1)}%
+                        Phishing score: {(phishingScore * 100).toFixed(1)}%
                       </p>
                     </div>
 
