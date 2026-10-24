@@ -29,7 +29,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.preprocessing import preprocess_image
-from src.ocr import extract_text
+from src.ocr import extract_text, normalize_ocr_urls
 from src.channel_detector import detect_channel
 from src.masking import strip_template_chrome, mask_text
 from src.feature_extraction import extract_features, FEATURE_NAMES
@@ -38,6 +38,10 @@ from src.display_indicators import compute_display_indicators, format_indicator_
 # ── Logging ──────────────────────────────────────────────────────────
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
+
+# Set to True to rejoin URLs that OCR split across lines (e.g. "http://" + newline + "www...").
+# Left False so the served model sees exactly the same text as before; test, then enable.
+NORMALIZE_URLS = False
 
 # ── App setup ────────────────────────────────────────────────────────
 app = FastAPI(
@@ -404,6 +408,8 @@ async def predict(
         try:
             preprocessed = preprocess_image(image_bytes)
             ocr_text = extract_text(preprocessed)
+            if NORMALIZE_URLS:
+                ocr_text = normalize_ocr_urls(ocr_text)
         except ValueError as e:
             raise HTTPException(status_code=400, detail=f"Image processing error: {e}")
         except RuntimeError as e:
@@ -488,7 +494,7 @@ async def predict(
     )
     display_signals = format_indicator_signals(display_indicators)
     combined_suspicion = display_signals + [s for s in suspicion_reasons if s not in display_signals]
-    combined_flagged = display_signals + [s for s in (flagged if flagged else suspicion_reasons) if s not in display_signals]
+    combined_flagged = list(display_signals)  # display-only signals; avoids old keyword-feature strings lighting the tiles
 
     prediction_id = str(uuid4())
 
