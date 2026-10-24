@@ -27,6 +27,7 @@ from src.channel_detector import detect_channel
 from src.masking import strip_template_chrome, mask_text
 from src.features import extract_features, FEATURE_NAMES
 from src.rules import evaluate_rules
+from src.display_indicators import compute_display_indicators, format_indicator_signals
 
 logger = logging.getLogger(__name__)
 
@@ -233,6 +234,15 @@ class PhishingPipeline:
             t_phish=self._t_phish,
         )
 
+        # 8. Compute display-only indicators (does NOT feed the model)
+        display_indicators = compute_display_indicators(
+            clean_text,
+            rules_triggered=rule_eval["rules_triggered"],
+            alerts=rule_eval["alerts"],
+        )
+        display_signals = format_indicator_signals(display_indicators)
+        combined_suspicion = display_signals + [s for s in suspicion_reasons if s not in display_signals]
+
         return {
             "verdict": rule_eval["verdict"],
             "phishing_score": round(float(rule_eval["phishing_score"]), 4),
@@ -244,7 +254,7 @@ class PhishingPipeline:
             "winning_variant": winning_variant,
             "rules_triggered": rule_eval["rules_triggered"],
             "raw_ml_score": round(raw_ml_score, 4),
-            "suspicion_reasons": suspicion_reasons,
+            "suspicion_reasons": combined_suspicion,
             "safe_reasons": safe_reasons,
         }
 

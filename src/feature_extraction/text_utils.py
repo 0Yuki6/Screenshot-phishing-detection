@@ -155,14 +155,44 @@ def count_credential_requests(text: str) -> int:
     """
     Count actual requests for sensitive credentials.
 
-    Checks both individual credential terms (password, OTP, PIN, CVV…)
-    and request patterns (enter your OTP, confirm your password…).
-
-    Does NOT treat generic words like 'account', 'details', 'verify',
-    or 'information' as credential requests.
+    Delivery text ("your OTP is 123456", "do not share", "valid for N minutes")
+    must NOT fire it; request text ("enter your OTP", "reply with password/PIN", "verify here")
+    must.
     """
-    count = _count_keyword_matches(text, CREDENTIAL_KEYWORDS)
-    count += _count_keyword_matches(text, CREDENTIAL_REQUEST_PATTERNS)
+    text_lower = text.lower()
+    count = 0
+
+    # Request patterns where user is actively prompted for credentials/verification
+    for pat in CREDENTIAL_REQUEST_PATTERNS:
+        pattern = r"(?<!do not\s)(?<!don't\s)(?<!never\s)(?<!should not\s)\b" + re.escape(pat.lower()) + r"\b"
+        if re.search(pattern, text_lower):
+            count += 1
+
+    request_regexes = [
+        r"\b(?:enter|provide|confirm|submit|type|input|share|send|insert)\s+(?:your\s+)?(?:password|pin|otp|cvv|credentials|passcode|secret code)\b",
+        r"\breply\s+(?:with|by\s+sending)\s+(?:your\s+)?(?:password|pin|otp|cvv|credentials|passcode|secret code|code)\b",
+        r"\breply\s+stop\s+followed\s+by\s+(?:your\s+)?(?:password|pin|otp|credentials)\b",
+        r"\b(?:verify|authenticate|confirm)\s+(?:your\s+)?(?:identity|account|credentials|password|pin|otp)\b",
+        r"\bverify\s+here\b",
+        r"\b(?:reset|update)\s+your\s+(?:password|pin|credentials)\b",
+    ]
+
+    for reg in request_regexes:
+        # Avoid counting if part of negative instructions (e.g. do not share your password)
+        pattern = r"(?<!do not\s)(?<!don't\s)(?<!never\s)(?<!should not\s)" + reg
+        matches = re.findall(pattern, text_lower)
+        count += len(matches)
+
+    # In compound requests ("Please enter your password and OTP") ensure distinct requested items are counted
+    multi_req_match = re.search(
+        r"\b(?:enter|provide|confirm|submit|reply with|share|type|send)\b.*?(password|pin|otp|cvv|credentials|secret code).*?(?:and|,)\s+(?:your\s+)?(password|pin|otp|cvv|credentials|secret code)",
+        text_lower,
+    )
+    if multi_req_match:
+        w1, w2 = multi_req_match.group(1), multi_req_match.group(2)
+        if w1 != w2:
+            count = max(count, 2)
+
     return count
 
 

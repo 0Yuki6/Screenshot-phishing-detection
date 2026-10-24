@@ -33,6 +33,7 @@ from src.ocr import extract_text
 from src.channel_detector import detect_channel
 from src.masking import strip_template_chrome, mask_text
 from src.feature_extraction import extract_features, FEATURE_NAMES
+from src.display_indicators import compute_display_indicators, format_indicator_signals
 
 # ── Logging ──────────────────────────────────────────────────────────
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -478,6 +479,17 @@ async def predict(
 
     flagged = _get_flagged_features(feature_vector, confidence, ocr_text, channel, label=verdict)
 
+    # Compute display-only indicators from clean text
+    clean_text = strip_template_chrome(ocr_text, channel=channel)
+    rules_triggered = ["BRAND_IMPERSONATION_MISMATCH"] if is_mismatch else []
+    alerts = [override_reason] if override_reason else []
+    display_indicators = compute_display_indicators(
+        clean_text, rules_triggered=rules_triggered, alerts=alerts
+    )
+    display_signals = format_indicator_signals(display_indicators)
+    combined_suspicion = display_signals + [s for s in suspicion_reasons if s not in display_signals]
+    combined_flagged = display_signals + [s for s in (flagged if flagged else suspicion_reasons) if s not in display_signals]
+
     prediction_id = str(uuid4())
 
     logger.info(
@@ -492,9 +504,13 @@ async def predict(
         "label": verdict,
         "phishing_score": round(phishing_score, 4),
         "confidence": round(confidence, 4),
-        "suspicion_reasons": suspicion_reasons,
+        "suspicion_reasons": combined_suspicion,
         "safe_reasons": safe_reasons,
-        "flagged_features": suspicion_reasons if suspicion_reasons else flagged,
+        "flagged_features": combined_flagged,
+        "alerts": alerts,
+        "rules_triggered": rules_triggered,
+        "indicators": display_indicators,
+        "display_indicators": display_indicators,
         "channel_scores": channel_result.get("scores", {}),
     }
 

@@ -1,10 +1,45 @@
 [
   {
+    "test_idx": 44,
+    "channel": "email",
+    "true_label": "legitimate",
+    "predicted_verdict": "phishing",
+    "score_before_rules": 0.9688,
+    "score_after_rules": 0.9688,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        110.0
+      ],
+      [
+        "url_length",
+        21.0
+      ],
+      [
+        "domain_length",
+        14.0
+      ],
+      [
+        "url_token_count",
+        4.0
+      ],
+      [
+        "url_entropy",
+        3.1820058147602133
+      ]
+    ],
+    "clean_text": "yahoo/mail \u00ae Search mail () Re: Forged whitelist spam Russell Turpin <deatbox@hotmail.com> Sun, Aug 11, 2002, 03:20 PM Apes | To: you@yanoo.com Starred Eugene Leit! th Sent >Users don't like entering passphrases when sending email. @ Trash 8s Ifyou'e using the mail client on your personal pam machine, there's no reason you would need to enter a passphrase, unless that is part of how you secure the data on your personal machine. You're private key is as secure as any other data on your machine. Ifyou'e working remotely, you already have to enter a passphrase to get to your email Send and receive Hotmail on your mobile device: http://mobile.msn.com http://xent.com/mailmantlistinforfork",
+    "alerts": [
+      "Classified phishing with elevated risk score (0.969 >= 0.79)."
+    ]
+  },
+  {
     "test_idx": 171,
     "channel": "email",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.9969,
+    "score_before_rules": 0.9825,
     "score_after_rules": 0.05,
     "rules_triggered": [
       "EXACT_WHITELIST_BYPASS"
@@ -41,7 +76,7 @@
     "channel": "email",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.9975,
+    "score_before_rules": 0.9852,
     "score_after_rules": 0.05,
     "rules_triggered": [
       "EXACT_WHITELIST_BYPASS"
@@ -78,7 +113,7 @@
     "channel": "email",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.9956,
+    "score_before_rules": 0.9714,
     "score_after_rules": 0.05,
     "rules_triggered": [
       "EXACT_WHITELIST_BYPASS"
@@ -115,7 +150,7 @@
     "channel": "email",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.9979,
+    "score_before_rules": 0.9834,
     "score_after_rules": 0.05,
     "rules_triggered": [
       "EXACT_WHITELIST_BYPASS"
@@ -152,7 +187,7 @@
     "channel": "email",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.9945,
+    "score_before_rules": 0.9697,
     "score_after_rules": 0.05,
     "rules_triggered": [
       "EXACT_WHITELIST_BYPASS"
@@ -181,7 +216,7 @@
     ],
     "clean_text": "yahoo/mail \u00ae Search mail () =?UTF-8?B?4pyllFRyYWNriFlvdXigU2hpcG1lbnQgLSBGZWRFeA==?= shipment <shipment@fedex.com> Fri, Sep 28, 2018, 07:50 PM by nox | To: you@\u00aeyahoo.com Stared Enter your tracking number to track and pay Dear Customer, Your package has been retumed to the FedEx office. The reason for the return is - payment of shipping costs. the th Sent landed cost of your shipment is not paid yet so you will be charged to pay handling cost 04.5 USD You have a period of 72 hours to recover your package, otherwise it will be @ Trash returned to the sender. Enter your tracking number to track and payTracking Numbers : 780032194102 djdj Click here to view the status of your order 8s fedex.com/apps/fedextrack/?action=track \u2014 Thank You for understanding best regards pam",
     "alerts": [
-      "Verified sender: All embedded links point exclusively to verified official domains (yahoo.com, fedex.com)."
+      "Verified sender: All embedded links point exclusively to verified official domains (fedex.com, yahoo.com)."
     ]
   },
   {
@@ -189,7 +224,7 @@
     "channel": "email",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.9978,
+    "score_before_rules": 0.9845,
     "score_after_rules": 0.05,
     "rules_triggered": [
       "EXACT_WHITELIST_BYPASS"
@@ -222,153 +257,95 @@
     ]
   },
   {
-    "test_idx": 414,
+    "test_idx": 394,
     "channel": "sms",
     "true_label": "legitimate",
     "predicted_verdict": "phishing",
-    "score_before_rules": 0.9154,
-    "score_after_rules": 0.9154,
+    "score_before_rules": 0.8187,
+    "score_after_rules": 0.8187,
     "rules_triggered": [],
     "top_scalar_features": [
       [
         "total_word_count",
-        35.0
+        46.0
       ],
       [
         "channel",
         1.0
       ]
     ],
-    "clean_text": "'ve sent my wife your text. After we buy them she'll tell you what to do. So just relax. We should go get them this wkend. 2:26 AM + Enter message >] oO (e) \u00a2",
+    "clean_text": "see you then Sent My love ! How come it took you so long to leave for Zaher's? | got your words on ym and was happy to see them but was sad you had left. | miss you 6:00 AM + Enter message [> |",
     "alerts": [
-      "Classified phishing with elevated risk score (0.915 >= 0.71)."
+      "Classified phishing with elevated risk score (0.819 >= 0.79)."
     ]
   },
   {
-    "test_idx": 415,
+    "test_idx": 421,
     "channel": "sms",
     "true_label": "legitimate",
     "predicted_verdict": "phishing",
-    "score_before_rules": 0.9877,
-    "score_after_rules": 0.9877,
+    "score_before_rules": 0.8358,
+    "score_after_rules": 0.8358,
     "rules_triggered": [],
     "top_scalar_features": [
       [
         "total_word_count",
-        16.0
+        32.0
       ],
       [
         "channel",
         1.0
       ]
     ],
-    "clean_text": "send a text. We'll skype later. 3:42 PM \u00a9 Text message oO u \u20ac [e) a)",
+    "clean_text": "David J. : \u20ac fo +1 (596) 581-7563 ma : Today Oh that was a forwarded message. | thought you send that to me \u00a9 Text message oO & \u20ac [e) a)",
     "alerts": [
-      "Classified phishing with elevated risk score (0.988 >= 0.71)."
+      "Classified phishing with elevated risk score (0.836 >= 0.79)."
     ]
   },
   {
-    "test_idx": 427,
+    "test_idx": 441,
     "channel": "sms",
     "true_label": "legitimate",
     "predicted_verdict": "phishing",
-    "score_before_rules": 0.9108,
-    "score_after_rules": 0.9108,
+    "score_before_rules": 0.8114,
+    "score_after_rules": 0.8114,
     "rules_triggered": [],
     "top_scalar_features": [
       [
         "total_word_count",
-        16.0
+        34.0
       ],
       [
         "channel",
         1.0
       ]
     ],
-    "clean_text": "your brother transfered only &lt#&gt; + &lt#&gt; . Pa. 2:18 AM + Enter message [> |",
+    "clean_text": "this slowly.? GOD,| LOVE YOU &amp; | NEED YOU,CLEAN MY HEART WITH YOUR BLOOD.Send this to Ten special people &amp; uc miracle tomorrow, do it,pls,pls do it... 4:43 PM + Enter message [> |",
     "alerts": [
-      "Classified phishing with elevated risk score (0.911 >= 0.71)."
+      "Classified phishing with elevated risk score (0.811 >= 0.79)."
     ]
   },
   {
-    "test_idx": 451,
+    "test_idx": 731,
     "channel": "sms",
-    "true_label": "legitimate",
-    "predicted_verdict": "phishing",
-    "score_before_rules": 0.9828,
-    "score_after_rules": 0.9828,
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.1856,
+    "score_after_rules": 0.1856,
     "rules_triggered": [],
     "top_scalar_features": [
       [
         "total_word_count",
-        9.0
+        41.0
       ],
       [
         "channel",
         1.0
       ]
     ],
-    "clean_text": "4 lor... 8:11 PM \u00a9 Text message oO u",
+    "clean_text": "<\u20ac t+) AM-NOTICE m G&S: Today Warner Village 83118 C Colin Farrell in SWAT this wkend @Warner Village & get 1 free med. Popcorn!Just show msg+ticket@kiosk.Valid 4-7/12. C t&c @kiosk. Reply SONY 4 mre film offers \u00a9 Text message oO &",
     "alerts": [
-      "Classified phishing with elevated risk score (0.983 >= 0.71)."
-    ]
-  },
-  {
-    "test_idx": 458,
-    "channel": "sms",
-    "true_label": "legitimate",
-    "predicted_verdict": "phishing",
-    "score_before_rules": 0.794,
-    "score_after_rules": 0.794,
-    "rules_triggered": [],
-    "top_scalar_features": [
-      [
-        "total_word_count",
-        37.0
-      ],
-      [
-        "url_length",
-        7.0
-      ],
-      [
-        "domain_length",
-        7.0
-      ],
-      [
-        "url_entropy",
-        2.521640636343318
-      ],
-      [
-        "domain_entropy",
-        2.521640636343318
-      ]
-    ],
-    "clean_text": "| might come to kerala for 2 days.so you can be prepared to take a leave once i finalise .dont plan any travel during my visit.need to finish urgent works. 6:04 AM + Enter message [> |",
-    "alerts": [
-      "Classified phishing with elevated risk score (0.794 >= 0.71)."
-    ]
-  },
-  {
-    "test_idx": 459,
-    "channel": "sms",
-    "true_label": "legitimate",
-    "predicted_verdict": "phishing",
-    "score_before_rules": 0.9417,
-    "score_after_rules": 0.9417,
-    "rules_triggered": [],
-    "top_scalar_features": [
-      [
-        "total_word_count",
-        43.0
-      ],
-      [
-        "channel",
-        1.0
-      ]
-    ],
-    "clean_text": "(OS Sun cant come to earth but send luv as rays. cloud cant come to river but send luv as rain. | cant come to meet U, but can send my care as msg to U. Gud evng a 9:22 AM : \u00a9",
-    "alerts": [
-      "Classified phishing with elevated risk score (0.942 >= 0.71)."
+      "Classified legitimate with low risk score (0.186 <= 0.22)."
     ]
   },
   {
@@ -376,8 +353,8 @@
     "channel": "sms",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.2262,
-    "score_after_rules": 0.2262,
+    "score_before_rules": 0.0972,
+    "score_after_rules": 0.0972,
     "rules_triggered": [],
     "top_scalar_features": [
       [
@@ -391,34 +368,30 @@
     ],
     "clean_text": "i have won wining number 946 wot do i do next 9:33 AM \u00a9 Text message oO &",
     "alerts": [
-      "Classified legitimate with low risk score (0.226 <= 0.40)."
+      "Classified legitimate with low risk score (0.097 <= 0.22)."
     ]
   },
   {
-    "test_idx": 754,
+    "test_idx": 756,
     "channel": "sms",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.3039,
-    "score_after_rules": 0.3039,
+    "score_before_rules": 0.1281,
+    "score_after_rules": 0.1281,
     "rules_triggered": [],
     "top_scalar_features": [
       [
         "total_word_count",
-        34.0
-      ],
-      [
-        "reward_bait_count",
-        1.0
+        36.0
       ],
       [
         "channel",
         1.0
       ]
     ],
-    "clean_text": "< t+) +1 (409) 298-1395 ma & : Wed, Sep 16 Thank you, winner notified by sms. Good Luck! No future marketing reply STOP to 84122 customer services 08450542832 \u00a9 Text message oO &",
+    "clean_text": "The Simpsons Movie released in July 2007 name the band that died at the start of the film? A-Green Day, B-Blue Day, C-Red Day. (Send A, B or C) 10:19 AM + Enter message [> |",
     "alerts": [
-      "Classified legitimate with low risk score (0.304 <= 0.40)."
+      "Classified legitimate with low risk score (0.128 <= 0.22)."
     ]
   },
   {
@@ -426,8 +399,8 @@
     "channel": "sms",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.2163,
-    "score_after_rules": 0.2163,
+    "score_before_rules": 0.0109,
+    "score_after_rules": 0.0109,
     "rules_triggered": [],
     "top_scalar_features": [
       [
@@ -441,39 +414,16 @@
     ],
     "clean_text": "84484 11:20 AM \u00a9 Text message oO io",
     "alerts": [
-      "Classified legitimate with low risk score (0.216 <= 0.40)."
+      "Classified legitimate with low risk score (0.011 <= 0.22)."
     ]
   },
   {
-    "test_idx": 791,
+    "test_idx": 773,
     "channel": "sms",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.2688,
-    "score_after_rules": 0.2688,
-    "rules_triggered": [],
-    "top_scalar_features": [
-      [
-        "total_word_count",
-        41.0
-      ],
-      [
-        "channel",
-        1.0
-      ]
-    ],
-    "clean_text": "\u20ac 0 +1 (484) 387-3609 x & : Tue, Sep 15 Get a brand new mobile phone by being an agent of The Mob! Plus loads more goodies! For more info just text MAT to 87021. \u00a9 Text message oO &",
-    "alerts": [
-      "Classified legitimate with low risk score (0.269 <= 0.40)."
-    ]
-  },
-  {
-    "test_idx": 817,
-    "channel": "sms",
-    "true_label": "phishing",
-    "predicted_verdict": "legitimate",
-    "score_before_rules": 0.2577,
-    "score_after_rules": 0.2577,
+    "score_before_rules": 0.0963,
+    "score_after_rules": 0.0963,
     "rules_triggered": [],
     "top_scalar_features": [
       [
@@ -485,9 +435,94 @@
         1.0
       ]
     ],
-    "clean_text": "Matthew please call 09063440451 from a landline, your complimentary 4*Lux Tenerife holiday or \u00a31000 CASH await collection. ppm150 SAE T&Cs Box334 SK38XH. 7:39 AM + Enter message >] oO (e) \u00a2",
+    "clean_text": "you want a new Video handset? 750 any time any network mins? UNLIMITED TEXT? Camcorder? Reply or Call now 08000930705 for del Sat AM 8:52 AM + Enter message [> |",
     "alerts": [
-      "Classified legitimate with low risk score (0.258 <= 0.40)."
+      "Classified legitimate with low risk score (0.096 <= 0.22)."
+    ]
+  },
+  {
+    "test_idx": 786,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.034,
+    "score_after_rules": 0.034,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        35.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "if ur lookin 4 saucy daytime fun wiv busty married woman Am free all next week Chat now 2 sort time 09099726429 JANINExx Calls\u00a31/minMobsmoreLKPOBOX177 HP51FL 10:01 PM \u00a9 Text message oO & <\u20ac [e) 0",
+    "alerts": [
+      "Classified legitimate with low risk score (0.034 <= 0.22)."
+    ]
+  },
+  {
+    "test_idx": 812,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.2182,
+    "score_after_rules": 0.2182,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        34.0
+      ],
+      [
+        "urgency_count",
+        1.0
+      ],
+      [
+        "action_word_count",
+        1.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "Last Chance! Claim ur \u00a3150 worth of discount vouchers today! Text SHOP to 85023 now! SavaMob, offers mobile! T Cs SavaMob POBOX84, M263UZ. \u00a33.00 Sub. 16 a 4:42 AM + \u00a9 oO (@) \u20ac",
+    "alerts": [
+      "Classified legitimate with low risk score (0.218 <= 0.22)."
+    ]
+  },
+  {
+    "test_idx": 829,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.2182,
+    "score_after_rules": 0.2182,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        34.0
+      ],
+      [
+        "urgency_count",
+        1.0
+      ],
+      [
+        "action_word_count",
+        1.0
+      ],
+      [
+        "channel",
+        1.0
+      ]
+    ],
+    "clean_text": "Last Chance! Claim ur \u00a3150 worth of discount vouchers today! Text SHOP to 85023 now! SavaMob, offers mobile! T Cs SavaMob POBOX84, M263UZ. \u00a33.00 Sub. 16 a 8:55 AM + \u00a9 oO (@) \u20ac",
+    "alerts": [
+      "Classified legitimate with low risk score (0.218 <= 0.22)."
     ]
   },
   {
@@ -495,8 +530,8 @@
     "channel": "sms",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.0303,
-    "score_after_rules": 0.0303,
+    "score_before_rules": 0.0515,
+    "score_after_rules": 0.0515,
     "rules_triggered": [],
     "top_scalar_features": [
       [
@@ -510,30 +545,65 @@
     ],
     "clean_text": "_Now - 12Mths Half Price Orange line rental: 400mins...Call MobileUpd8 on 08000839402 or call2optout=J5Q 5:44 PM + Enter message [> |",
     "alerts": [
-      "Classified legitimate with low risk score (0.030 <= 0.40)."
+      "Classified legitimate with low risk score (0.051 <= 0.22)."
     ]
   },
   {
-    "test_idx": 847,
+    "test_idx": 837,
     "channel": "sms",
     "true_label": "phishing",
     "predicted_verdict": "legitimate",
-    "score_before_rules": 0.0183,
-    "score_after_rules": 0.0183,
+    "score_before_rules": 0.2198,
+    "score_after_rules": 0.2198,
     "rules_triggered": [],
     "top_scalar_features": [
       [
         "total_word_count",
-        38.0
+        41.0
+      ],
+      [
+        "url_length",
+        11.0
+      ],
+      [
+        "domain_length",
+        11.0
+      ],
+      [
+        "url_entropy",
+        3.277613436819116
+      ],
+      [
+        "domain_entropy",
+        3.0957952550009344
+      ]
+    ],
+    "clean_text": "heard from U4 a while. Call me now am here all night with just my knickers on. Make me beg for it like U did last time 01223585236 XX Luv Nikiyu4.net 1:32 PM \u00a9 Text message oO & \u20ac [e) i)",
+    "alerts": [
+      "Classified legitimate with low risk score (0.220 <= 0.22)."
+    ]
+  },
+  {
+    "test_idx": 857,
+    "channel": "sms",
+    "true_label": "phishing",
+    "predicted_verdict": "legitimate",
+    "score_before_rules": 0.1415,
+    "score_after_rules": 0.1415,
+    "rules_triggered": [],
+    "top_scalar_features": [
+      [
+        "total_word_count",
+        33.0
       ],
       [
         "channel",
         1.0
       ]
     ],
-    "clean_text": "<\u20ac t+) PZ-CLAIMNOW mw: Wed, Sep 16 ROMCAPspam Everyone around should be responding well to your presence since you are so warm and outgoing. You are bringing in a real breath of sunshine. \u00a9 Text message oO &",
+    "clean_text": "you want a NEW video phone750 anytime any network mins 150 text for only five pounds per week call 08000776320 now or reply for delivery tomorrow 6:24 PM + Enter message [> |",
     "alerts": [
-      "Classified legitimate with low risk score (0.018 <= 0.40)."
+      "Classified legitimate with low risk score (0.141 <= 0.22)."
     ]
   }
 ]

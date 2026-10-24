@@ -28,9 +28,9 @@ logger = logging.getLogger(__name__)
 REAL_TRAIN_DIR = "data/real_train"
 PROCESSED_REAL_TRAIN_CSV = "data/processed/real_train_samples.csv"
 HOLDOUT_DIRS = [
-    "data/real_holdout/dev",
     "data/real_holdout/final",
-    "data/real_holdout_originals",
+    "data/smishtank_test_holdout",
+    "data/wild_test",
 ]
 
 

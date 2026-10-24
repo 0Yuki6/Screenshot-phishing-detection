@@ -83,6 +83,15 @@ def evaluate_rules(
     # but the destination URL points to an unverified third-party domain
     from src.feature_extraction.url_utils import _EMAIL_PATTERN
 
+    # Stop firing on routine OAuth and third-party app permission notifications
+    is_oauth_permission_notice = bool(
+        re.search(
+            r'\b(?:you shared\b.*?\baccount data with|granted\b.*?\bpermission|requesting updated permissions|third-party app permission|connected app permissions|review or revoke third-party|access requested by)\b',
+            clean_text,
+            re.IGNORECASE,
+        )
+    )
+
     text_no_addresses = _EMAIL_PATTERN.sub(" ", clean_text)
     text_no_addresses = re.sub(r'https?://[^\s<>"\'\)\]]+|www\.[^\s<>"\'\)\]]+', '', text_no_addresses)
     text_no_addresses = re.sub(r'\b(yahoo/?mail|gmail|outlook|icloud)\b', '', text_no_addresses, flags=re.IGNORECASE)
@@ -98,46 +107,70 @@ def evaluate_rules(
     mismatch_detected = False
     mismatched_brand = None
     mismatched_domain = None
+    mismatch_reason = None
 
-    for url in urls:
-        reg_domain = extract_registered_domain(url)
-        if not reg_domain:
-            continue
-        # If the destination domain itself is whitelisted (e.g. google.com, youtube.com, linkedin.com),
-        # it is not an attacker's phishing harvest site
-        if is_exact_whitelisted_domain(reg_domain):
-            continue
-
-        for brand, legit_domains in PUBLIC_BRAND_DOMAINS.items():
-            if len(brand) < 3 and brand not in {"sbi", "pnb", "bof", "dhl", "ups"}:
+    if not is_oauth_permission_notice:
+        for url in urls:
+            reg_domain = extract_registered_domain(url)
+            if not reg_domain:
                 continue
-            # Must be an explicit claim of brand identity (e.g. 'PayPal:', 'Your PayPal Account', 'Dear SBI Customer', 'Netflix Support')
-            # rather than an incidental social login mention ('sign in with Google', 'available on Google Play')
-            brand_claim_pattern = (
-                rf"(?:^{re.escape(brand)}\s*:|\b{re.escape(brand)}\s*:|"
-                rf"\b(?:your\s+{re.escape(brand)}\s+(?:account|card|id|service|statement)|"
-                rf"dear\s+{re.escape(brand)}\s+(?:user|customer|member|client)|"
-                rf"{re.escape(brand)}\s+(?:security|team|support|alerts?|bank|notice|billing|official|admin))\b)"
-            )
-            is_incidental_mention = bool(
-                re.search(rf"\b(?:via|with|using|through|on)\s+{re.escape(brand)}\b|\b{re.escape(brand)}\s+play\b", text_no_addresses, re.IGNORECASE)
-            )
-            has_brand_claim = bool(re.search(brand_claim_pattern, text_no_addresses, re.IGNORECASE)) and not is_incidental_mention
-            if has_brand_claim:
-                if reg_domain not in legit_domains and has_account_action_context:
-                    mismatch_detected = True
-                    mismatched_brand = brand
-                    mismatched_domain = reg_domain
-                    break
-        if mismatch_detected:
-            break
+            # If the destination domain itself is whitelisted (e.g. google.com, youtube.com, linkedin.com),
+            # it is not an attacker's phishing harvest site
+            if is_exact_whitelisted_domain(reg_domain):
+                continue
+
+            for brand, legit_domains in PUBLIC_BRAND_DOMAINS.items():
+                if len(brand) < 3 and brand not in {"sbi", "pnb", "bof", "dhl", "ups"}:
+                    continue
+                # Must be an explicit claim of brand identity (e.g. 'PayPal:', 'Your PayPal Account', 'Dear SBI Customer', 'Netflix Support')
+                # rather than an incidental social login mention ('sign in with Google', 'available on Google Play')
+                brand_claim_pattern = (
+                    rf"(?:^{re.escape(brand)}\s*:|\b{re.escape(brand)}\s*:|"
+                    rf"\b(?:your\s+{re.escape(brand)}\s+(?:account|card|id|service|statement)|"
+                    rf"dear\s+{re.escape(brand)}\s+(?:user|customer|member|client)|"
+                    rf"{re.escape(brand)}\s+(?:security|team|support|alerts?|bank|notice|billing|official|admin))\b)"
+                )
+                is_incidental_mention = bool(
+                    re.search(rf"\b(?:via|with|using|through|on)\s+{re.escape(brand)}\b|\b{re.escape(brand)}\s+play\b", text_no_addresses, re.IGNORECASE)
+                )
+                has_brand_claim = bool(re.search(brand_claim_pattern, text_no_addresses, re.IGNORECASE)) and not is_incidental_mention
+                if has_brand_claim:
+                    if reg_domain not in legit_domains and has_account_action_context:
+                        mismatch_detected = True
+                        mismatched_brand = brand
+                        mismatched_domain = reg_domain
+                        mismatch_reason = f"claims to be from '{brand.title()}' but directs to unauthorized domain '{reg_domain}'"
+                        break
+            if mismatch_detected:
+                break
+
+        # Check sender domain near-miss (e.g. microsoft.co vs microsoft.com)
+        if not mismatch_detected:
+            from_match = re.search(r'\bfrom:\s*(?:[^<@\n\r]*<)?([a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,}))>?', clean_text, re.IGNORECASE)
+            if from_match:
+                sender_domain = from_match.group(2).lower()
+                sender_reg = extract_registered_domain(sender_domain)
+                if sender_reg:
+                    sender_sld = sender_reg.split('.')[0]
+                    for brand, legit_domains in PUBLIC_BRAND_DOMAINS.items():
+                        if len(brand) < 3 and brand not in {"sbi", "pnb", "bof", "dhl", "ups"}:
+                            continue
+                        brand_in_text = bool(re.search(rf"\b{re.escape(brand)}\b", text_no_addresses, re.IGNORECASE))
+                        if brand_in_text and sender_reg not in legit_domains:
+                            is_near_miss = (sender_sld == brand) or (
+                                abs(len(sender_sld) - len(brand)) <= 1 and
+                                sum(c1 != c2 for c1, c2 in zip(sender_sld, brand)) <= 1
+                            )
+                            if is_near_miss:
+                                mismatch_detected = True
+                                mismatched_brand = brand
+                                mismatched_domain = sender_reg
+                                mismatch_reason = f"email sender domain '{sender_domain}' is an unauthorized near-miss of '{brand.title()}'"
+                                break
 
     if mismatch_detected:
         rules_triggered.append("BRAND_IMPERSONATION_MISMATCH")
-        alerts.append(
-            f"Brand impersonation detected: Message claims to be from '{mismatched_brand.title()}' "
-            f"but directs to unauthorized domain '{mismatched_domain}'."
-        )
+        alerts.append(f"Brand impersonation detected: Message {mismatch_reason}.")
         final_score = max(final_score, 0.95)
         return {
             "verdict": "phishing",

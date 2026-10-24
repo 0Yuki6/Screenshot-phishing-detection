@@ -4,6 +4,7 @@ and Character Error Rate (CER) measurement.
 """
 
 import os
+import re
 from typing import Dict, Tuple, Any, Optional
 import numpy as np
 import pandas as pd
@@ -100,6 +101,8 @@ def run_dual_variant_ocr(
         chosen_conf = conf_b
         chosen_words = words_b
 
+    chosen_text = normalize_ocr_urls(chosen_text)
+
     return {
         "text": chosen_text,
         "confidence": chosen_conf,
@@ -110,6 +113,23 @@ def run_dual_variant_ocr(
         "scale_factor": scale,
         "phone_cropped": was_phone_cropped,
     }
+
+
+def normalize_ocr_urls(text: str) -> str:
+    """
+    Rejoin URLs split across lines or by spaces during OCR extraction.
+    E.g. 'http://' + line break/space + 'www...' -> 'http://www...'
+    """
+    if not text:
+        return ""
+    # Rejoin protocol + space/line break + domain or path
+    t = re.sub(r'(https?:\s*//)\s+', r'\1', text, flags=re.IGNORECASE)
+    t = re.sub(r'(https?://)\s+([a-zA-Z0-9_\-\./?=&%#]+)', r'\1\2', t, flags=re.IGNORECASE)
+    # Rejoin line break after scheme or www
+    t = re.sub(r'(https?://[^\s<>"\'\)\]]*?)[\r\n]+\s*([a-zA-Z0-9_\-\./?=&%#]+)', r'\1\2', t, flags=re.IGNORECASE)
+    # Rejoin broken 'www.'
+    t = re.sub(r'(www\.)\s+([a-zA-Z0-9_\-\./?=&%#]+)', r'\1\2', t, flags=re.IGNORECASE)
+    return t
 
 
 def check_unreadable_gate(

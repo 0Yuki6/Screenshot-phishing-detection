@@ -52,14 +52,15 @@ _LEGIT_EMAIL_TEMPLATES = [
     "Subject: Your order has shipped!\nFrom: orders@amazon.com\nTo: customer@gmail.com\n\nHi there,\n\nGreat news! Your order #12345 has shipped and is on its way.\n\nTrack your package: https://www.amazon.com/track/12345\n\nExpected delivery: Monday, October 15\n\nThanks for shopping with us!\nAmazon Customer Service",
     "Subject: Weekly Newsletter - Tech Updates\nFrom: newsletter@techcrunch.com\nTo: subscriber@example.com\n\nHello,\n\nHere are this week's top stories:\n\n1. New AI breakthrough in language models\n2. Startup raises $50M for cloud infrastructure\n3. Review: Latest smartphone comparison\n\nRead more at https://techcrunch.com/weekly\n\nUnsubscribe: https://techcrunch.com/unsubscribe",
     "Subject: Meeting reminder - Team standup tomorrow\nFrom: calendar@google.com\nTo: team@company.com\n\nReminder: Team standup meeting\nWhen: Tomorrow at 10:00 AM\nWhere: Conference Room B / https://meet.google.com/abc-defg-hij\n\nAgenda:\n- Sprint review\n- Blockers discussion\n- Next sprint planning",
-    "Subject: Your monthly statement is ready\nFrom: statements@chase.com\nTo: customer@gmail.com\n\nDear John,\n\nYour October statement is now available. Log in to your Chase account to view it:\n\nhttps://www.chase.com/statements\n\nTotal balance: $2,450.32\nPayment due: November 15\n\nThank you for being a valued Chase customer.",
+    "Subject: Your monthly statement is ready\nFrom: statements@{service_domain}\nTo: customer@gmail.com\n\nDear Customer,\n\nYour monthly statement for {bank} is now available. Log in to your online banking portal to view it:\n\nhttps://{service_domain}/statements\n\nTotal balance: INR {balance}\nPayment due: {date}\n\nThank you for choosing {bank}.",
     "Subject: Re: Project proposal feedback\nFrom: manager@company.com\nTo: employee@company.com\n\nHi Sarah,\n\nThanks for sending over the proposal. I've reviewed it and have a few suggestions:\n\n1. The timeline looks realistic\n2. Budget section needs more detail\n3. Let's discuss the staffing plan\n\nCan we schedule a call this week?\n\nBest,\nMike",
     "Subject: Your verification code for {service}\nFrom: no-reply@{service_domain}\nTo: user@example.com\n\nHi,\n\nYour one-time verification code is {otp}. This code is valid for 10 minutes.\n\nIf you did not request this code, you can safely ignore this email.\n\nThanks,\n{service} Security Team",
     "Subject: Security alert: New sign-in on {device}\nFrom: security@{service_domain}\nTo: user@example.com\n\nSecurity alert for your account. We noticed a new sign-in from a {device} in {city} at {time} PM.\n\nIf this was you, you do not need to take any action. If this was not you, review your active sessions in account settings.\n\n{service} Account Team",
     "Subject: Your order #{num} has been completed successfully\nFrom: support@{service_domain}\nTo: user@example.com\n\nThank you for your purchase! Your payment of INR {amount} has been received and your order #{num} is confirmed.\n\nDelivery details: Standard shipping to your registered address.\n\nCustomer Support",
-    "Subject: You shared some Google Account data with {app_name}\nFrom: no-reply@accounts.google.com\nTo: user@gmail.com\n\nKeep track of your Google Account data. You recently granted {app_name} permission to access your basic profile information.\n\nYou can review or revoke third-party app permissions anytime in your Google Account security settings.",
-    "Subject: [GitHub] {app_name} is requesting updated permissions\nFrom: notifications@github.com\nTo: developer@example.com\n\nThe GitHub App {app_name} is requesting additional permissions for your repositories.\n\nYou can review this request directly on GitHub: https://github.com/settings/installations",
-    "Subject: Quarterly reminder about Terms of Service and Privacy Policy\nFrom: updates@{service_domain}\nTo: user@example.com\n\nDear User,\n\nThis is a routine reminder regarding our updated Terms of Service and Community Guidelines.\n\nNo action is required on your part. Thank you for being a valued member of our community.",
+    "Subject: New third-party connection linked to {service}\nFrom: no-reply@{service_domain}\nTo: user@example.com\n\nHello,\n\nYou recently connected {app_name} to your {service} workspace. It was granted read-only access to view team information.\n\nIf you authorized this application, no further action is required. You can manage connected apps anytime in your profile settings.",
+    "Subject: [{service}] {app_name} requested updated workspace permissions\nFrom: notifications@{service_domain}\nTo: developer@example.com\n\nThe integration {app_name} has requested updated permissions for your organization on {service}.\n\nReview this request in your administrator integrations dashboard: https://{service_domain}/settings/integrations",
+    "Subject: Routine update to Community Guidelines and Terms\nFrom: updates@{service_domain}\nTo: user@example.com\n\nDear Member,\n\nThis is a periodic notice regarding updates to our Terms of Service and Privacy Policy for {service}.\n\nNo action is required on your part. Thank you for using our platform.",
+    "Subject: Passkey registered successfully for {service}\nFrom: security@{service_domain}\nTo: user@example.com\n\nA new passkey was created on {device} ({city}) for your account on {date}.\n\nIf you added this passkey, you may safely disregard this message. Otherwise, review your security settings immediately.",
 ]
 
 _PHISHING_SMS_TEMPLATES = [
@@ -68,10 +69,10 @@ _PHISHING_SMS_TEMPLATES = [
     "Text Message\n{phone}\nToday {time} PM\n\nAlert: Unusual login detected on your account. If this wasn't you, secure your account now: http://{phish_url}. Your password and OTP are required.",
     "SMS\n+1{phone}\n{time} AM\n\nCongratulations! You've won a $500 gift card. Claim your prize now at http://{phish_url}. Limited time offer - expires immediately!",
     "Text Message\n+91{phone}\nToday {time} PM\n\nYour OTP for bank transaction is 847291. If you did not request this, block your account at http://{phish_url}. Reply with your PIN to cancel.",
-    "SMS\n+91{phone}\nToday {time} PM\n\nSBI Alert: Unrecognized transaction of Rs {amount} initiated on card. To block payment immediately, reply with the 6-digit OTP sent to your phone.",
-    "SMS\n+91{phone}\nToday {time} PM\n\nDear Customer, your electricity power will be disconnected today. Update bill payment and enter debit card PIN at http://{phish_url} to avoid cut-off.",
-    "SMS\n+91{phone}\nToday {time} PM\n\nDear User, your SIM KYC is expired. Visit http://{phish_url} and enter your mobile number and OTP within 2 hours to avoid service suspension.",
-    "SMS\n+91{phone}\nToday {time} PM\n\nBank Notice: Suspicious charge of Rs {amount} on account. Reply STOP followed by your netbanking password to freeze card.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nSecurity Notice: Unrecognized card charge of Rs {amount} detected. To cancel payment, click http://{phish_url} and submit your debit card PIN.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nDear Customer, your electricity service will be disconnected tonight. Update pending bill of Rs {amount} at http://{phish_url} to avoid disconnection.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nDear Subscriber, your SIM KYC document verification is overdue. Complete KYC online at http://{phish_url} within 24h to avoid permanent deactivation.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nAccount Alert: Debit card frozen due to unusual activity. Reply with your netbanking password to unfreeze immediately.",
 ]
 
 _LEGIT_SMS_TEMPLATES = [
@@ -80,12 +81,14 @@ _LEGIT_SMS_TEMPLATES = [
     "Text Message\n{phone}\nToday {time} PM\n\nAppointment reminder: Dr. Smith on Tuesday at 2:30 PM. Reply YES to confirm or call (555) 123-4567 to reschedule.",
     "SMS\n+1{phone}\n{time} AM\n\nYour Amazon order has been delivered to your front door. Track at https://amazon.com/track/ABC123",
     "Text Message\n+1{phone}\nToday {time} PM\n\nHey! Are you still coming to dinner tonight? The reservation is at 7:30 at Olive Garden. Let me know!",
-    "SMS\n+91{phone}\nToday {time} PM\n\nDear Customer, INR {amount} debited from A/c XX{num} on {date} at {merchant} via UPI Ref {ref}. Avail Bal: INR {balance}. -SBI",
-    "SMS\n+91{phone}\nToday {time} PM\n\nDear SBI User, your A/c X{num} credited by INR {amount} on {date} transfer from {sender} Ref No {ref}. Check balance on YONO app.",
-    "SMS\n+91{phone}\nToday {time} PM\n\nHello User, Your OTP for login is {otp}. Please do not share with anyone. Regards, OneStepLink.",
-    "SMS\n+91{phone}\nToday {time} PM\n\nRecharge of INR {amount} is successful for your Mobile {num} on {date}. Current pack validity has been updated. -Airtel",
-    "SMS\n+91{phone}\nToday {time} PM\n\nDear Student NL{num}, NSP offers easy renewal option for your scholarship for academic year 2026-27. Login at scholarships.gov.in.",
-    "SMS\n+91{phone}\nToday {time} PM\n\nBiometric access for YONO app successfully enabled. Please ensure that your phone contains only your biometric credentials.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nAlert: INR {amount} debited from your {bank} A/c XX{num} on {date}. Info: UPI/{merchant}/Ref {ref}. Avail Bal: INR {balance}.",
+    "SMS\n+91{phone}\nToday {time} PM\n\n{bank_code}: Account XX{num} credited with INR {amount} on {date} by {sender}. IMPS Ref: {ref}. Avail Bal: INR {balance}.",
+    "SMS\n+91{phone}\nToday {time} PM\n\n{otp} is your secret one-time password (OTP) for login to {service}. Valid for 5 minutes. Do not share this OTP with anyone.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nRecharge of Rs {amount} completed successfully for your {telco} prepaid number {num} on {date}. Balance details updated.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nApplication ID {num}: Verification status updated on {portal}. Please log in to applicant portal to check details.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nBiometric login has been enabled on {bank} mobile application for device {num}. If unauthorized, please call customer care.",
+    "SMS\n+91{phone}\nToday {time} PM\n\n{bank_code} Alert: Card ending {num} used for INR {amount} at {merchant} on {date}. Call 1800-000-000 if not authorized by you.",
+    "SMS\n+91{phone}\nToday {time} PM\n\nBill generated: Your {telco} postpaid bill for {num} is Rs {amount}. Due date {date}. Pay online at {telco} app.",
 ]
 
 _PHISHING_WHATSAPP_TEMPLATES = [
@@ -94,9 +97,9 @@ _PHISHING_WHATSAPP_TEMPLATES = [
     "WhatsApp\nGroup: Family\n{phone}\n\n⚠️ WARNING: New government scheme - get Rs.5000 directly! Apply now: http://{phish_url}\n\nForwarded many times\n✓✓ Read",
     "WhatsApp\n{phone}\nonline\n\nYour OTP for login is 739201. Someone is trying to access your account. If this wasn't you, secure your account at http://{phish_url}\n\nEnd-to-end encrypted\n✓✓",
     "WhatsApp\n{phone}\nlast seen yesterday\n\nCongratulations! You've been selected for a special Bitcoin investment opportunity. Invest $100 and earn $10,000 in a week: http://{phish_url}\n\nForwarded\n✓✓ Delivered",
-    "WhatsApp\n{phone}\nonline\n\nUrgent: Your account is being transferred to another device. Enter your 6-digit verification code here: http://{phish_url} or reply with the OTP to cancel.\n\nForwarded\n✓✓",
-    "WhatsApp\n{phone}\nlast seen today at {time}\n\nCongratulations! You won Rs 25,00,000 in KBC Lucky Draw. To claim your prize, send your bank account number and UPI PIN to this number.\n\n✓✓ Delivered",
-    "WhatsApp\n{phone}\nonline\n\nSecurity alert: WhatsApp Web session active. If you did not initiate this, reply with your 6-digit registration PIN immediately to terminate session.\n\n✓✓",
+    "WhatsApp\n{phone}\nonline\n\nSecurity Notice: Device verification failed. Please visit http://{phish_url} and input your 6-digit registration PIN to restore service.\n\nForwarded\n✓✓",
+    "WhatsApp\n{phone}\nlast seen today at {time}\n\nCongratulations! Your mobile number won Rs 25,00,000 in Mega Lucky Draw. Contact manager with your account details and UPI PIN to claim reward.\n\n✓✓ Delivered",
+    "WhatsApp\n{phone}\nonline\n\nWeb session alert: Unrecognized browser login. If you did not initiate this, reply with your 6-digit verification code immediately to block access.\n\n✓✓",
 ]
 
 _LEGIT_WHATSAPP_TEMPLATES = [
@@ -105,11 +108,11 @@ _LEGIT_WHATSAPP_TEMPLATES = [
     "WhatsApp\n{phone}\nlast seen today at {time}\n\nHappy birthday! 🎉🎂 Hope you have an amazing day! Let's celebrate this weekend.\n\nEnd-to-end encrypted\n✓✓ Read",
     "WhatsApp\n{phone}\nonline\n\nJust shared the photos from the trip on Google Drive: https://drive.google.com/folder/abc123\n\nLet me know which ones you like!\n\n✓✓",
     "WhatsApp\nGroup: Apartment\n{phone}\n\nReminder: Building maintenance this Saturday from 9 AM to 12 PM. Water will be shut off during this time.\n\n✓✓ Delivered",
-    "WhatsApp\n{phone}\nonline\n\nYour verification code is {otp}. This code is valid for 10 minutes. Do not share this code with anyone.\n\nEnd-to-end encrypted\n✓✓ Read",
-    "WhatsApp\n{phone}\nlast seen today at {time}\n\nPayment of INR {amount} to {merchant} was completed successfully. Transaction Ref: {ref}. Thank you!\n\n✓✓ Delivered",
-    "WhatsApp\nGroup: Class 2026\n{phone}\n\nHey everyone, New note 2026-09-08.pdf uploaded to the shared drive. Let me know if you can view the notes.\n\n✓✓ Read",
-    "WhatsApp\n{phone}\nonline\n\nTwo-step verification PIN reset was successful for your account. If you did not do this, review your settings.\n\n✓✓ Delivered",
-    "WhatsApp\n{phone}\nlast seen yesterday\n\nHere is the order update: Your delivery of 1 item from {merchant} is scheduled for tomorrow by 4 PM.\n\n✓✓",
+    "WhatsApp\n{phone}\nonline\n\nYour {service} verification code is {otp}. Valid for 10 minutes. Do not share this code with anyone.\n\nEnd-to-end encrypted\n✓✓ Read",
+    "WhatsApp\n{phone}\nlast seen today at {time}\n\nTransaction update: Payment of Rs {amount} to {merchant} successful. Ref: {ref}. Thank you for using {bank_code} UPI.\n\n✓✓ Delivered",
+    "WhatsApp\nGroup: Study Circle\n{phone}\n\nHey guys, I uploaded the lecture slides and reading material to our shared repository. Check it out when free.\n\n✓✓ Read",
+    "WhatsApp\n{phone}\nonline\n\nSecurity confirmation: Two-step verification settings for your account were updated on {date}. Disregard if done by you.\n\n✓✓ Delivered",
+    "WhatsApp\n{phone}\nlast seen yesterday\n\nDelivery notification: Your package from {merchant} is out for delivery today and will arrive by {time} PM.\n\n✓✓",
 ]
 
 
@@ -155,15 +158,23 @@ _SERVICES = [
     ("Radient", "radient.io"),
     ("Dab Arcade", "dabarcade.in"),
     ("Binance", "binance.com"),
-    ("GitHub", "github.com"),
+    ("GitLab", "gitlab.com"),
+    ("Atlassian", "atlassian.com"),
+    ("Notion", "notion.so"),
+    ("Slack", "slack.com"),
+    ("Canva", "canva.com"),
 ]
 
-_MERCHANTS = ["Amazon", "Zentro Store", "Flipkart", "Swiggy", "EaseMyTrip", "Zomato", "Myntra"]
-_SENDERS = ["Rajesh Kumar", "TEPUDI SOLE", "Anita Roy", "Manoj Singh", "TechCorp Ltd"]
-_APPS = ["Cursor", "Cursor.sh", "Grammarly", "Figma", "Zoom", "Notion", "Slack"]
-_DEVICES = ["Chrome on Windows", "iPhone 15", "Samsung Galaxy S24", "MacBook Pro", "Steam Mobile"]
-_CITIES = ["New Delhi, IN", "Mumbai, IN", "Bangalore, IN", "Assam, IN", "Mizoram, IN"]
-_DATES = ["19-Feb", "14-May", "10-Jun", "22-Jul", "18-Oct", "26-Sep", "12-May"]
+_BANKS = ["HDFC Bank", "ICICI Bank", "Axis Bank", "Kotak Mahindra Bank", "Punjab National Bank", "Barclays", "Standard Chartered"]
+_BANK_CODES = ["HDFC", "ICICI", "AXIS", "KOTAK", "PNB", "SCB"]
+_TELCOS = ["Jio", "Vodafone Idea", "Vi", "BSNL", "Airtel Xstream"]
+_PORTALS = ["National Apprenticeship Portal", "State Scholarship Mission", "Skill India Digital", "Central University Admissions", "State Student Portal"]
+_MERCHANTS = ["Amazon", "Zentro Store", "Flipkart", "Swiggy", "EaseMyTrip", "Zomato", "Myntra", "Zepto", "Blinkit"]
+_SENDERS = ["Rajesh Kumar", "Priya Sharma", "Anita Roy", "Manoj Singh", "TechCorp Ltd", "Vikas Verma"]
+_APPS = ["Cursor", "Grammarly", "Figma", "Zoom", "Notion", "Slack", "Linear", "Miro"]
+_DEVICES = ["Chrome on Windows", "iPhone 15", "Samsung Galaxy S24", "MacBook Pro", "iPad Air"]
+_CITIES = ["New Delhi, IN", "Mumbai, IN", "Bangalore, IN", "Hyderabad, IN", "Pune, IN", "Kolkata, IN"]
+_DATES = ["19-Feb", "14-May", "10-Jun", "22-Jul", "18-Oct", "26-Sep", "12-May", "05-Aug"]
 
 
 def _fill_template(template: str, is_phishing: bool) -> str:
@@ -174,12 +185,16 @@ def _fill_template(template: str, is_phishing: bool) -> str:
     text = text.replace("{num}", _random_num())
     text = text.replace("{otp}", f"{random.randint(100000, 999999)}")
     text = text.replace("{amount}", f"{random.choice([11, 49, 100, 199, 499, 786, 1250, 2450, 5000])}")
-    text = text.replace("{balance}", f"{random.choice(['1,420.50', '3,850.00', '15,240.00', '780.00'])}")
+    text = text.replace("{balance}", f"{random.choice(['1,420.50', '3,850.00', '15,240.00', '780.00', '24,190.50'])}")
     text = text.replace("{ref}", f"{random.randint(100000000000, 999999999999)}")
     text = text.replace("{date}", random.choice(_DATES))
     service, s_domain = random.choice(_SERVICES)
     text = text.replace("{service}", service)
     text = text.replace("{service_domain}", s_domain)
+    text = text.replace("{bank}", random.choice(_BANKS))
+    text = text.replace("{bank_code}", random.choice(_BANK_CODES))
+    text = text.replace("{telco}", random.choice(_TELCOS))
+    text = text.replace("{portal}", random.choice(_PORTALS))
     text = text.replace("{merchant}", random.choice(_MERCHANTS))
     text = text.replace("{sender}", random.choice(_SENDERS))
     text = text.replace("{app_name}", random.choice(_APPS))
