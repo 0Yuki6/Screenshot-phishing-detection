@@ -42,7 +42,23 @@ def sha(p: Path) -> str:
 
 
 def images(d: Path):
-    return sorted(p for p in d.iterdir() if p.suffix.lower() in EXTS) if d.exists() else []
+    """All images under d, including any subfolders."""
+    return sorted(p for p in d.rglob("*") if p.is_file() and p.suffix.lower() in EXTS) if d.exists() else []
+
+
+def channel_images(root: Path, ch: str):
+    """Images under any folder named <ch> found anywhere below root (handles nested zips)."""
+    if not root.exists():
+        return []
+    dirs = [root / ch] if (root / ch).is_dir() else []
+    dirs += [d for d in root.rglob(ch) if d.is_dir() and d not in dirs]
+    seen, out = set(), []
+    for d in dirs:
+        for p in images(d):
+            if p not in seen:
+                seen.add(p)
+                out.append(p)
+    return sorted(out)
 
 
 for ch in CHANNELS:
@@ -50,12 +66,12 @@ for ch in CHANNELS:
     if args.apply:
         dest.mkdir(parents=True, exist_ok=True)
     have = {sha(p) for p in images(dest)}
-    final_files = images(FINAL / ch)
+    final_files = channel_images(FINAL, ch)
     final_hashes = {sha(p) for p in final_files}
 
     # 1. originals that are not in final
     to_copy = []
-    for p in images(ORIG / ch):
+    for p in channel_images(ORIG, ch):
         h = sha(p)
         if h not in final_hashes and h not in have:
             to_copy.append((p, h))
@@ -71,7 +87,9 @@ for ch in CHANNELS:
                 to_move.append((p, h))
                 have.add(h)
 
-    print(f"{ch}: originals->train {len(to_copy)}, final->train {len(to_move)}, "
+    n_orig = len(channel_images(ORIG, ch))
+    print(f"{ch}: found originals={n_orig}, final={len(final_files)}, already in train={len(images(dest))}")
+    print(f"     originals->train {len(to_copy)}, final->train {len(to_move)}, "
           f"final stays {len(final_files) - len(to_move)}")
 
     if args.apply:
@@ -79,6 +97,9 @@ for ch in CHANNELS:
             shutil.copy2(p, dest / f"orig_{h[:10]}{p.suffix.lower()}")
         for p, h in to_move:
             shutil.move(str(p), dest / f"fin_{h[:10]}{p.suffix.lower()}")
+
+for d in (ORIG, FINAL, TRAIN):
+    print(f"{d}: {'exists' if d.exists() else 'NOT FOUND'}")
 
 if not args.apply:
     print("\nDry run only. Re-run with --apply to make these changes.")
