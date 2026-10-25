@@ -120,8 +120,8 @@ function App() {
     } else if (verdict === 'uncertain') {
       return {
         icon: <ShieldQuestion className="w-10 h-10" />,
-        title: "Could Not Decide",
-        subtitle: "Verify through the official app or website",
+        title: "Moderate Risk",
+        subtitle: "Proceed with caution – verify through the official app or website",
         colorClass: "text-yellow-400",
         bgClass: "bg-yellow-500/20 text-yellow-500 ring-yellow-500/30",
         topBorder: "bg-yellow-500"

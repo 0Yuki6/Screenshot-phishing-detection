@@ -21,6 +21,7 @@ from uuid import uuid4
 from dotenv import load_dotenv
 load_dotenv()  # Load .env file (contains GOOGLE_SAFE_BROWSING_API_KEY)
 
+import cv2
 import numpy as np
 import joblib
 from scipy.sparse import csr_matrix, hstack
@@ -29,7 +30,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.preprocessing import preprocess_image
-from src.ocr import extract_text, normalize_ocr_urls
+from src.ocr import extract_text, normalize_ocr_urls, run_dual_variant_ocr
 from src.channel_detector import detect_channel
 from src.masking import strip_template_chrome, mask_text
 from src.feature_extraction import extract_features, FEATURE_NAMES
@@ -42,6 +43,10 @@ logger = logging.getLogger(__name__)
 # Set to True to rejoin URLs that OCR split across lines (e.g. "http://" + newline + "www...").
 # Left False so the served model sees exactly the same text as before; test, then enable.
 NORMALIZE_URLS = False
+
+# True = use the same OCR as training and evaluation (run_dual_variant_ocr). The older
+# preprocess_image + extract_text path garbles dark-mode phone screenshots. Set False to go back.
+USE_PIPELINE_OCR = True
 
 # ── App setup ────────────────────────────────────────────────────────
 app = FastAPI(
@@ -311,6 +316,12 @@ def _translate_feature(name: str) -> str:
     return name.replace("_", " ").capitalize()
 
 
+# Features that say nothing useful to a reader (shown only if they dominate the SHAP values).
+_UNINFORMATIVE_FEATURES = {"channel", "total_word_count"}
+_WORDING_PHISH = "Overall wording resembles known phishing messages"
+_WORDING_SAFE = "Overall wording resembles ordinary legitimate messages"
+
+
 def _get_shap_explanations(feature_vector: np.ndarray, top_n: int = 3):
     """Return (suspicion_reasons, safe_reasons) based on SHAP values."""
     suspicion = []
@@ -328,13 +339,23 @@ def _get_shap_explanations(feature_vector: np.ndarray, top_n: int = 3):
             sv = shap_values[0]
 
         pairs = list(zip(_feature_names, sv))
-        positive = sorted([(n, v) for n, v in pairs if v > 0.001], key=lambda x: -x[1])
-        for name, _ in positive[:top_n]:
-            suspicion.append(_translate_feature(name))
 
-        negative = sorted([(n, v) for n, v in pairs if v < -0.001], key=lambda x: x[1])
-        for name, _ in negative[:top_n]:
-            safe.append(_translate_feature(name))
+        # Character n-gram TF-IDF features ('e> ', 'ess', 'the') mean nothing to a reader,
+        # so they are summed into ONE "overall wording" signal instead of being listed.
+        tfidf_sum = sum(float(v) for n, v in pairs if n.startswith("tfidf_"))
+        items = [
+            (_translate_feature(n), float(v))
+            for n, v in pairs
+            if not n.startswith("tfidf_") and n not in _UNINFORMATIVE_FEATURES
+        ]
+        if abs(tfidf_sum) > 0.001:
+            items.append((_WORDING_PHISH if tfidf_sum > 0 else _WORDING_SAFE, tfidf_sum))
+
+        positive = sorted([(l, v) for l, v in items if v > 0.001], key=lambda x: -x[1])
+        suspicion.extend(l for l, _ in positive[:top_n])
+
+        negative = sorted([(l, v) for l, v in items if v < -0.001], key=lambda x: x[1])
+        safe.extend(l for l, _ in negative[:top_n])
     except Exception as e:
         logger.warning("SHAP explanation failed: %s", e)
 
@@ -406,8 +427,14 @@ async def predict(
             raise HTTPException(status_code=400, detail="Uploaded file is empty.")
 
         try:
-            preprocessed = preprocess_image(image_bytes)
-            ocr_text = extract_text(preprocessed)
+            if USE_PIPELINE_OCR:
+                img = cv2.imdecode(np.frombuffer(image_bytes, np.uint8), cv2.IMREAD_COLOR)
+                if img is None:
+                    raise ValueError("Could not decode the uploaded image.")
+                ocr_text = run_dual_variant_ocr(img)["text"]
+            else:
+                preprocessed = preprocess_image(image_bytes)
+                ocr_text = extract_text(preprocessed)
             if NORMALIZE_URLS:
                 ocr_text = normalize_ocr_urls(ocr_text)
         except ValueError as e:
@@ -503,11 +530,15 @@ async def predict(
         verdict, phishing_score, confidence, channel, prediction_id,
     )
 
+    # Risk badge shown in the UI: always consistent with the verdict and the model thresholds.
+    risk_level = {"phishing": "high", "legitimate": "low"}.get(verdict, "moderate")
+
     return {
         "prediction_id": prediction_id,
         "channel": channel,
         "verdict": verdict,
         "label": verdict,
+        "risk_level": risk_level,
         "phishing_score": round(phishing_score, 4),
         "confidence": round(confidence, 4),
         "suspicion_reasons": combined_suspicion,

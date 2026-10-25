@@ -50,13 +50,19 @@ export default function KeyIndicators({ result, phishingScore = 0 }) {
     String(s).toLowerCase()
   );
 
+  /* Structured display indicators from the API (booleans). When present they win;
+     the string matching below is only a fallback for older responses. */
+  const ind = result?.indicators ?? result?.display_indicators ?? null;
+  const pick = (key, fallback) =>
+    ind && typeof ind[key] === 'boolean' ? ind[key] : fallback;
+
   /* ── 1. Urgent Language ────────────────────────────────────────────── */
-  const urgentHit = allSuspicious.some((s) =>
+  const urgentHitOld = allSuspicious.some((s) =>
     s.includes('urgent') || s.includes('pressure') || s.includes('threat') || s.includes('urgency')
   );
 
   /* ── 2. Personal Info Request ──────────────────────────────────────── */
-  const personalHit = allSuspicious.some((s) =>
+  const personalHitOld = allSuspicious.some((s) =>
     s.includes('personal') || s.includes('identity') || s.includes('sensitive personal')
   );
 
@@ -72,7 +78,7 @@ export default function KeyIndicators({ result, phishingScore = 0 }) {
     s.includes('high-risk')
   );
   let urlDetail = 'Not detected';
-  const urlHit = urlMatches.length > 0;
+  const urlHit = pick('suspicious_url', urlMatches.length > 0);
   if (urlHit) {
     const joined = urlMatches.join(' ');
     if (joined.includes('typosquat')) urlDetail = 'Typosquatting detected';
@@ -83,12 +89,12 @@ export default function KeyIndicators({ result, phishingScore = 0 }) {
   }
 
   /* ── 4. Credential Request ─────────────────────────────────────────── */
-  const credentialHit = allSuspicious.some((s) =>
+  const credentialHitOld = allSuspicious.some((s) =>
     s.includes('credential') || s.includes('password') || s.includes('login') || s.includes('otp')
   );
 
   /* ── 5. Financial Keywords ─────────────────────────────────────────── */
-  const financialHit = allSuspicious.some((s) =>
+  const financialHitOld = allSuspicious.some((s) =>
     s.includes('financial') ||
     s.includes('banking') ||
     s.includes('payment') ||
@@ -97,12 +103,18 @@ export default function KeyIndicators({ result, phishingScore = 0 }) {
   );
 
   /* ── 6. Suspicious Vocabulary ──────────────────────────────────────── */
-  const vocabHit = allSuspicious.some((s) =>
+  const vocabHitOld = allSuspicious.some((s) =>
     s.includes('vocabulary') ||
     s.includes('tfidf') ||
     s.includes('suspicious keywords') ||
     s.includes('pattern')
   );
+
+  const urgentHit = pick('urgent_language', urgentHitOld);
+  const personalHit = pick('personal_info_request', personalHitOld);
+  const credentialHit = pick('credential_request', credentialHitOld);
+  const financialHit = pick('financial_keywords', financialHitOld);
+  const vocabHit = pick('suspicious_vocabulary', vocabHitOld);
 
   /* Build the 6 indicator tiles */
   const indicators = [
@@ -161,7 +173,7 @@ export default function KeyIndicators({ result, phishingScore = 0 }) {
     verdict === 'phishing'
       ? { text: 'High Risk', className: 'bg-red-950/60 border-red-800/60 text-red-400' }
       : verdict === 'uncertain'
-      ? { text: 'Uncertain', className: 'bg-yellow-950/60 border-yellow-800/60 text-yellow-400' }
+      ? { text: 'Moderate Risk', className: 'bg-yellow-950/60 border-yellow-800/60 text-yellow-400' }
       : { text: 'Low Risk', className: 'bg-emerald-950/60 border-emerald-800/60 text-emerald-400' };
 
   const scorePct = Math.min(100, Math.max(0, Math.round(phishingScore * 100)));
@@ -243,7 +255,7 @@ export default function KeyIndicators({ result, phishingScore = 0 }) {
 
               <div className="flex justify-between items-center text-[11px] text-slate-400 mt-2 font-medium">
                 <span className="text-emerald-400">0.0 (Legitimate)</span>
-                <span className="text-amber-400">0.5 (Uncertain)</span>
+                <span className="text-amber-400">0.5 (Moderate)</span>
                 <span className="text-rose-400">1.0 (Phishing)</span>
               </div>
             </div>
@@ -324,11 +336,11 @@ export default function KeyIndicators({ result, phishingScore = 0 }) {
             <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
             <div className="space-y-1">
               <h4 className="text-sm font-semibold text-amber-300">
-                Could not decide with confidence – manual review recommended
+                Proceed with caution – manual verification recommended
               </h4>
               <p className="text-xs text-amber-200/80 leading-relaxed">
-                The message presents conflicting signals. Please inspect sender domains and message
-                links directly through official bookmarks.
+                This message shows mixed signals. Check the sender and any links directly through
+                the official app or website before acting.
               </p>
             </div>
           </div>
