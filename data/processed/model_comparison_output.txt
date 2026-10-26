@@ -4,6 +4,8 @@
    Phishing Detection Pipeline
 ========================================================================
 
+   Total screenshot dataset: ~8,017 images
+
 ----------------------- Training: Random Forest ------------------------
 
 ---------------------- Training: SVM (RBF Kernel) ----------------------
@@ -13,9 +15,9 @@
 ========================= MODEL: Random Forest =========================
 
   Timing Measurements:
-    Final model fitting time      : 1.08s
-    5-fold cross-validation time  : 9.55s
-    Test set prediction time      : 0.2389s
+    Final model fitting time      : 1.13s
+    5-fold cross-validation time  : 9.38s
+    Test set prediction time      : 0.2850s
 
   -------------------------------------------------------
   TRAINING PERFORMANCE (mean +/- std across 5 folds)
@@ -73,15 +75,16 @@
 
     TP=572  TN=587  FP=13  FN=28
     False Positive Rate (FPR) : 0.0217
+    False Negative Rate (FNR) : 0.0467
     Phishing Precision        : 0.9778
     Phishing Recall (TPR)     : 0.9533
 
 ======================= MODEL: SVM (RBF Kernel) ========================
 
   Timing Measurements:
-    Final model fitting time      : 10.27s
-    5-fold cross-validation time  : 23.60s
-    Test set prediction time      : 1.2161s
+    Final model fitting time      : 11.09s
+    5-fold cross-validation time  : 30.95s
+    Test set prediction time      : 1.4269s
 
   -------------------------------------------------------
   TRAINING PERFORMANCE (mean +/- std across 5 folds)
@@ -139,15 +142,16 @@
 
     TP=538  TN=590  FP=10  FN=62
     False Positive Rate (FPR) : 0.0167
+    False Negative Rate (FNR) : 0.1033
     Phishing Precision        : 0.9818
     Phishing Recall (TPR)     : 0.8967
 
 ====================== MODEL: Logistic Regression ======================
 
   Timing Measurements:
-    Final model fitting time      : 0.17s
-    5-fold cross-validation time  : 4.56s
-    Test set prediction time      : 0.0028s
+    Final model fitting time      : 0.19s
+    5-fold cross-validation time  : 4.70s
+    Test set prediction time      : 0.0021s
 
   -------------------------------------------------------
   TRAINING PERFORMANCE (mean +/- std across 5 folds)
@@ -205,6 +209,7 @@
 
     TP=547  TN=583  FP=17  FN=53
     False Positive Rate (FPR) : 0.0283
+    False Negative Rate (FNR) : 0.0883
     Phishing Precision        : 0.9699
     Phishing Recall (TPR)     : 0.9117
 
@@ -212,9 +217,9 @@
 
   Metric                             |        Random Forest |     SVM (RBF Kernel) |  Logistic Regression
   -------------------------------------------------------------------------------------------------------
-  Final Model Fitting Time (s)       |                 1.08 |                10.27 |                 0.17
-  5-Fold CV Time (s)                 |                 9.55 |                23.60 |                 4.56
-  Test Set Prediction Time (s)       |               0.2389 |               1.2161 |               0.0028
+  Final Model Fitting Time (s)       |                 1.13 |                11.09 |                 0.19
+  5-Fold CV Time (s)                 |                 9.38 |                30.95 |                 4.70
+  Test Set Prediction Time (s)       |               0.2850 |               1.4269 |               0.0021
   Test Accuracy                      |               0.9658 |               0.9400 |               0.9417
   Test Precision (macro avg)         |               0.9661 |               0.9433 |               0.9433
   Test Recall (macro avg)            |               0.9658 |               0.9400 |               0.9417
@@ -225,6 +230,7 @@
   CV F1-Score (macro avg)            |    0.9596 +/- 0.0039 |    0.9441 +/- 0.0049 |    0.9435 +/- 0.0033
   Phishing Recall (Test)             |               0.9533 |               0.8967 |               0.9117
   False Positive Rate (Test)         |               0.0217 |               0.0167 |               0.0283
+  False Negative Rate (Test)         |               0.0467 |               0.1033 |               0.0883
 
   -------------------------------------------------------------------------------------------------------
 
@@ -234,6 +240,7 @@
      Test Recall (macro avg)        -> Random Forest (0.9658)
      Phishing Recall (Test)         -> Random Forest (0.9533)
      Lowest False Positive Rate     -> SVM (RBF Kernel) (0.0167)
+     Lowest False Negative Rate     -> Random Forest (0.0467)
 
 ========================= FINAL RECOMMENDATION =========================
   Recommended Model: Random Forest
@@ -246,7 +253,7 @@
     - False Positive Rate: Achieved an FPR of 0.0217 (13 false alarms out of 600), minimizing disruption to benign communications.
     - Cross-Validation Consistency: 5-fold CV F1 score was 0.9596 +/- 0.0039,
       indicating stable generalization with low fold-to-fold variance.
-    - Training Efficiency: Final model fitting completed in 1.08s,
+    - Training Efficiency: Final model fitting completed in 1.13s,
       making it computationally suitable for periodic retraining.
 
   Note: This recommendation is strictly based on the empirical performance

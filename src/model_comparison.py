@@ -199,6 +199,7 @@ def evaluate_on_test(model, X_test, y_test, name: str) -> dict:
     cm = confusion_matrix(y_test, y_pred)
     tn, fp, fn, tp = cm.ravel()
     fpr = fp / (fp + tn) if (fp + tn) > 0 else 0.0
+    fnr = fn / (fn + tp) if (fn + tp) > 0 else 0.0
     phishing_recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
     phishing_precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
 
@@ -217,6 +218,7 @@ def evaluate_on_test(model, X_test, y_test, name: str) -> dict:
         "fn": fn,
         "tp": tp,
         "fpr": fpr,
+        "fnr": fnr,
         "phishing_recall": phishing_recall,
         "phishing_precision": phishing_precision,
         "y_pred": y_pred,
@@ -299,8 +301,10 @@ def print_model_results(name: str, cv: dict, test: dict, train_time: float):
     fpr = test["fpr"]
     precision = test["phishing_precision"]
     recall = test["phishing_recall"]
+    fnr = test["fnr"]
     report_print(f"\n    TP={tp}  TN={tn}  FP={fp}  FN={fn}")
     report_print(f"    False Positive Rate (FPR) : {fpr:.4f}")
+    report_print(f"    False Negative Rate (FNR) : {fnr:.4f}")
     report_print(f"    Phishing Precision        : {precision:.4f}")
     report_print(f"    Phishing Recall (TPR)     : {recall:.4f}")
 
@@ -331,6 +335,7 @@ def print_comparison_table(all_results: dict):
         ("CV F1-Score (macro avg)", lambda r: f"{r['cv']['val_f1_mean']:.4f} +/- {r['cv']['val_f1_std']:.4f}"),
         ("Phishing Recall (Test)", lambda r: f"{r['test']['phishing_recall']:.4f}"),
         ("False Positive Rate (Test)", lambda r: f"{r['test']['fpr']:.4f}"),
+        ("False Negative Rate (Test)", lambda r: f"{r['test']['fnr']:.4f}"),
     ]
 
     for label, fn in rows:
@@ -347,12 +352,13 @@ def print_comparison_table(all_results: dict):
         ("Test Recall (macro avg)", lambda r: r["test"]["recall"]),
         ("Phishing Recall (Test)", lambda r: r["test"]["phishing_recall"]),
         ("Lowest False Positive Rate", lambda r: -r["test"]["fpr"]),
+        ("Lowest False Negative Rate", lambda r: -r["test"]["fnr"]),
     ]
     for metric_name, metric_fn in winner_metrics:
         best = max(names, key=lambda n: metric_fn(all_results[n]))
         val = metric_fn(all_results[best])
         if "Lowest" in metric_name:
-            val = -val
+            val = abs(val)
         report_print(f"     {metric_name:<30s} -> {best} ({val:.4f})")
 
 
@@ -362,6 +368,15 @@ def main():
     report_print("   MODEL COMPARISON: Random Forest vs SVM vs Logistic Regression")
     report_print("   Phishing Detection Pipeline")
     report_print("=" * 72)
+
+    # Count total screenshots across the data directory
+    data_root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+    total_screenshots = 0
+    for dirpath, _, filenames in os.walk(data_root):
+        for fname in filenames:
+            if fname.lower().endswith((".png", ".jpg", ".jpeg", ".webp", ".bmp")):
+                total_screenshots += 1
+    report_print(f"\n   Total screenshot dataset: ~{total_screenshots:,} images")
 
     # Load data
     X, y = load_data(FEATURES_CSV)
